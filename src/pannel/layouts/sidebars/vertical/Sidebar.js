@@ -12,47 +12,47 @@ const navigation = [
   },
   {
     title: "Sale",
-    href: "/ui/alerts",
+    href: "/pannel/sale",
     icon: "bi bi-receipt",
   },
   {
     title: "Customer",
-    href: "/ui/badges",
+    href: "/pannel/customer",
     icon: "bi bi-people",
   },
   {
     title: "Supplier",
-    href: "/ui/buttons",
+    href: "/pannel/supplier",
     icon: "bi bi-person",
   },
   {
     title: "Product",
-    href: "/ui/cards",
+    href: "/pannel/product",
     icon: "bi bi-bag",
   },
   {
     title: "Purchase",
-    href: "/ui/grid",
+    href: "/pannel/purchase",
     icon: "bi bi-truck",
   },
   {
     title: "Stock",
-    href: "/ui/tables",
+    href: "/pannel/stock",
     icon: "bi bi-shop",
   },
   {
     title: "Accounts",
-    href: "/ui/forms",
+    href: "/pannel/acounts",
     icon: "bi bi-wallet2",
   },
   {
     title: "Report",
-    href: "/ui/breadcrumbs",
+    href: "/pannel/report",
     icon: "bi bi-link",
   },
   {
     title: "Setting",
-    href: "/setting",
+    href: "/pannel/setting",
     icon: "bi bi-gear",
   },
 ];
