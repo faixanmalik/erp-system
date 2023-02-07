@@ -6,6 +6,7 @@ import ProjectTables from "../pannel/components/dashboard/ProjectTable";
 import TopCards from "../pannel/components/dashboard/TopCards";
 import Blog from "../pannel/components/dashboard/Blog";
 
+
 import bg1 from "../pannel/assets/images/bg/bg1.jpg";
 import bg2 from "../pannel/assets/images/bg/bg2.jpg";
 import bg3 from "../pannel/assets/images/bg/bg3.jpg";
