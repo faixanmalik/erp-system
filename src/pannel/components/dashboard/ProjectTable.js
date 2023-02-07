@@ -8,7 +8,6 @@ import user5 from "../../assets/images/users/user5.jpg";
 
 const tableData = [
   {
-    avatar: user1,
     name: "Jonathan Gover",
     email: "hgover@gmail.com",
     project: "Flexy React",
@@ -17,7 +16,6 @@ const tableData = [
     budget: "95K",
   },
   {
-    avatar: user2,
     name: "Martin Gover",
     email: "hgover@gmail.com",
     project: "Lading pro React",
@@ -26,7 +24,6 @@ const tableData = [
     budget: "95K",
   },
   {
-    avatar: user3,
     name: "Gulshan Gover",
     email: "hgover@gmail.com",
     project: "Elite React",
@@ -35,7 +32,6 @@ const tableData = [
     budget: "95K",
   },
   {
-    avatar: user4,
     name: "Pavar Gover",
     email: "hgover@gmail.com",
     project: "Flexy React",
@@ -44,7 +40,6 @@ const tableData = [
     budget: "95K",
   },
   {
-    avatar: user5,
     name: "Hanna Gover",
     email: "hgover@gmail.com",
     project: "Ample React",
@@ -68,9 +63,7 @@ const ProjectTables = () => {
               <tr>
                 <th>Team Lead</th>
                 <th>Project</th>
-
                 <th>Status</th>
-
                 <th>Budget</th>
               </tr>
             </thead>
@@ -79,14 +72,7 @@ const ProjectTables = () => {
                 <tr key={index} className="border-top">
                   <td>
                     <div className="d-flex align-items-center p-2">
-                      <Image
-                        src={tdata.avatar}
-                        className="rounded-circle"
-                        alt="avatar"
-                        width="45"
-                        height="45"
-                      />
-                      <div className="ms-3">
+                      <div className="">
                         <h6 className="mb-0">{tdata.name}</h6>
                         <span className="text-muted">{tdata.email}</span>
                       </div>
