@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Nav, NavItem } from "reactstrap";
 import Logo from "../../logo/Logo";
 import Link from "next/link";
@@ -8,7 +9,7 @@ const navigation = [
   {
     title: "Dashboard",
     href: "/",
-    icon: "bi bi-speedometer2",
+    icon: "",
   },
   {
     title: "Sale",
@@ -57,10 +58,19 @@ const navigation = [
   },
 ];
 
+
 const Sidebar = ({ showMobilemenu }) => {
   let router = useRouter();
   const location = router.pathname;
+  const [sale, setSale] = useState(false)
+  const [customer, setCustomer] = useState(false)
+  const [supplier, setSupplier] = useState(false)
+  const [product, setProduct] = useState(false)
+  const [purchase, setPurchase] = useState(false)
+  const [stock, setStock] = useState(false)
+  const [accounts, setAccounts] = useState(false)
 
+  
   return (
     <div className="p-3">
       <div className="d-flex align-items-center">
@@ -73,22 +83,113 @@ const Sidebar = ({ showMobilemenu }) => {
         </button>
         
       </div>
+ 
       <div className="pt-4 mt-2">
         <Nav vertical className="sidebarNav">
-          {navigation.map((navi, index) => (
-            <NavItem key={index} className="sidenav-bg">
-              <Link href={navi.href}
-                  className={
-                    location === navi.href
-                      ? "text-primary nav-link py-3"
-                      : "nav-link text-secondary py-3"
-                  }
-                >
-                  <i className={navi.icon}></i>
-                  <span className="ms-3 d-inline-block">{navi.title}</span>
+
+            <NavItem className="sidenav-bg">
+              <Link href={'/'} className={location === '/' ? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
+                <i className='bi bi-speedometer2'></i>
+                <span className="ms-3 d-inline-block">Dashboard</span>
               </Link>
             </NavItem>
-          ))}
+
+             <NavItem className="sidenav-bg cursor-pointer">
+              <div onClick={()=>{setSale(!sale)}} className={` ${location === '/pannel/addSale' || location === '/pannel/manageSale' ? "text-primary nav-link py-3" : "nav-link text-secondary py-3"} `}>
+              <i className='bi bi-speedometer2'></i>
+              <button className="ms-3 d-inline-block">Sale</button>
+        
+                <ul id="dropdown-example" className={` ${sale === false ? 'hidden' : 'visible'} py-2 space-y-2`}>
+                    <li className="flex items-center space-x-1 hover:text-indigo-700">
+                        <i className='bi bi-plus-circle'></i>
+                        <Link href={"/pannel/addSale"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Add Sale</Link>
+                    </li>
+                    <li className="flex items-center space-x-1 hover:text-indigo-700">
+                        <i className='bi bi-plus-circle'></i>
+                        <Link href={"/pannel/manageSale"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Manage Sale</Link>
+                    </li>
+                </ul>
+     
+              </div>
+
+            </NavItem>
+
+            <NavItem className="sidenav-bg cursor-pointer">
+              <div onClick={()=>{setCustomer(!customer)}} href={''} className={location === '/pannel/addCustomer' || location === '/pannel/manageCustomer' ? "text-primary nav-link": "nav-link text-secondary py-3"}>
+                <i className='bi bi-speedometer2'></i>
+                <span className="ms-3 d-inline-block cursor-pointer">Customer</span>
+        
+                <ul id="dropdown-example" className={` ${customer === false ? 'hidden' : 'visible'} py-2 space-y-2`}>
+                    <li className="flex items-center space-x-1 hover:text-indigo-700">
+                        <i className='bi bi-plus-circle'></i>
+                        <Link href={"/pannel/addCustomer"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Add Customer</Link>
+                    </li>
+                    <li className="flex items-center space-x-1 hover:text-indigo-700">
+                        <i className='bi bi-plus-circle'></i>
+                        <Link href={"/pannel/manageCustomer"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Manage Customer</Link>
+                    </li>
+                </ul>
+     
+              </div>
+
+            </NavItem>
+
+            <NavItem className={location === '/pannel/supplier' ? " bg-slate-50": "text-secondary sidenav-bg"}>
+              <div onClick={()=>{setSupplier(!supplier)}} href={''} className={location === '/pannel/addSupplier' || location === '/pannel/manageSupplier' ? "text-primary nav-link": "nav-link text-secondary py-3"}>
+                <i className='bi bi-speedometer2'></i>
+                <span className="ms-3 d-inline-block cursor-pointer">Supplier</span>
+        
+                <ul id="dropdown-example" className={` ${supplier === false ? 'hidden' : 'visible'} py-2 space-y-2`}>
+                    <li className="flex items-center space-x-1 hover:text-indigo-700">
+                        <i className='bi bi-plus-circle'></i>
+                        <Link href={"/pannel/addSupplier"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Add Supplier</Link>
+                    </li>
+                    <li className="flex items-center space-x-1 hover:text-indigo-700">
+                        <i className='bi bi-plus-circle'></i>
+                        <Link href={"/pannel/manageSupplier"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Manage Supplier</Link>
+                    </li>
+                </ul>
+              </div>
+            </NavItem>
+
+            <NavItem className={location === '/pannel/product' ? " bg-slate-50": "text-secondary sidenav-bg"}>
+              <div onClick={()=>{setProduct(!product)}} href={''} className={location === '/pannel/addProducts' || location === '/pannel/manageProducts' ? "text-primary nav-link": "nav-link text-secondary py-3"}>
+                <i className='bi bi-speedometer2'></i>
+                <span className="ms-3 d-inline-block cursor-pointer">Products</span>
+        
+                <ul id="dropdown-example" className={` ${product === false ? 'hidden' : 'visible'} py-2 space-y-2`}>
+                    <li className="flex items-center space-x-1 hover:text-indigo-700">
+                        <i className='bi bi-plus-circle'></i>
+                        <Link href={"/pannel/addProduct"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Add Products</Link>
+                    </li>
+                    <li className="flex items-center space-x-1 hover:text-indigo-700">
+                        <i className='bi bi-plus-circle'></i>
+                        <Link href={"/pannel/manageProduct"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Manage Products</Link>
+                    </li>
+                </ul>
+              </div>
+            </NavItem>
+
+            <NavItem className="sidenav-bg">
+              <Link href={'/pannel/bank'} className={location === '/pannel/bank'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
+                <i className='bi bi-speedometer2'></i>
+                <span className="ms-3 d-inline-block">Banks</span>
+              </Link>
+            </NavItem>
+
+            <NavItem className="sidenav-bg">
+              <Link href={'/pannel/chartsOfAccount'} className={location === '/pannel/chartsOfAccount'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
+                <i className='bi bi-speedometer2'></i>
+                <span className="ms-3 d-inline-block">Charts Of Account</span>
+              </Link>
+            </NavItem>
+
+            <NavItem className="sidenav-bg">
+              <Link href={'/pannel/report'} className={location === '/pannel/report'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
+                <i className='bi bi-speedometer2'></i>
+                <span className="ms-3 d-inline-block">Report</span>
+              </Link>
+            </NavItem>
           
         </Nav>
       </div>
