@@ -96,7 +96,7 @@ const Sidebar = ({ showMobilemenu }) => {
 
              <NavItem className="sidenav-bg cursor-pointer">
               <div onClick={()=>{setSale(!sale)}} className={` ${location === '/pannel/addSale' || location === '/pannel/manageSale' ? "text-primary nav-link py-3" : "nav-link text-secondary py-3"} `}>
-              <i className='bi bi-speedometer2'></i>
+              <i className='bi bi-receipt'></i>
               <button className="ms-3 d-inline-block">Sale</button>
         
                 <ul id="dropdown-example" className={` ${sale === false ? 'hidden' : 'visible'} py-2 space-y-2`}>
@@ -109,14 +109,12 @@ const Sidebar = ({ showMobilemenu }) => {
                         <Link href={"/pannel/manageSale"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Manage Sale</Link>
                     </li>
                 </ul>
-     
               </div>
-
             </NavItem>
 
             <NavItem className="sidenav-bg cursor-pointer">
               <div onClick={()=>{setCustomer(!customer)}} href={''} className={location === '/pannel/addCustomer' || location === '/pannel/manageCustomer' ? "text-primary nav-link": "nav-link text-secondary py-3"}>
-                <i className='bi bi-speedometer2'></i>
+                <i className='bi bi-people'></i>
                 <span className="ms-3 d-inline-block cursor-pointer">Customer</span>
         
                 <ul id="dropdown-example" className={` ${customer === false ? 'hidden' : 'visible'} py-2 space-y-2`}>
@@ -129,14 +127,12 @@ const Sidebar = ({ showMobilemenu }) => {
                         <Link href={"/pannel/manageCustomer"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Manage Customer</Link>
                     </li>
                 </ul>
-     
               </div>
-
             </NavItem>
 
             <NavItem className={location === '/pannel/supplier' ? " bg-slate-50": "text-secondary sidenav-bg"}>
               <div onClick={()=>{setSupplier(!supplier)}} href={''} className={location === '/pannel/addSupplier' || location === '/pannel/manageSupplier' ? "text-primary nav-link": "nav-link text-secondary py-3"}>
-                <i className='bi bi-speedometer2'></i>
+                <i className='bi bi-person'></i>
                 <span className="ms-3 d-inline-block cursor-pointer">Supplier</span>
         
                 <ul id="dropdown-example" className={` ${supplier === false ? 'hidden' : 'visible'} py-2 space-y-2`}>
@@ -153,8 +149,8 @@ const Sidebar = ({ showMobilemenu }) => {
             </NavItem>
 
             <NavItem className={location === '/pannel/product' ? " bg-slate-50": "text-secondary sidenav-bg"}>
-              <div onClick={()=>{setProduct(!product)}} href={''} className={location === '/pannel/addProducts' || location === '/pannel/manageProducts' ? "text-primary nav-link": "nav-link text-secondary py-3"}>
-                <i className='bi bi-speedometer2'></i>
+              <div onClick={()=>{setProduct(!product)}} href={''} className={location === '/pannel/addProduct' || location === '/pannel/manageProduct' ? "text-primary nav-link": "nav-link text-secondary py-3"}>
+                <i className='bi bi-bag'></i>
                 <span className="ms-3 d-inline-block cursor-pointer">Products</span>
         
                 <ul id="dropdown-example" className={` ${product === false ? 'hidden' : 'visible'} py-2 space-y-2`}>
@@ -172,22 +168,30 @@ const Sidebar = ({ showMobilemenu }) => {
 
             <NavItem className="sidenav-bg">
               <Link href={'/pannel/bank'} className={location === '/pannel/bank'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
-                <i className='bi bi-speedometer2'></i>
+                <i className='bi bi-bank'></i>
                 <span className="ms-3 d-inline-block">Banks</span>
               </Link>
             </NavItem>
 
             <NavItem className="sidenav-bg">
               <Link href={'/pannel/chartsOfAccount'} className={location === '/pannel/chartsOfAccount'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
-                <i className='bi bi-speedometer2'></i>
+                <i className='bi bi-alexa'></i>
                 <span className="ms-3 d-inline-block">Charts Of Account</span>
               </Link>
             </NavItem>
 
             <NavItem className="sidenav-bg">
               <Link href={'/pannel/report'} className={location === '/pannel/report'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
-                <i className='bi bi-speedometer2'></i>
+                <i className='bi bi-activity'></i>
                 <span className="ms-3 d-inline-block">Report</span>
+              </Link>
+            </NavItem>
+
+
+            <NavItem className="sidenav-bg">
+              <Link href={'/pannel/setting'} className={location === '/pannel/setting'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
+                <i className='bi bi-gear'></i>
+                <span className="ms-3 d-inline-block">Setting</span>
               </Link>
             </NavItem>
           
