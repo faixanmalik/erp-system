@@ -58,8 +58,8 @@ const navigation = [
 ];
 
 const Sidebar = ({ showMobilemenu }) => {
-  let curl = useRouter();
-  const location = curl.pathname;
+  let router = useRouter();
+  const location = router.pathname;
 
   return (
     <div className="p-3">
