@@ -99,13 +99,13 @@ const Sidebar = ({ showMobilemenu }) => {
               <i className='bi bi-receipt'></i>
               <button className="ms-3 d-inline-block">Sale</button>
         
-                <ul id="dropdown-example" className={` ${sale === false ? 'hidden' : 'visible'} py-2 space-y-2`}>
+                <ul id="dropdown-example" className={` ${sale === false ? 'hidden' : 'visible'} py-2 -ml-4 space-y-1`}>
                     <li className="flex items-center space-x-1 hover:text-indigo-700">
                         <i className='bi bi-plus-circle'></i>
                         <Link href={"/pannel/addSale"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Add Sale</Link>
                     </li>
                     <li className="flex items-center space-x-1 hover:text-indigo-700">
-                        <i className='bi bi-plus-circle'></i>
+                        <i className='bi bi-pen'></i>
                         <Link href={"/pannel/manageSale"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Manage Sale</Link>
                     </li>
                 </ul>
@@ -115,53 +115,76 @@ const Sidebar = ({ showMobilemenu }) => {
             <NavItem className="sidenav-bg cursor-pointer">
               <div onClick={()=>{setCustomer(!customer)}} href={''} className={location === '/pannel/addCustomer' || location === '/pannel/manageCustomer' ? "text-primary nav-link": "nav-link text-secondary py-3"}>
                 <i className='bi bi-people'></i>
-                <span className="ms-3 d-inline-block cursor-pointer">Customer</span>
+                <span className="ms-3 d-inline-block">Customer</span>
         
-                <ul id="dropdown-example" className={` ${customer === false ? 'hidden' : 'visible'} py-2 space-y-2`}>
+                <ul id="dropdown-example" className={` ${customer === false ? 'hidden' : 'visible'} py-2 -ml-4 space-y-1`}>
                     <li className="flex items-center space-x-1 hover:text-indigo-700">
                         <i className='bi bi-plus-circle'></i>
                         <Link href={"/pannel/addCustomer"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Add Customer</Link>
                     </li>
                     <li className="flex items-center space-x-1 hover:text-indigo-700">
-                        <i className='bi bi-plus-circle'></i>
+                        <i className='bi bi-pen'></i>
                         <Link href={"/pannel/manageCustomer"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Manage Customer</Link>
                     </li>
                 </ul>
               </div>
             </NavItem>
 
-            <NavItem className={location === '/pannel/supplier' ? " bg-slate-50": "text-secondary sidenav-bg"}>
+            <NavItem className="sidenav-bg cursor-pointer">
               <div onClick={()=>{setSupplier(!supplier)}} href={''} className={location === '/pannel/addSupplier' || location === '/pannel/manageSupplier' ? "text-primary nav-link": "nav-link text-secondary py-3"}>
                 <i className='bi bi-person'></i>
                 <span className="ms-3 d-inline-block cursor-pointer">Supplier</span>
         
-                <ul id="dropdown-example" className={` ${supplier === false ? 'hidden' : 'visible'} py-2 space-y-2`}>
+                <ul id="dropdown-example" className={` ${supplier === false ? 'hidden' : 'visible'} py-2 -ml-4 space-y-1`}>
                     <li className="flex items-center space-x-1 hover:text-indigo-700">
                         <i className='bi bi-plus-circle'></i>
                         <Link href={"/pannel/addSupplier"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Add Supplier</Link>
                     </li>
                     <li className="flex items-center space-x-1 hover:text-indigo-700">
-                        <i className='bi bi-plus-circle'></i>
+                        <i className='bi bi-pen'></i>
                         <Link href={"/pannel/manageSupplier"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Manage Supplier</Link>
                     </li>
                 </ul>
               </div>
             </NavItem>
 
-            <NavItem className={location === '/pannel/product' ? " bg-slate-50": "text-secondary sidenav-bg"}>
-              <div onClick={()=>{setProduct(!product)}} href={''} className={location === '/pannel/addProduct' || location === '/pannel/manageProduct' ? "text-primary nav-link": "nav-link text-secondary py-3"}>
+            <NavItem className="sidenav-bg cursor-pointer">
+              <div onClick={()=>{setProduct(!product)}} href={''} className={location === '/pannel/addProduct' || location === '/pannel/manageProduct' || location === '/pannel/addCategory' || location === '/pannel/categoryList' || location === '/pannel/addUnit' || location === '/pannel/unitList' ? "text-primary nav-link": "nav-link text-secondary py-3"}>
                 <i className='bi bi-bag'></i>
                 <span className="ms-3 d-inline-block cursor-pointer">Products</span>
         
-                <ul id="dropdown-example" className={` ${product === false ? 'hidden' : 'visible'} py-2 space-y-2`}>
+                <ul id="dropdown-example" className={` ${product === false ? 'hidden' : 'visible'} py-2 -ml-4 space-y-1`}>
+
+                    <li className="flex items-center space-x-1 hover:text-indigo-700">
+                        <i className='bi bi-plus-circle'></i>
+                        <Link href={"/pannel/addCategory"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Add Category</Link>
+                    </li>
+                    <li className="flex items-center space-x-1 hover:text-indigo-700">
+                        <i className='bi bi-plus-circle'></i>
+                        <Link href={"/pannel/categoryList"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Category List</Link>
+                    </li>
+
+
+                    <li className="flex items-center space-x-1 hover:text-indigo-700">
+                        <i className='bi bi-plus-circle'></i>
+                        <Link href={"/pannel/addUnit"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Add Unit</Link>
+                    </li>
+                    <li className="flex items-center space-x-1 hover:text-indigo-700">
+                        <i className='bi bi-plus-circle'></i>
+                        <Link href={"/pannel/unitList"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Unit List</Link>
+                    </li>
+
+
                     <li className="flex items-center space-x-1 hover:text-indigo-700">
                         <i className='bi bi-plus-circle'></i>
                         <Link href={"/pannel/addProduct"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Add Products</Link>
                     </li>
                     <li className="flex items-center space-x-1 hover:text-indigo-700">
-                        <i className='bi bi-plus-circle'></i>
+                        <i className='bi bi-pen'></i>
                         <Link href={"/pannel/manageProduct"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Manage Products</Link>
                     </li>
+
+
                 </ul>
               </div>
             </NavItem>
