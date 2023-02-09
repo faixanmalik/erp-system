@@ -18,129 +18,184 @@ const AddProduct = () => {
                 <div className="bg-white px-4 py-5 sm:p-6">
                   <div className="grid grid-cols-6 gap-6">
 
+                    <div className="col-span-6 sm:col-span-4">
+                      <label htmlFor="barcode" className="block text-sm font-medium text-gray-700">
+                        Barcode/QR-code
+                      </label>
+                      <input
+                        type="text"
+                        name="barcode"
+                        id="barcode"
+                        autoComplete="given-name"
+                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      />
+                    </div>
+
+
+
                     <div className="col-span-6 sm:col-span-3">
-                      <label htmlFor="ProductName" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="productName" className="block text-sm font-medium text-gray-700">
                         Product Name
                       </label>
                       <input
                         type="text"
-                        name="ProductName"
-                        id="ProductName"
+                        name="productName"
+                        id="productName"
                         autoComplete="given-name"
-                        className="mt-1 py-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      />
+                    </div>
+
+
+                    <div className="col-span-6 sm:col-span-3">
+                      <label htmlFor="SN" className="block text-sm font-medium text-gray-700">
+                        SN
+                      </label>
+                      <input
+                        type="text"
+                        name="sn"
+                        id="sn"
+                        placeholder='111.abc.XYZ'
+                        autoComplete="given-name"
+                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       />
                     </div>
  
 
-                    <div className="col-span-6 sm:col-span-4">
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                        Email address
+                    <div className="col-span-6 sm:col-span-3">
+                      <label htmlFor="model" className="block text-sm font-medium text-gray-700">
+                        Model
                       </label>
                       <input
                         type="text"
-                        name="email"
-                        id="email"
-                        autoComplete="email"
-                        className="mt-1 py-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                      />
-                    </div>
-
-                    <div className="col-span-6 sm:col-span-3">
-                      <label htmlFor="phoneno" className="block text-sm font-medium text-gray-700">
-                        Phone Number
-                      </label>
-                      <input
-                        type="number"
-                        name="phoneno"
-                        id="phoneno"
-                        autoComplete="phoneno"
+                        name="model"
+                        id="model"
+                        autoComplete="model"
                         className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       />
                     </div>
 
                     <div className="col-span-6 sm:col-span-3">
-                      <label htmlFor="country" className="block text-sm font-medium text-gray-700">
-                        Country
+                      <label htmlFor="category" className="block text-sm font-medium text-gray-700">
+                        Category
                       </label>
                       <select
-                        id="country"
-                        name="country"
-                        autoComplete="country"
-                        className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        id="category"
+                        name="category"
+                        autoComplete="category"
+                        className="mt-1 p-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       >
-                        <option>United States</option>
-                        <option>Canada</option>
-                        <option>Mexico</option>
+                        <option>Shirts</option>
+                        <option>Sneakers</option>
+                        <option>Mugs</option>
                       </select>
                     </div>
 
-                    <div className="col-span-6">
-                      <label htmlFor="streetAddress" className="block text-sm font-medium text-gray-700">
-                        Street Address
-                      </label>
-                      <input
-                        type="text"
-                        name="streetAddress"
-                        id="streetAddress"
-                        autoComplete="streetAddress"
-                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                      />
-                    </div>
-
-                    <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                      <label htmlFor="city" className="block text-sm font-medium text-gray-700">
-                        City
-                      </label>
-                      <input
-                        type="text"
-                        name="city"
-                        id="city"
-                        autoComplete="address-level2"
-                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                      />
-                    </div>
-
-                    <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                      <label htmlFor="state" className="block text-sm font-medium text-gray-700">
-                        State / Province
-                      </label>
-                      <input
-                        type="text"
-                        name="state"
-                        id="state"
-                        autoComplete="address-level1"
-                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                      />
-                    </div>
-
-                    <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                      <label htmlFor="zip" className="block text-sm font-medium text-gray-700">
-                        ZIP / Postal code
-                      </label>
-                      <input
-                        type="text"
-                        name="zip"
-                        id="zip"
-                        autoComplete="zip"
-                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                      />
-                    </div>
 
 
 
-                    <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                      <label htmlFor="Provision for Doubtful Debt" className="block text-sm font-medium text-gray-700">
-                        Provision for Doubtful Debt
+
+                    <div className="col-span-6 sm:col-span-3">
+                      <label htmlFor="salePrice" className="block text-sm font-medium text-gray-700">
+                        Sale Price
                       </label>
                       <input
                         type="number"
-                        name="provisionForDoubtfulDebt"
-                        id="provisionForDoubtfulDebt"
-                        autoComplete="provisionForDoubtfulDebt"
+                        name="salePrice"
+                        id="salePrice"
+                        autoComplete="salePrice"
                         className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       />
                     </div>
 
+
+                    <div className="col-span-6 sm:col-span-3">
+                      <label htmlFor="unit" className="block text-sm font-medium text-gray-700">
+                        Unit
+                      </label>
+                      <input
+                        type="number"
+                        name="unit"
+                        id="unit"
+                        autoComplete="unit"
+                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      />
+                    </div>
+
+                    
+                    <div className="col-span-6 sm:col-span-5">
+                      <label htmlFor="image" className="block text-sm font-medium text-gray-700">
+                        Image
+                      </label>
+                      <input
+                        type="file"
+                        name="image"
+                        id="image"
+                        autoComplete="image"
+                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      />
+                    </div>
+
+
+        
+                    <div className="col-span-6 sm:col-span-3">
+                      <label htmlFor="supplier" className="block text-sm font-medium text-gray-700">
+                        Supplier
+                      </label>
+                      <select
+                        id="supplier"
+                        name="supplier"
+                        autoComplete="supplier"
+                        className="mt-1 p-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                      >
+                        <option>Ahmad Trader</option>
+                        <option>Lahore Travel Agency</option>
+                        <option>Garden Town Agency</option>
+                      </select>
+                    </div>
+
+
+
+
+                    <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                      <label htmlFor="supplierPrice" className="block text-sm font-medium text-gray-700">
+                        Supplier Price
+                      </label>
+                      <input
+                        type="number"
+                        name="supplierPrice"
+                        id="supplierPrice"
+                        autoComplete="supplierPrice"
+                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      />
+                    </div>
+
+                    <div className="col-span-6 sm:col-span-3 lg:col-span-1">
+                      <label htmlFor="action" className="block text-sm font-medium text-gray-700">
+                        Action
+                      </label>
+                      <input
+                        type="text"
+                        name="action"
+                        id="action"
+                        autoComplete="action"
+                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      />
+                    </div>
+
+
+
+                    <div className="col-span-6 sm:col-span-3 lg:col-span-6">
+                      <label htmlFor="productDetails" className="block text-sm font-medium text-gray-700">
+                        Produt Details
+                      </label>
+                      <textarea cols="30" rows="5" type="text"
+                        name="productDetails"
+                        id="productDetails"
+                        autoComplete="productDetails"
+                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                      </textarea>
+                    </div>
 
 
                   </div>
@@ -164,7 +219,6 @@ const AddProduct = () => {
           <div className="border-t border-gray-200" />
         </div>
       </div>
-
       
     </>
   )
