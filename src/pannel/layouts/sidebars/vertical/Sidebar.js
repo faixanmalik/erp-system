@@ -142,7 +142,7 @@ const Sidebar = ({ showMobilemenu }) => {
                     </li>
                     <li className="flex items-center space-x-1 hover:text-indigo-700">
                         <i className='bi bi-pen'></i>
-                        <Link href={"/pannel/manageSupplier"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Manage Supplier</Link>
+                        <Link href={"/pannel/supplierList"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Manage Supplier</Link>
                     </li>
                 </ul>
               </div>

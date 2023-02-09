@@ -45,16 +45,16 @@ const UnitList = () => {
                         
                           <tr class="bg-white border-b hover:bg-gray-50">
                               <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                  Apple MacBook Pro 17"
+                                  10
                               </th>
                               <td class="px-6 py-4">
-                                  Sliver
+                                  Test
                               </td>
                               <td class="px-6 py-4">
-                                  Laptop
+                                  available
                               </td>
                               <td class="px-6 py-4">
-                                  $2999
+                                  active
                               </td>
                               <td class="px-6 py-4 text-right">
                                   <a href="#" class="font-medium text-blue-600  no-underline hover:underline">Edit</a>
