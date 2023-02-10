@@ -117,7 +117,7 @@ export async function getServerSideProps() {
    
   // Pass data to the page via props
   return {
-     props: { 
+     props: {
       customer: JSON.parse(JSON.stringify(customer)),
       product: JSON.parse(JSON.stringify(product)),
       supplier: JSON.parse(JSON.stringify(supplier))

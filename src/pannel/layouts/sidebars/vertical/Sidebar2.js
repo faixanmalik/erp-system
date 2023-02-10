@@ -1,15 +1,35 @@
-import { Fragment, useState } from 'react'
 import { Nav, NavItem } from "reactstrap";
 import Logo from "../../logo/Logo";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {AiOutlineCloseCircle} from 'react-icons/ai'
+
+
+
+import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
 
 
+
+
 const Sidebar = ({ showMobilemenu }) => {
+
+
+
+    const customers = [{
+        customers: 'faizan',
+        href:'/pannel/addCustomer',
+        supplier: 'test',
+        employees: 'test@example.com',
+        other: 'US'
+      },
+
+    ]
+
+
+
 
   const router = useRouter();
   const location = router.pathname;
@@ -17,124 +37,11 @@ const Sidebar = ({ showMobilemenu }) => {
   const [customer, setCustomer] = useState(false)
   const [supplier, setSupplier] = useState(false)
   const [product, setProduct] = useState(false)
+
   const [open, setOpen] = useState(false)
 
 
-  const customers = [{
-      customers: 'Invoice',
-      href:'/pannel/invoice',
-
-      supplier: 'Expense',
-      href:'/pannel/expense',
-
-      employees: 'Single time activity',
-      href:'/pannel/expense',
-
-      other: 'Bank deposit',
-      href:'/pannel/deposit',
-    },
-    {
-      customers: 'Receive payment',
-      href:'/pannel/receivePayment',
-      
-      supplier: 'Cheque',
-      href:'/pannel/cheque',
-      
-      employees: 'Weekly timesheet',
-      href:'/pannel/weeklyTimesheet',
-      
-      other: 'Transfer',
-      href:'/pannel/transfer',
-
-    },
-    {
-      customers: 'Estimate',
-      href:'/pannel/estimate',
-      
-      supplier: 'Bill',
-      href:'/pannel/bill',
-      
-      employees: '',
-      href:'#',
-      
-      other: 'Journal entry',
-      href:'/pannel/journalEntry',
-
-    },
-    {
-      customers: 'Credit note',
-      href:'/pannel/creditNote',
-      
-      supplier: 'Pay bills',
-      href:'/pannel/payBills',
-      
-      employees: '',
-      href:'#',
-      
-      other: 'Statement',
-      href:'/pannel/statement',
-
-    },
-    {
-      customers: 'Sales receipt',
-      href:'/pannel/saleReceipt',
-      
-      supplier: 'Purchase order',
-      href:'/pannel/parchaseOrder',
-      
-      employees: '',
-      href:'#',
-      
-      other: 'Pay down credit card',
-      href:'/pannel/journalEntry',
-
-    },
-    {
-      customers: 'Refund receipt',
-      href:'/pannel/refundReceipt',
-      
-      supplier: 'Supplier Credit',
-      href:'/pannel/supplierCredit',
-      
-      employees: '',
-      href:'#',
-      
-      other: '',
-      href:'#',
-
-    },
-    {
-      customers: 'Delayed credit',
-      href:'/pannel/delayedCredit',
-      
-      supplier: 'Credit card credit',
-      href:'/pannel/creditCardCredit',
-      
-      employees: '',
-      href:'#',
-      
-      other: '',
-      href:'#',
-
-    },
-    {
-      customers: 'Delayed charge',
-      href:'/pannel/delayedCharge',
-      
-      supplier: '',
-      href:'#',
-      
-      employees: '',
-      href:'#',
-      
-      other: '',
-      href:'#',
-
-    }
-  ]
-
-
-
+  
   return (
     <div className="p-3">
       <div className="d-flex align-items-center">
@@ -144,75 +51,79 @@ const Sidebar = ({ showMobilemenu }) => {
         </button>
       </div>
 
-      <Transition.Root show={open} as={Fragment}>
-        <Dialog as="div" className="relative z-20" onClose={setOpen}>
-          <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
-            <div className="fixed inset-0 hidden bg-gray-500 bg-opacity-75 transition-opacity md:block" />
-          </Transition.Child>
+    <Transition.Root show={open} as={Fragment}>
+      <Dialog as="div" className="relative z-20" onClose={setOpen}>
+        <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
+          <div className="fixed inset-0 hidden bg-gray-500 bg-opacity-75 transition-opacity md:block" />
+        </Transition.Child>
 
-          <div className="fixed inset-0 z-10 overflow-y-auto">
-            <div className="flex min-h-full items-stretch justify-center text-center md:items-center md:px-2 lg:px-4">
-              <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 translate-y-4 md:translate-y-0 md:scale-95" enterTo="opacity-100 translate-y-0 md:scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 translate-y-0 md:scale-100" leaveTo="opacity-0 translate-y-4 md:translate-y-0 md:scale-95">
-                <Dialog.Panel className="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-5xl">
+        <div className="fixed inset-0 z-10 overflow-y-auto">
+          <div className="flex min-h-full items-stretch justify-center text-center md:items-center md:px-2 lg:px-4">
+            <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 translate-y-4 md:translate-y-0 md:scale-95" enterTo="opacity-100 translate-y-0 md:scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 translate-y-0 md:scale-100" leaveTo="opacity-0 translate-y-4 md:translate-y-0 md:scale-95">
+              <Dialog.Panel className="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-5xl">
 
-                  <div className="relative flex w-full items-center overflow-hidden bg-white px-4 pt-14 pb-8 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
-                    <button
-                      type="button"
-                      className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-6 lg:right-8"
-                      onClick={() => setOpen(false)}
-                    >
-                      <span className="sr-only">Close</span>
-                      <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
+                <div className="relative flex w-full items-center overflow-hidden bg-white px-4 pt-14 pb-8 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
+                  <button
+                    type="button"
+                    className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-6 lg:right-8"
+                    onClick={() => setOpen(false)}
+                  >
+                    <span className="sr-only">Close</span>
+                    <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                  </button>
 
-                    <div className="relative mt-6 w-full overflow-x-auto shadow-sm">
-                    <table className="w-full text-sm text-left text-gray-500 ">
-                      <thead className="text-xs text-gray-700 uppercase bg-gray-50">
-                        <tr>
-                            <th scope="col" className="px-6 py-3">
-                                Customers
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Suppliers
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Employees
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Others
-                            </th>
-                          
-                        </tr>
-                      </thead>
-                      
-                      <tbody> 
-                          {Object.keys(customers).map((item)=>{
-                          return  <tr key={item._id} className="bg-white border-b hover:bg-gray-50">
-                              
-                              <td className="px-6 py-2">
-                                  <Link href={customers[item].href} className='no-underline text-gray-500 font-semibold text-base'>{customers[item].customers}</Link>
-                              </td>
-                              <td className="px-6 py-2">
-                                  <Link href={customers[item].href} className='no-underline text-gray-500 font-semibold text-base'>{customers[item].supplier}</Link>
-                              </td>
-                              <td className="px-6 py-2">
-                                  <Link href={customers[item].href} className='no-underline text-gray-500 font-semibold text-base'>{customers[item].employees}</Link>
-                              </td>
-                              <td className="px-6 py-2">
-                                  <Link href={customers[item].href} className='no-underline text-gray-500 font-semibold text-base'>{customers[item].other}</Link>
-                              </td>
-                          </tr>})}
-                      </tbody>
-                    </table>
-                  </div>
+                  <div className="relative mt-6 w-full overflow-x-auto shadow-sm">
+                  <table className="w-full text-sm text-left text-gray-500 ">
+                    <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+                      <tr>
+                          <th scope="col" className="px-6 py-3">
+                              Customers
+                          </th>
+                          <th scope="col" className="px-6 py-3">
+                              Suppliers
+                          </th>
+                          <th scope="col" className="px-6 py-3">
+                              Employees
+                          </th>
+                          <th scope="col" className="px-6 py-3">
+                              Others
+                          </th>
+                         
+                      </tr>
+                    </thead>
+                    
+                    <tbody> 
+                        {Object.keys(customers).map((item)=>{
+                        return  <tr key={item._id} className="bg-white border-b hover:bg-gray-50">
+                            
+                            <td className="px-6 py-4">
+                                <Link href={customers[item].href} className='no-underline font-semibold text-base'>{customers[item].customers}</Link>
+                            </td>
+                            <td className="px-6 py-4">
+                                <Link href={customers[item].href} className='no-underline font-semibold text-base'>{customers[item].supplier}</Link>
+                            </td>
+                            <td className="px-6 py-4">
+                                <Link href={customers[item].href} className='no-underline font-semibold text-base'>{customers[item].employees}</Link>
+                            </td>
+                            <td className="px-6 py-4">
+                                <Link href={customers[item].href} className='no-underline font-semibold text-base'>{customers[item].other}</Link>
+                            </td>
+                        </tr>})}
+                    </tbody>
+                  </table>
+                </div>
 
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
+                </div>
+              </Dialog.Panel>
+            </Transition.Child>
           </div>
-        </Dialog>
-      </Transition.Root>
+        </div>
+
+      </Dialog>
+    </Transition.Root>
+
+
+
 
       <div className="pt-4 mt-2">
         <Nav vertical className="sidebarNav">
