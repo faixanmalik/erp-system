@@ -8,7 +8,8 @@ const SupplierSchema = new mongoose.Schema({
     streetAddress: {type: String, required: true},
     city: {type: String, required: true},
     state: {type: String, required: true},
-    zip: {type: Number, required: true}
+    zip: {type: Number, required: true},
+    Date: {type: Date, default: Date.now() }
     
   },{timestamps:true});
 

@@ -1,4 +1,9 @@
 import { Card, CardBody, CardTitle, CardSubtitle, Table } from "reactstrap";
+import mongoose from "mongoose";
+import Customer from '../../../../models/Customer';
+
+
+
 
 const tableData = [
   {
@@ -7,7 +12,7 @@ const tableData = [
   }
 ];
 
-const Customer = () => {
+const CustomerComponent = () => {
   return (
     <Card>
       <CardBody>
@@ -54,4 +59,20 @@ const Customer = () => {
   );
 };
 
-export default Customer;
+
+export async function getServerSideProps() {
+  if (!mongoose.connections[0].readyState){
+    mongoose.set("strictQuery", false);
+    await mongoose.connect(process.env.MONGO_URI)
+  }
+  let customer = await Customer.find()
+  console.log(customer)
+
+   
+  // Pass data to the page via props
+  return {
+     props: { customer: JSON.parse(JSON.stringify(customer)) } 
+    }
+}
+
+export default CustomerComponent;

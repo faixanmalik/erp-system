@@ -13,6 +13,7 @@ const ProductSchema = new mongoose.Schema({
     action: {type: String, required: true},
     productDetails: {type: String, required: true},
     image: {type: String },
+    Date: {type: Date, default: Date.now() }
 
   },{timestamps:true});
 

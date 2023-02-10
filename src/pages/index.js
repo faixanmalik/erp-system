@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Col, Row } from "reactstrap";
 import SalesChart from "../pannel/components/dashboard/SalesChart";
-import CustomerComponent from "../pannel/components/dashboard/Customer";
+import CustomerComponent from "../pannel/components/dashboard/CustomerComponent";
 import TodayOverview from "../pannel/components/dashboard/TodayOverview";
 import TopCards from "../pannel/components/dashboard/TopCards";
 import SupplierComponent from "../pannel/components/dashboard/Supplier";

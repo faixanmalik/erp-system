@@ -1,6 +1,6 @@
 import React from 'react'
-import Customer from '../../../models/Customer';
 import mongoose from "mongoose";
+import Customer from '../../../models/Customer';
 
 const ManageCustomer = ({customer}) => {
 
