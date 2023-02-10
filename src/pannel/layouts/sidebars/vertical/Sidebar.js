@@ -97,16 +97,16 @@ const Sidebar = ({ showMobilemenu }) => {
              <NavItem className="sidenav-bg cursor-pointer">
               <div onClick={()=>{setSale(!sale)}} className={` ${location === '/pannel/addSale' || location === '/pannel/manageSale' ? "text-primary nav-link py-3" : "nav-link text-secondary py-3"} `}>
               <i className='bi bi-receipt'></i>
-              <button className="ms-3 d-inline-block">Sale</button>
+              <button className="ms-3 d-inline-block">Journal Entries</button>
         
                 <ul id="dropdown-example" className={` ${sale === false ? 'hidden' : 'visible'} py-2 -ml-4 space-y-1`}>
                     <li className="flex items-center space-x-1 hover:text-indigo-700">
                         <i className='bi bi-plus-circle'></i>
-                        <Link href={"/pannel/addSale"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Add Sale</Link>
+                        <Link href={"/pannel/makeJournalEntries"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Make a Journal Entry</Link>
                     </li>
                     <li className="flex items-center space-x-1 hover:text-indigo-700">
                         <i className='bi bi-pen'></i>
-                        <Link href={"/pannel/manageSale"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Manage Sale</Link>
+                        <Link href={"/pannel/manageJournalEntries"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Manage Journal Entry</Link>
                     </li>
                 </ul>
               </div>
@@ -157,26 +157,6 @@ const Sidebar = ({ showMobilemenu }) => {
 
                     <li className="flex items-center space-x-1 hover:text-indigo-700">
                         <i className='bi bi-plus-circle'></i>
-                        <Link href={"/pannel/addCategory"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Add Category</Link>
-                    </li>
-                    <li className="flex items-center space-x-1 hover:text-indigo-700">
-                        <i className='bi bi-plus-circle'></i>
-                        <Link href={"/pannel/categoryList"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Category List</Link>
-                    </li>
-
-
-                    <li className="flex items-center space-x-1 hover:text-indigo-700">
-                        <i className='bi bi-plus-circle'></i>
-                        <Link href={"/pannel/addUnit"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Add Unit</Link>
-                    </li>
-                    <li className="flex items-center space-x-1 hover:text-indigo-700">
-                        <i className='bi bi-plus-circle'></i>
-                        <Link href={"/pannel/unitList"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Unit List</Link>
-                    </li>
-
-
-                    <li className="flex items-center space-x-1 hover:text-indigo-700">
-                        <i className='bi bi-plus-circle'></i>
                         <Link href={"/pannel/addProduct"} className="flex no-underline items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group">Add Products</Link>
                     </li>
                     <li className="flex items-center space-x-1 hover:text-indigo-700">
@@ -199,7 +179,7 @@ const Sidebar = ({ showMobilemenu }) => {
             <NavItem className="sidenav-bg">
               <Link href={'/pannel/chartsOfAccount'} className={location === '/pannel/chartsOfAccount'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
                 <i className='bi bi-alexa'></i>
-                <span className="ms-3 d-inline-block">Charts Of Account</span>
+                <span className="ms-3 d-inline-block">Charts of Account</span>
               </Link>
             </NavItem>
 
