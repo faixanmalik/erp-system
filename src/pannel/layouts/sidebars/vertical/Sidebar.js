@@ -5,58 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import {AiOutlineCloseCircle} from 'react-icons/ai'
 
-const navigation = [
-  {
-    title: "Dashboard",
-    href: "/",
-    icon: "",
-  },
-  {
-    title: "Sale",
-    href: "/pannel/sale",
-    icon: "bi bi-receipt",
-  },
-  {
-    title: "Customer",
-    href: "/pannel/customer",
-    icon: "bi bi-people",
-  },
-  {
-    title: "Supplier",
-    href: "/pannel/supplier",
-    icon: "bi bi-person",
-  },
-  {
-    title: "Product",
-    href: "/pannel/product",
-    icon: "bi bi-bag",
-  },
-  {
-    title: "Purchase",
-    href: "/pannel/purchase",
-    icon: "bi bi-truck",
-  },
-  {
-    title: "Stock",
-    href: "/pannel/stock",
-    icon: "bi bi-shop",
-  },
-  {
-    title: "Accounts",
-    href: "/pannel/acounts",
-    icon: "bi bi-wallet2",
-  },
-  {
-    title: "Report",
-    href: "/pannel/report",
-    icon: "bi bi-link",
-  },
-  {
-    title: "Setting",
-    href: "/pannel/setting",
-    icon: "bi bi-gear",
-  },
-];
 
 
 const Sidebar = ({ showMobilemenu }) => {
@@ -66,9 +14,6 @@ const Sidebar = ({ showMobilemenu }) => {
   const [customer, setCustomer] = useState(false)
   const [supplier, setSupplier] = useState(false)
   const [product, setProduct] = useState(false)
-  const [purchase, setPurchase] = useState(false)
-  const [stock, setStock] = useState(false)
-  const [accounts, setAccounts] = useState(false)
 
   
   return (

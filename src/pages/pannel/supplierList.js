@@ -1,6 +1,9 @@
 import React from 'react'
+import Supplier from '../../../models/Supplier';
+import mongoose from "mongoose";
 
-const SupplierList = () => {
+const SupplierList = ({supplier}) => {
+  
   return (
     <>
     <div className="mt-10 sm:mt-0">
@@ -15,81 +18,75 @@ const SupplierList = () => {
               <div className="overflow-hidden shadow sm:rounded-md">
               
                 
-              <div class="relative overflow-x-auto shadow-sm">
-                  <table class="w-full text-sm text-left text-gray-500 ">
-                      <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-
-
-                          <tr>
-                              <th scope="col" class="px-6 py-3">
-                                  SL
-                              </th>
-                              <th scope="col" class="px-6 py-3">
-                                  Supplier Name
-                              </th>
-                              <th scope="col" class="px-6 py-3">
-                                  Phone No
-                              </th>
-                              <th scope="col" class="px-6 py-3">
-                                  Email
-                              </th>
-                              <th scope="col" class="px-6 py-3">
-                                  Country
-                              </th>
-                              <th scope="col" class="px-6 py-3">
-                                  City
-                              </th>
-                              <th scope="col" class="px-6 py-3">
-                                  State
-                              </th>
-                              <th scope="col" class="px-6 py-3">
-                                  Zip Code
-                              </th>
-                              
-                              <th scope="col" class="px-6 py-3">
-                                  <span class="sr-only">Edit</span>
-                              </th>
-                          </tr>
-
-                      </thead>
-
-
-                      <tbody>
+              <div className="relative overflow-x-auto shadow-sm">
+                <table className="w-full text-sm text-left text-gray-500 ">
+                  <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+                    <tr>
+                        <th scope="col" className="px-6 py-3">
+                            SL
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Supplier Name
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Phone No
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Email
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Country
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            City
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            State
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Zip Code
+                        </th>
                         
-                          <tr class="bg-white border-b hover:bg-gray-50">
-                              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                  01:
-                              </th>
-                              <td class="px-6 py-4">
-                                  Test
-                              </td>
-                              <td class="px-6 py-4">
-                                  0300-1234567
-                              </td>
-                              <td class="px-6 py-4">
-                                  abc@gmail.com
-                              </td>
-                              <td class="px-6 py-4">
-                                  Pakistan
-                              </td>
-                              <td class="px-6 py-4">
-                                  Lahore
-                              </td>
-                              <td class="px-6 py-4">
-                                  Punjab
-                              </td>
-                              <td class="px-6 py-4">
-                                  35700
-                              </td>
-                              
-                              <td class="px-6 py-4 text-right">
-                                  <a href="#" class="font-medium text-blue-600  no-underline hover:underline">Edit</a>
-                              </td>
-                          </tr>
+                        <th scope="col" className="px-6 py-3">
+                            <span className="sr-only">Edit</span>
+                        </th>
+                    </tr>
+                  </thead>
 
-                        
-                      </tbody>
-                  </table>
+                  <tbody>  
+                    {supplier.map((item, index)=>{
+                    return <tr key={item._id} className="bg-white border-b hover:bg-gray-50">
+                      <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        {index === 0 || 1 ? index + 1 : index}
+                      </th>
+                      <td className="px-6 py-4">
+                          {item.supplierName}
+                      </td>
+                      <td className="px-6 py-4">
+                          {item.phoneNo}
+                      </td>
+                      <td className="px-6 py-4">
+                          {item.email}
+                      </td>
+                      <td className="px-6 py-4">
+                          {item.country}
+                      </td>
+                      <td className="px-6 py-4">
+                          {item.city}
+                      </td>
+                      <td className="px-6 py-4">
+                          {item.state}
+                      </td>
+                      <td className="px-6 py-4">
+                          {item.zip}
+                      </td>
+
+                      <td className="px-6 py-4 text-right">
+                          <a href="#" className="font-medium text-blue-600  no-underline hover:underline">Edit</a>
+                      </td>
+                    </tr>})}
+                  </tbody>
+                </table>
               </div>
 
 
@@ -116,5 +113,23 @@ const SupplierList = () => {
     </>
   )
 }
+
+
+
+export async function getServerSideProps() {
+  if (!mongoose.connections[0].readyState){
+    mongoose.set("strictQuery", false);
+    await mongoose.connect(process.env.MONGO_URI)
+  }
+  let supplier = await Supplier.find()
+
+   
+  // Pass data to the page via props
+  return {
+     props: { supplier: JSON.parse(JSON.stringify(supplier)) } 
+    }
+}
+
+
 
 export default SupplierList

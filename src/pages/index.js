@@ -1,14 +1,24 @@
 import Head from "next/head";
 import { Col, Row } from "reactstrap";
 import SalesChart from "../pannel/components/dashboard/SalesChart";
-import Customer from "../pannel/components/dashboard/Customer";
+import CustomerComponent from "../pannel/components/dashboard/Customer";
 import TodayOverview from "../pannel/components/dashboard/TodayOverview";
 import TopCards from "../pannel/components/dashboard/TopCards";
-import Supplier from "../pannel/components/dashboard/Supplier";
-import Products from "@/pannel/components/dashboard/Products";
+import SupplierComponent from "../pannel/components/dashboard/Supplier";
+import ProductsComponent from "@/pannel/components/dashboard/Products";
+import mongoose from "mongoose";
+import Customer from '../../models/Customer';
+import Product from '../../models/Product';
+import Supplier from '../../models/Supplier';
 
 
-export default function Home() {
+export default function Home({customer, product, supplier}) {
+
+  const noOfCustomers = customer.length;
+  const noOfProducts = product.length;
+  const noOfSuppliers = supplier.length;
+  
+
   return (
     <>
       <Head>
@@ -24,33 +34,37 @@ export default function Home() {
           <Col sm="6" lg="3">
             <TopCards
               bg="bg-light-success text-success"
+              href='/pannel/manageCustomer'
               title="Customer"
               subtitle="Total Customer"
-              amount="12"
+              amount={noOfCustomers}
               icon="bi bi-people"
             />
           </Col>
           <Col sm="6" lg="3">
             <TopCards
               bg="bg-light-danger text-danger"
+              href='/pannel/manageProduct'
               title="Products"
               subtitle="Total Products"
-              amount="235"
+              amount={noOfProducts}
               icon="bi bi-bag"
             />
           </Col>
           <Col sm="6" lg="3">
             <TopCards
               bg="bg-light-warning text-warning"
+              href='/pannel/supplierList'
               title="Supplier"
               subtitle="Total Supplier"
-              amount="456"
+              amount={noOfSuppliers}
               icon="bi bi-basket3"
             />
           </Col>
           <Col sm="6" lg="3">
             <TopCards
               bg="bg-light-info text-into"
+              href='/pannel/manageJournalEntries'
               title="Sales"
               subtitle="Total Sales"
               amount="$210"
@@ -68,16 +82,16 @@ export default function Home() {
         {/***Table ***/}
         <Row>
           <Col lg="6" xxl="8" sm="12">
-            <Customer />
+            <CustomerComponent />
           </Col>
           <Col lg="6" xxl="8" sm="12">
-            <Products />  
+            <ProductsComponent />  
           </Col>
         </Row>
 
         <Row>
           <Col lg="6" xxl="8" sm="12">
-            <Supplier />
+            <SupplierComponent />
           </Col>
           <Col lg="6" xxl="8" sm="12">
           <TodayOverview />
@@ -89,4 +103,25 @@ export default function Home() {
       </main>
     </>
   )
+}
+
+
+export async function getServerSideProps() {
+  if (!mongoose.connections[0].readyState){
+    mongoose.set("strictQuery", false);
+    await mongoose.connect(process.env.MONGO_URI)
+  }
+  let customer = await Customer.find()
+  let product = await Product.find()
+  let supplier = await Supplier.find()
+   
+  // Pass data to the page via props
+  return {
+     props: { 
+      customer: JSON.parse(JSON.stringify(customer)),
+      product: JSON.parse(JSON.stringify(product)),
+      supplier: JSON.parse(JSON.stringify(supplier))
+     }
+     
+    }
 }

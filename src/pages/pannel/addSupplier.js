@@ -1,8 +1,93 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const AddSupplier = () => {
+
+
+  const [supplierName, setSupplierName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phoneNo, setPhoneNo] = useState('')
+  const [country, setCountry] = useState('United States')
+  const [streetAddress, setStreetAddress] = useState('')
+  const [city, setCity] = useState('')
+  const [state, setState] = useState('')
+  const [zip, setZip] = useState('')
+
+
+
+  const handleChange = (e) => {
+    if(e.target.name === 'supplierName'){
+      setSupplierName(e.target.value)
+    }
+    else if(e.target.name === 'email'){
+      setEmail(e.target.value)
+    }
+    else if(e.target.name === 'phoneNo'){
+      setPhoneNo(e.target.value)
+    }
+    else if(e.target.name === 'country'){
+      setCountry(e.target.value)
+    }
+    else if(e.target.name === 'streetAddress'){
+      setStreetAddress(e.target.value)
+    }
+    else if(e.target.name === 'city'){
+      setCity(e.target.value)
+    }
+    else if(e.target.name === 'state'){
+      setState(e.target.value)
+    }
+    else if(e.target.name === 'zip'){
+      setZip(e.target.value)
+    }
+
+  }
+
+
+
+  const submit = async(e)=>{
+    e.preventDefault()
+
+    
+    // fetch the data from form to makes a file in local system
+    const data = { supplierName, email, phoneNo, country, streetAddress, city, state, zip };
+      let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/addSupplier`, {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      let response = await res.json()
+
+        setSupplierName('')
+        setEmail('')
+        setPhoneNo('')
+        setCountry('')
+        setStreetAddress('')
+        setCity('')
+        setState('')
+        setZip('')
+
+        if (response.success === true) {
+            toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+        }
+
+        else {
+            toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+        }
+  }
+
+
+
+
   return (
     <> 
+
+    {/* React tostify */}
+    <ToastContainer position="bottom-center" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>
 
       <div className="mt-10 sm:mt-0">
         <div className="md:grid md:grid-cols-1 md:gap-6">
@@ -13,7 +98,10 @@ const AddSupplier = () => {
             </div>
           </div>
           <div className="mt-2 md:col-span-2 md:mt-0">
-            <form action="#" method="POST">
+
+
+
+            <form method="POST" onSubmit={submit}>
               <div className="overflow-hidden shadow sm:rounded-md">
                 <div className="bg-white px-4 py-5 sm:p-6">
                   <div className="grid grid-cols-6 gap-6">
@@ -23,11 +111,13 @@ const AddSupplier = () => {
                         Supplier Name
                       </label>
                       <input
+                        onChange={handleChange}
+                        value={supplierName}
                         type="text"
                         name="supplierName"
                         id="supplierName"
                         autoComplete="given-name"
-                        className="mt-1 py-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       />
                     </div>
  
@@ -37,23 +127,27 @@ const AddSupplier = () => {
                         Email address
                       </label>
                       <input
+                        onChange={handleChange}
+                        value={email}
                         type="text"
                         name="email"
                         id="email"
                         autoComplete="email"
-                        className="mt-1 py-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       />
                     </div>
 
                     <div className="col-span-6 sm:col-span-3">
-                      <label htmlFor="phoneno" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="phoneNo" className="block text-sm font-medium text-gray-700">
                         Phone Number
                       </label>
                       <input
+                        onChange={handleChange}
+                        value={phoneNo}
                         type="number"
-                        name="phoneno"
-                        id="phoneno"
-                        autoComplete="phoneno"
+                        name="phoneNo"
+                        id="phoneNo"
+                        autoComplete="phoneNo"
                         className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       />
                     </div>
@@ -63,14 +157,16 @@ const AddSupplier = () => {
                         Country
                       </label>
                       <select
+                        onChange={handleChange}
+                        value={country}
                         id="country"
                         name="country"
                         autoComplete="country"
-                        className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="mt-1 p-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       >
-                        <option>United States</option>
-                        <option>Canada</option>
-                        <option>Mexico</option>
+                        <option value={'United States'}>United States</option>
+                        <option value={'Canada'}>Canada</option>
+                        <option value={'Mexico'}>Mexico</option>
                       </select>
                     </div>
 
@@ -79,6 +175,8 @@ const AddSupplier = () => {
                         Street Address
                       </label>
                       <input
+                        onChange={handleChange}
+                        value={streetAddress}
                         type="text"
                         name="streetAddress"
                         id="streetAddress"
@@ -92,6 +190,8 @@ const AddSupplier = () => {
                         City
                       </label>
                       <input
+                        onChange={handleChange}
+                        value={city}
                         type="text"
                         name="city"
                         id="city"
@@ -105,6 +205,8 @@ const AddSupplier = () => {
                         State / Province
                       </label>
                       <input
+                        onChange={handleChange}
+                        value={state}
                         type="text"
                         name="state"
                         id="state"
@@ -118,7 +220,9 @@ const AddSupplier = () => {
                         ZIP / Postal code
                       </label>
                       <input
-                        type="text"
+                        onChange={handleChange}
+                        value={zip}
+                        type="number"
                         name="zip"
                         id="zip"
                         autoComplete="zip"
@@ -139,6 +243,9 @@ const AddSupplier = () => {
                 </div>
               </div>
             </form>
+
+
+
           </div>
         </div>
       </div>
