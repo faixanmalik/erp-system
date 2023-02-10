@@ -12,7 +12,11 @@ const AddCustomer = () => {
   const [city, setCity] = useState('')
   const [state, setState] = useState('')
   const [zip, setZip] = useState('')
-  const [provisionForDoubtfulDebt, setProvisionForDoubtfulDebt] = useState('')
+  const [taxRigNo, setTaxRigNo] = useState('')
+  const [paymentMethod, setPaymentMethod] = useState('Cash')
+  const [terms, setTerms] = useState('Due on receipt')
+  const [openingBalance, setOpeningBalance] = useState('')
+  const [date, setDate] = useState('')
 
   
   const handleChange = (e) => {
@@ -40,8 +44,20 @@ const AddCustomer = () => {
     else if(e.target.name === 'zip'){
       setZip(e.target.value)
     }
-    else if(e.target.name === 'provisionForDoubtfulDebt'){
-      setProvisionForDoubtfulDebt(e.target.value)
+    else if(e.target.name === 'taxRigNo'){
+      setTaxRigNo(e.target.value)
+    }
+    else if(e.target.name === 'paymentMethod'){
+      setPaymentMethod(e.target.value)
+    }
+    else if(e.target.name === 'terms'){
+      setTerms(e.target.value)
+    }
+    else if(e.target.name === 'openingBalance'){
+      setOpeningBalance(e.target.value)
+    }
+    else if(e.target.name === 'date'){
+      setDate(e.target.value)
     }
 
   }
@@ -51,7 +67,7 @@ const AddCustomer = () => {
 
     
     // fetch the data from form to makes a file in local system
-    const data = { customerName, email, phoneNo, country, streetAddress, city, state, zip, provisionForDoubtfulDebt };
+    const data = { customerName, email, phoneNo, country, streetAddress, city, state, zip, taxRigNo, paymentMethod, terms , openingBalance, date };
       let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/addCustomer`, {
       method: 'POST',
       headers: { 
@@ -69,7 +85,12 @@ const AddCustomer = () => {
         setCity('')
         setState('')
         setZip('')
-        setProvisionForDoubtfulDebt('')
+        setTaxRigNo('')
+        setTerms('')
+        setOpeningBalance('')
+        setPaymentMethod('')
+        setDate('')
+
 
         if (response.success === true) {
             toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
@@ -227,19 +248,79 @@ const AddCustomer = () => {
                     </div>
 
                     <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                      <label htmlFor="Provision for Doubtful Debt" className="block text-sm font-medium text-gray-700">
-                        Provision for Doubtful Debt
+                      <label htmlFor="taxRigNo" className="block text-sm font-medium text-gray-700">
+                          Tax Reg.No
                       </label>
                       <input
                         onChange={handleChange}
-                        value={provisionForDoubtfulDebt}
+                        value={taxRigNo}
                         type="number"
-                        name="provisionForDoubtfulDebt"
-                        id="provisionForDoubtfulDebt"
-                        autoComplete="provisionForDoubtfulDebt"
+                        name="taxRigNo"
+                        id="taxRigNo"
+                        autoComplete="taxRigNo"
                         className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       />
                     </div>
+
+                    <div className="col-span-6 sm:col-span-3">
+                      <label htmlFor="paymentMethod" className="block text-sm font-medium text-gray-700">
+                        Prefered Payment Method
+                      </label>
+                      <select
+                        id="paymentMethod"
+                        name="paymentMethod"
+                        onChange={handleChange}
+                        value={paymentMethod}
+                        className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                      >
+                        <option value={'Cash'}>Cash</option>
+                        <option value={'Cheque'}>Cheque</option>
+                        <option value={'Credit Card'}>Credit Card</option>
+                        <option value={'Direct Debit'}>Direct Debit</option>
+                      </select>
+                    </div>
+
+                    <div className="col-span-6 sm:col-span-2">
+                      <label htmlFor="terms" className="block text-sm font-medium text-gray-700">
+                        Terms
+                      </label>
+                      <select id="terms" name="terms" onChange={handleChange} value={terms} className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                        <option value={'Due on receipt'}>Due on receipt</option>
+                        <option value={'Net 15'}>Net 15</option>
+                        <option value={'Net 30'}>Net 30</option>
+                        <option value={'Net 60'}>Net 60</option>
+                      </select>
+                    </div>
+
+                    <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                      <label htmlFor="openingBalance" className="block text-sm font-medium text-gray-700">
+                        Opening Balance
+                      </label>
+                      <input
+                        onChange={handleChange}
+                        value={openingBalance}
+                        type="number"
+                        name="openingBalance"
+                        id="openingBalance"
+                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      />
+                    </div>
+
+
+                    <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                      <label htmlFor="date" className="block text-sm font-medium text-gray-700">
+                        as of
+                      </label>
+                      <input
+                        onChange={handleChange}
+                        value={date}
+                        type="date"
+                        name="date"
+                        id="date"
+                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      />
+                    </div>
+
 
                   </div>
                 </div>

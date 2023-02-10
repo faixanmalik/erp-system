@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 const date = new Date();
 
 const CustomerSchema = new mongoose.Schema({
@@ -13,9 +12,14 @@ const CustomerSchema = new mongoose.Schema({
     city: {type: String, required: true},
     state: {type: String, required: true},
     zip: {type: Number, required: true},
-    provisionForDoubtfulDebt: {type: Number, required: true},
-    Date: {type: Date, default: Date.now() }
+    taxRigNo: {type: Number, required: true},
+    paymentMethod: {type: String, required: true},
+    terms: {type: String, required: true},
+    openingBalance: {type: Number, required: true},
+    date: {type: date, required: true},
+    taxRigNo: {type: Number, required: true}
     
+
   },{timestamps:true});
 
 mongoose.models={}
