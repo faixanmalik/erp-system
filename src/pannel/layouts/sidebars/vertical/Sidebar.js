@@ -304,28 +304,28 @@ const Sidebar = ({ showMobilemenu }) => {
             </NavItem>
 
             <NavItem className="sidenav-bg">
-              <Link href={'/pannel/forms/bank'} className={location === '/pannel/bank'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
+              <Link href={'/pannel/bank'} className={location === '/pannel/bank'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
                 <i className='bi bi-bank'></i>
                 <span className="ms-3 d-inline-block">Banks</span>
               </Link>
             </NavItem>
 
             <NavItem className="sidenav-bg">
-              <Link href={'/pannel/forms/chartsOfAccount'} className={location === '/pannel/chartsOfAccount'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
+              <Link href={'/pannel/chartsOfAccount'} className={location === '/pannel/chartsOfAccount'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
                 <i className='bi bi-alexa'></i>
                 <span className="ms-3 d-inline-block">Charts of Account</span>
               </Link>
             </NavItem>
 
             <NavItem className="sidenav-bg">
-              <Link href={'/pannel/forms/report'} className={location === '/pannel/report'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
+              <Link href={'/pannel/report'} className={location === '/pannel/report'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
                 <i className='bi bi-activity'></i>
                 <span className="ms-3 d-inline-block">Report</span>
               </Link>
             </NavItem>
 
             <NavItem className="sidenav-bg">
-              <Link href={'/pannel/forms/setting'} className={location === '/pannel/setting'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
+              <Link href={'/pannel/setting'} className={location === '/pannel/setting'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
                 <i className='bi bi-gear'></i>
                 <span className="ms-3 d-inline-block">Setting</span>
               </Link>
