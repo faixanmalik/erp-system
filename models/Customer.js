@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-const date = new Date();
-
 const CustomerSchema = new mongoose.Schema({
 
     customerName:{type: String, required: true},
@@ -16,7 +14,7 @@ const CustomerSchema = new mongoose.Schema({
     paymentMethod: {type: String, required: true},
     terms: {type: String, required: true},
     openingBalance: {type: Number, required: true},
-    date: {type: date, required: true},
+    date: {type: Date, required: true},
     taxRigNo: {type: Number, required: true}
     
 

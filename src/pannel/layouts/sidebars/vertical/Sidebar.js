@@ -20,118 +20,7 @@ const Sidebar = ({ showMobilemenu }) => {
   const [open, setOpen] = useState(false)
 
 
-  const customers = [{
-      customers: 'Invoice',
-      href:'/pannel/invoice',
 
-      supplier: 'Expense',
-      href:'/pannel/expense',
-
-      employees: 'Single time activity',
-      href:'/pannel/expense',
-
-      other: 'Bank deposit',
-      href:'/pannel/deposit',
-    },
-    {
-      customers: 'Receive payment',
-      href:'/pannel/receivePayment',
-      
-      supplier: 'Cheque',
-      href:'/pannel/cheque',
-      
-      employees: 'Weekly timesheet',
-      href:'/pannel/weeklyTimesheet',
-      
-      other: 'Transfer',
-      href:'/pannel/transfer',
-
-    },
-    {
-      customers: 'Estimate',
-      href:'/pannel/estimate',
-      
-      supplier: 'Bill',
-      href:'/pannel/bill',
-      
-      employees: '',
-      href:'#',
-      
-      other: 'Journal entry',
-      href:'/pannel/journalEntry',
-
-    },
-    {
-      customers: 'Credit note',
-      href:'/pannel/creditNote',
-      
-      supplier: 'Pay bills',
-      href:'/pannel/payBills',
-      
-      employees: '',
-      href:'#',
-      
-      other: 'Statement',
-      href:'/pannel/statement',
-
-    },
-    {
-      customers: 'Sales receipt',
-      href:'/pannel/saleReceipt',
-      
-      supplier: 'Purchase order',
-      href:'/pannel/parchaseOrder',
-      
-      employees: '',
-      href:'#',
-      
-      other: 'Pay down credit card',
-      href:'/pannel/journalEntry',
-
-    },
-    {
-      customers: 'Refund receipt',
-      href:'/pannel/refundReceipt',
-      
-      supplier: 'Supplier Credit',
-      href:'/pannel/supplierCredit',
-      
-      employees: '',
-      href:'#',
-      
-      other: '',
-      href:'#',
-
-    },
-    {
-      customers: 'Delayed credit',
-      href:'/pannel/delayedCredit',
-      
-      supplier: 'Credit card credit',
-      href:'/pannel/creditCardCredit',
-      
-      employees: '',
-      href:'#',
-      
-      other: '',
-      href:'#',
-
-    },
-    {
-      customers: 'Delayed charge',
-      href:'/pannel/delayedCharge',
-      
-      supplier: '',
-      href:'#',
-      
-      employees: '',
-      href:'#',
-      
-      other: '',
-      href:'#',
-
-    }
-  ]
 
 
 
@@ -186,22 +75,133 @@ const Sidebar = ({ showMobilemenu }) => {
                       </thead>
                       
                       <tbody> 
-                          {Object.keys(customers).map((item)=>{
-                          return  <tr key={item._id} className="bg-white border-b hover:bg-gray-50">
-                              
-                              <td className="px-6 py-2">
-                                  <Link href={customers[item].href} className='no-underline text-gray-500 font-semibold text-base'>{customers[item].customers}</Link>
-                              </td>
-                              <td className="px-6 py-2">
-                                  <Link href={customers[item].href} className='no-underline text-gray-500 font-semibold text-base'>{customers[item].supplier}</Link>
-                              </td>
-                              <td className="px-6 py-2">
-                                  <Link href={customers[item].href} className='no-underline text-gray-500 font-semibold text-base'>{customers[item].employees}</Link>
-                              </td>
-                              <td className="px-6 py-2">
-                                  <Link href={customers[item].href} className='no-underline text-gray-500 font-semibold text-base'>{customers[item].other}</Link>
-                              </td>
-                          </tr>})}
+                          
+                        <tr className="bg-white border-b hover:bg-gray-50"> 
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/invoice'} className='no-underline text-gray-500 font-semibold text-base'>Invoice</Link>
+                            </td>
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/expense'} className='no-underline text-gray-500 font-semibold text-base'>Expense</Link>
+                            </td>
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/singleTimeActivity'} className='no-underline text-gray-500 font-semibold text-base'>Single time activity</Link>
+                            </td>
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/bankDeopsit'} className='no-underline text-gray-500 font-semibold text-base'>Bank deposit</Link>
+                            </td>
+                          </tr>
+
+                          <tr className="bg-white border-b hover:bg-gray-50"> 
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/receivePayment'} className='no-underline text-gray-500 font-semibold text-base'>Receive payment</Link>
+                            </td>
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/cheque'} className='no-underline text-gray-500 font-semibold text-base'>Cheque</Link>
+                            </td>
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/weeklyTimeSheet'} className='no-underline text-gray-500 font-semibold text-base'>Weekly time sheet</Link>
+                            </td>
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/transfer'} className='no-underline text-gray-500 font-semibold text-base'>Transfer</Link>
+                            </td>
+                          </tr>
+
+
+                          <tr className="bg-white border-b hover:bg-gray-50"> 
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/estimate'} className='no-underline text-gray-500 font-semibold text-base'>Estimate</Link>
+                            </td>
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/bill'} className='no-underline text-gray-500 font-semibold text-base'>Bill</Link>
+                            </td>
+                            <td className="px-6 py-2">
+                                
+                            </td>
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/journalEntry'} className='no-underline text-gray-500 font-semibold text-base'>Journal entry</Link>
+                            </td>
+                          </tr>
+
+
+                          <tr className="bg-white border-b hover:bg-gray-50"> 
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/creditNote'} className='no-underline text-gray-500 font-semibold text-base'>Credit Note</Link>
+                            </td>
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/payBills'} className='no-underline text-gray-500 font-semibold text-base'>Pay bills</Link>
+                            </td>
+                            <td className="px-6 py-2">
+                                
+                            </td>
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/statement'} className='no-underline text-gray-500 font-semibold text-base'>Statement</Link>
+                            </td>
+                          </tr>
+
+                          <tr className="bg-white border-b hover:bg-gray-50"> 
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/salesReceipt'} className='no-underline text-gray-500 font-semibold text-base'>Sales receipt</Link>
+                            </td>
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/purchaseOrder'} className='no-underline text-gray-500 font-semibold text-base'>Purchase order</Link>
+                            </td>
+                            <td className="px-6 py-2">
+                                
+                            </td>
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/payDownCreditCard'} className='no-underline text-gray-500 font-semibold text-base'>Pay down credit card</Link>
+                            </td>
+                          </tr>
+
+
+                          <tr className="bg-white border-b hover:bg-gray-50"> 
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/refundReceipt'} className='no-underline text-gray-500 font-semibold text-base'>Refund receipt</Link>
+                            </td>
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/supplierCredit'} className='no-underline text-gray-500 font-semibold text-base'>Supplier credit</Link>
+                            </td>
+                            <td className="px-6 py-2">
+                                
+                            </td>
+                            <td className="px-6 py-2">
+                                
+                            </td>
+                          </tr>
+                          
+                          <tr className="bg-white border-b hover:bg-gray-50"> 
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/delayedCredit'} className='no-underline text-gray-500 font-semibold text-base'>Delayed credit</Link>
+                            </td>
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/creditCardCredit'} className='no-underline text-gray-500 font-semibold text-base'>Credit card credit</Link>
+                            </td>
+                            <td className="px-6 py-2">
+                                
+                            </td>
+                            <td className="px-6 py-2">
+                                
+                            </td>
+                          </tr>
+                          <tr className="bg-white border-b hover:bg-gray-50"> 
+                            <td className="px-6 py-2">
+                                <Link href={'/pannel/forms/delayedCharge'} className='no-underline text-gray-500 font-semibold text-base'>Delayed charge</Link>
+                            </td>
+                            <td className="px-6 py-2">
+                                
+                            </td>
+                            <td className="px-6 py-2">
+                                
+                            </td>
+                            <td className="px-6 py-2">
+                                
+                            </td>
+                          </tr>
+
+                          
+
+
+                          
                       </tbody>
                     </table>
                   </div>
@@ -304,28 +304,28 @@ const Sidebar = ({ showMobilemenu }) => {
             </NavItem>
 
             <NavItem className="sidenav-bg">
-              <Link href={'/pannel/bank'} className={location === '/pannel/bank'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
+              <Link href={'/pannel/forms/bank'} className={location === '/pannel/bank'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
                 <i className='bi bi-bank'></i>
                 <span className="ms-3 d-inline-block">Banks</span>
               </Link>
             </NavItem>
 
             <NavItem className="sidenav-bg">
-              <Link href={'/pannel/chartsOfAccount'} className={location === '/pannel/chartsOfAccount'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
+              <Link href={'/pannel/forms/chartsOfAccount'} className={location === '/pannel/chartsOfAccount'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
                 <i className='bi bi-alexa'></i>
                 <span className="ms-3 d-inline-block">Charts of Account</span>
               </Link>
             </NavItem>
 
             <NavItem className="sidenav-bg">
-              <Link href={'/pannel/report'} className={location === '/pannel/report'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
+              <Link href={'/pannel/forms/report'} className={location === '/pannel/report'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
                 <i className='bi bi-activity'></i>
                 <span className="ms-3 d-inline-block">Report</span>
               </Link>
             </NavItem>
 
             <NavItem className="sidenav-bg">
-              <Link href={'/pannel/setting'} className={location === '/pannel/setting'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
+              <Link href={'/pannel/forms/setting'} className={location === '/pannel/setting'? "text-primary nav-link py-3": "nav-link text-secondary py-3"}>
                 <i className='bi bi-gear'></i>
                 <span className="ms-3 d-inline-block">Setting</span>
               </Link>
