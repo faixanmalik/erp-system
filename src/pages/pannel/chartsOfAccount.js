@@ -104,7 +104,7 @@ const ChartsOfAccounts = ({charts}) => {
           <form action="#" method="POST">
             <div className="overflow-hidden shadow sm:rounded-md">
        
-            <div className=" overflow-x-auto shadow-sm">
+            <div className="overflow-x-auto shadow-sm">
               <table className="w-full text-sm text-left text-gray-500 ">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                   <tr>
@@ -156,12 +156,9 @@ const ChartsOfAccounts = ({charts}) => {
                               </Menu.Button>
                             </div>
                             <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-75" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
-                              <Menu.Items className="absolute right-20 w-44 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                              <Menu.Items className="absolute right-20 w-36 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 <div className="py-1 z-20">
-                                  <Menu.Item>{({ active }) => (
-                                      <Link href="#" className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'block px-4 py-2 text-sm hover:no-underline' )}>Connect bank</Link>
-                                    )}
-                                  </Menu.Item>
+                                  
                                   <Menu.Item>{({ active }) => (
                                       <Link href="#" className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'block px-4 py-2 text-sm hover:no-underline' )}>Edit</Link>
                                     )}
@@ -170,12 +167,7 @@ const ChartsOfAccounts = ({charts}) => {
                                       <Link href="#" className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'block px-4 py-2 text-sm hover:no-underline' )}>Make inactive</Link>
                                     )}
                                   </Menu.Item>
-                                  <Menu.Item>{({ active }) => (
-                                      <Link href="#" className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline',   'block px-4 py-2 text-sm hover:no-underline' )}>
-                                        Run report
-                                      </Link>
-                                    )}
-                                  </Menu.Item>
+                             
                                 </div>
                               </Menu.Items>
                             </Transition>
@@ -247,8 +239,35 @@ const ChartsOfAccounts = ({charts}) => {
                                     className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                   />
                                 </div>
+
+
+                                <div className="col-span-6 sm:col-span-2">
+                                  <label htmlFor="subAccount" className="block text-sm font-medium text-gray-700">
+                                    Sub Account
+                                  </label>
+                                  <select id="subAccount" name="subAccount" onChange={handleChange} value={subAccount} className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                    <option value={'Due on receipt'}>Due on receipt</option>
+                                    <option value={'Net 15'}>Net 15</option>
+                                    <option value={'Net 30'}>Net 30</option>
+                                    <option value={'Net 60'}>Net 60</option>
+                                  </select>
+                                </div>
                                 
                                 
+                                <div className="col-span-6 sm:col-span-3 lg:col-span-6">
+                                  <label htmlFor="desc" className="block text-sm font-medium text-gray-700">
+                                    Description:
+                                  </label>
+                                  <textarea cols="30" rows="3" type="text"
+                                    name="desc"
+                                    id="desc"
+                                    onChange={handleChange}
+                                    value={desc}
+                                    className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                  </textarea>
+                                </div>
+
+
                                 <div className="col-span-6 sm:col-span-2">
                                   <label htmlFor="balance" className="block text-sm font-medium text-gray-700">
                                     Balance:
@@ -262,20 +281,6 @@ const ChartsOfAccounts = ({charts}) => {
                                     autoComplete="balance"
                                     className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                   />
-                                </div>
-
-
-                                <div className="col-span-6 sm:col-span-3 lg:col-span-6">
-                                  <label htmlFor="desc" className="block text-sm font-medium text-gray-700">
-                                    Description:
-                                  </label>
-                                  <textarea cols="30" rows="3" type="text"
-                                    name="desc"
-                                    id="desc"
-                                    onChange={handleChange}
-                                    value={desc}
-                                    className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                  </textarea>
                                 </div>
                                 
                                 
@@ -294,18 +299,11 @@ const ChartsOfAccounts = ({charts}) => {
                                   />
                                 </div>
                            
-                                <div className="col-span-6 sm:col-span-2">
-                                  <label htmlFor="subAccount" className="block text-sm font-medium text-gray-700">
-                                    Sub Account
-                                  </label>
-                                  <select id="subAccount" name="subAccount" onChange={handleChange} value={subAccount} className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                    <option value={'Due on receipt'}>Due on receipt</option>
-                                    <option value={'Net 15'}>Net 15</option>
-                                    <option value={'Net 30'}>Net 30</option>
-                                    <option value={'Net 60'}>Net 60</option>
-                                  </select>
-                                </div>
+                                
+
+
                               </div>
+
                             </div>
                             <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
                               <button type="submit" className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save</button>
