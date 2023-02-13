@@ -25,11 +25,11 @@ const AddVouchers = () => {
     <div className="p-3">
 
       <div className='justify-center mt-3 flex md:justify-start space-x-3'>
-        <button onClick={() => { setCashPayment(true) }} className='bg-blue-800 font-semibold text-white px-10 py-3 rounded-lg'>Cash Payment</button>
-        <button onClick={() => { setCashReceipt(true) }} className='bg-blue-800 font-semibold text-white px-10 py-3 rounded-lg'>Cash Receipt</button>
-        <button onClick={() => { setBankPayment(true) }} className='bg-blue-800 font-semibold text-white px-10 py-3 rounded-lg'>Bank Payment</button>
-        <button onClick={() => { setBankReceipt(true) }} className='bg-blue-800 font-semibold text-white px-10 py-3 rounded-lg'>Bank Receipt</button>
-        <button onClick={() => { setJournalVoucher(true) }} className='bg-blue-800 font-semibold text-white px-10 py-3 rounded-lg'>Journal Voucher</button>
+        <button onClick={() => { setCashPayment(true) }} className='bg-white font-extrabold text-lg text-blue-800 px-10 py-4 rounded-lg'>Cash Payment</button>
+        <button onClick={() => { setCashReceipt(true) }} className='bg-white font-extrabold text-lg text-blue-800 px-10 py-4 rounded-lg'>Cash Receipt</button>
+        <button onClick={() => { setBankPayment(true) }} className='bg-white font-extrabold text-lg text-blue-800 px-10 py-4 rounded-lg'>Bank Payment</button>
+        <button onClick={() => { setBankReceipt(true) }} className='bg-white font-extrabold text-lg text-blue-800 px-10 py-4 rounded-lg'>Bank Receipt</button>
+        <button onClick={() => { setJournalVoucher(true) }} className='bg-white font-extrabold text-lg text-blue-800 px-10 py-4 rounded-lg'>Journal Voucher</button>
       </div>
       
       <Transition.Root show={cashPayment} as={Fragment}>
