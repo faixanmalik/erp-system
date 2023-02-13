@@ -59,7 +59,7 @@ const ManageCustomer = ({customer}) => {
                                 City
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                State
+                                Opening Balance
                             </th>
                             
                             <th scope="col" className="px-6 py-3">
@@ -90,7 +90,7 @@ const ManageCustomer = ({customer}) => {
                             {item.city}
                         </td>
                         <td className="px-6 py-3">
-                            {item.zip}
+                            {item.openingBalance}
                         </td>
                         <td className="px-6 py-3">
                           <Menu as="div" className=" inline-block text-left">
@@ -126,13 +126,6 @@ const ManageCustomer = ({customer}) => {
           </div>
         </div>
     </div>
-
-    <div className="hidden sm:block" aria-hidden="true">
-      <div className="py-5">
-        <div className="border-t border-gray-200" />
-      </div>
-    </div>
-
 
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-20" onClose={()=>{setOpen(false)}}>

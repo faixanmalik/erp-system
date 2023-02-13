@@ -7,6 +7,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import JournalVoucher from './forms/journalVoucher';
+import AddVouchers from './forms/addVouchers';
 
 
 
@@ -21,7 +22,6 @@ const ManageVouchers = ({journalEntries}) => {
 
   const edit = (id)=>{
     console.log(id);
-    
   }
 
   return (
@@ -135,11 +135,6 @@ const ManageVouchers = ({journalEntries}) => {
       </div>
     </div>
 
-    <div className="hidden sm:block" aria-hidden="true">
-      <div className="py-5">
-        <div className="border-t border-gray-200" />
-      </div>
-    </div>
 
 
     <Transition.Root show={open} as={Fragment}>
@@ -157,7 +152,7 @@ const ManageVouchers = ({journalEntries}) => {
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
 
-
+                  {/* <AddVouchers/> */}
                   <JournalVoucher/>
 
 

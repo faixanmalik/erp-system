@@ -59,7 +59,6 @@ const SupplierList = ({supplier}) => {
                           <th scope="col" className="px-6 py-3">
                               State
                           </th>
-                          
                           <th scope="col" className="px-6 py-3">
                               <span className="">Action</span>
                           </th>
@@ -69,28 +68,27 @@ const SupplierList = ({supplier}) => {
                     <tbody>  
                       {supplier.map((item, index)=>{
                       return <tr key={item._id} className="bg-white border-b hover:bg-gray-50">
-                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        <th scope="row" className="px-6 py-3 font-medium text-gray-900 whitespace-nowrap">
                           {index + 1}
                         </th>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-3">
                             {item.supplierName}
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-3">
                             {item.phoneNo}
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-3">
                             {item.email}
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-3">
                             {item.country}
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-3">
                             {item.city}
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-3">
                             {item.state}
                         </td>
-
                         <td className="px-6 py-3">
                           <Menu as="div" className=" inline-block text-left">
                             <div>
@@ -126,14 +124,6 @@ const SupplierList = ({supplier}) => {
           </div>
         </div>
     </div>
-
-    <div className="hidden sm:block" aria-hidden="true">
-      <div className="py-5">
-        <div className="border-t border-gray-200" />
-      </div>
-    </div>
-
-
 
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-20" onClose={()=>{setOpen(false)}}>

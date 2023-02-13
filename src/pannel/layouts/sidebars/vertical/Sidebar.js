@@ -13,9 +13,6 @@ const Sidebar = ({ showMobilemenu }) => {
 
   const router = useRouter();
   const location = router.pathname;
-  const [customer, setCustomer] = useState(false)
-  const [supplier, setSupplier] = useState(false)
-  const [product, setProduct] = useState(false)
   const [open, setOpen] = useState(false)
 
 

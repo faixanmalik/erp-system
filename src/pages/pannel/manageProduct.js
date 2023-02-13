@@ -33,7 +33,7 @@ const ManageProduct = ({product}) => {
             <form action="#" method="POST">
               <div className="overflow-hidden shadow sm:rounded-md">
               
-              <div className="relative overflow-x-auto shadow-sm">
+              <div className="overflow-x-auto shadow-sm">
                   <table className="w-full text-sm text-left text-gray-500 ">
                       <thead className="text-xs text-gray-700 uppercase bg-gray-50">
 
@@ -71,25 +71,25 @@ const ManageProduct = ({product}) => {
                         
                           {product.map((item, index)=>{
                           return <tr key={item._id} className="bg-white border-b hover:bg-gray-50">
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                            <th scope="row" className="px-6 py-3 font-medium text-gray-900 whitespace-nowrap">
                                 {index + 1}
                             </th>
-                            <td className="px-6 py-4">
+                            <td className="px-6 py-3">
                                 {item.productName}
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-6 py-3">
                                 {item.model}
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-6 py-3">
                                 {item.supplier}
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-6 py-3">
                                 ${item.salePrice}
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-6 py-3">
                                 ${item.supplierPrice}
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-6 py-3">
                                 {item.action}
                             </td>
                             <td className="px-6 py-3">
@@ -100,7 +100,7 @@ const ManageProduct = ({product}) => {
                                     </Menu.Button>
                                   </div>
                                   <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-75" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
-                                    <Menu.Items className="absolute right-12 w-36 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                    <Menu.Items className="absolute right-16 w-36 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                       <div className="py-1 z-20">
                                         <Menu.Item>{({ active }) => (
                                             <Link href="#" className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'block px-4 py-2 text-sm hover:no-underline' )}>Edit</Link>
@@ -126,12 +126,6 @@ const ManageProduct = ({product}) => {
             </form>
           </div>
         </div>
-    </div>
-
-    <div className="hidden sm:block" aria-hidden="true">
-      <div className="py-5">
-        <div className="border-t border-gray-200" />
-      </div>
     </div>
 
     <Transition.Root show={open} as={Fragment}>

@@ -50,14 +50,14 @@ const CashReceipt = () => {
     const data = { receivedIn, cashInHand, receivedFrom, amount, date, refNo, details, balance };
 
       let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/addVouchers`, {
-        method: 'POST',
+        method: 'POST',                                       
         headers: { 
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       })
         let response = await res.json()
-  
+        
         setDate('')
         setRefNo('')
         setReceivedIn('')
