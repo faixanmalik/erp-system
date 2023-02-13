@@ -3,9 +3,14 @@ import Product from '../../../models/Product';
 import mongoose from "mongoose";
 import AddProduct from './addProduct';
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { Dialog, Transition } from '@headlessui/react'
+import { Menu, Dialog, Transition } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import Link from 'next/link';
 
 
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
 
 const ManageProduct = ({product}) => {
 
@@ -55,7 +60,7 @@ const ManageProduct = ({product}) => {
                                   Action
                               </th>
                               <th scope="col" className="px-6 py-3">
-                                  <span className="sr-only">Edit</span>
+                                  Action
                               </th>
                           </tr>
 
@@ -66,33 +71,53 @@ const ManageProduct = ({product}) => {
                         
                           {product.map((item, index)=>{
                           return <tr key={item._id} className="bg-white border-b hover:bg-gray-50">
-                              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                  {index + 1}
-                              </th>
-                              <td className="px-6 py-4">
-                                  {item.productName}
-                              </td>
-                              <td className="px-6 py-4">
-                                  {item.model}
-                              </td>
-                              <td className="px-6 py-4">
-                                  {item.supplier}
-                              </td>
-                              <td className="px-6 py-4">
-                                  ${item.salePrice}
-                              </td>
-                              <td className="px-6 py-4">
-                                  ${item.supplierPrice}
-                              </td>
-                              <td className="px-6 py-4">
-                                  {item.action}
-                              </td>
-                              <td className="px-6 py-4 text-right">
-                                  <a href="#" className="font-medium text-blue-600  no-underline hover:underline">Edit</a>
-                              </td>
+                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                {index + 1}
+                            </th>
+                            <td className="px-6 py-4">
+                                {item.productName}
+                            </td>
+                            <td className="px-6 py-4">
+                                {item.model}
+                            </td>
+                            <td className="px-6 py-4">
+                                {item.supplier}
+                            </td>
+                            <td className="px-6 py-4">
+                                ${item.salePrice}
+                            </td>
+                            <td className="px-6 py-4">
+                                ${item.supplierPrice}
+                            </td>
+                            <td className="px-6 py-4">
+                                {item.action}
+                            </td>
+                            <td className="px-6 py-3">
+                              <Menu as="div" className=" inline-block text-left">
+                                  <div>
+                                    <Menu.Button className="z-0">
+                                      <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
+                                    </Menu.Button>
+                                  </div>
+                                  <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-75" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
+                                    <Menu.Items className="absolute right-12 w-36 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                      <div className="py-1 z-20">
+                                        <Menu.Item>{({ active }) => (
+                                            <Link href="#" className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'block px-4 py-2 text-sm hover:no-underline' )}>Edit</Link>
+                                          )}
+                                        </Menu.Item>
+                                        <Menu.Item>{({ active }) => (
+                                            <Link href="#" className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'block px-4 py-2 text-sm hover:no-underline' )}>Make inactive</Link>
+                                          )}
+                                        </Menu.Item>
+                                        
+                                      </div>
+                                    </Menu.Items>
+                                  </Transition>
+                              </Menu>
+                            </td>
                           </tr>})}
 
-                        
                       </tbody>
                   </table>
               </div>

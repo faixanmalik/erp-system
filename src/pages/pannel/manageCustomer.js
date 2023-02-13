@@ -1,9 +1,19 @@
 import React, {useState, Fragment} from 'react'
+import Link from 'next/link';
 import mongoose from "mongoose";
 import Customer from '../../../models/Customer';
 import AddCustomer from './addCustomer';
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { Dialog, Transition } from '@headlessui/react'
+import { Menu, Dialog, Transition } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
+
+
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
+
+
 
 const ManageCustomer = ({customer}) => {
 
@@ -25,79 +35,90 @@ const ManageCustomer = ({customer}) => {
           <div className="mt-2 md:col-span-2 md:mt-0">
             <form action="#" method="POST">
               <div className="overflow-hidden shadow sm:rounded-md">
-              
-                
-              <div className="relative overflow-x-auto shadow-sm">
-                  <table className="w-full text-sm text-left text-gray-500 ">
-                      <thead className="text-xs text-gray-700 uppercase bg-gray-50">
-                          <tr>
-                              <th scope="col" className="px-6 py-3">
-                                  SL
-                              </th>
-                              <th scope="col" className="px-6 py-3">
-                                  Customer Name
-                              </th>
-                              <th scope="col" className="px-6 py-3">
-                                  Phone No
-                              </th>
-                              <th scope="col" className="px-6 py-3">
-                                  Email
-                              </th>
-                              <th scope="col" className="px-6 py-3">
-                                  Country
-                              </th>
-                              <th scope="col" className="px-6 py-3">
-                                  City
-                              </th>
-                              <th scope="col" className="px-6 py-3">
-                                  State
-                              </th>
-                              <th scope="col" className="px-6 py-3">
-                                  Zip Code
-                              </th>
-                              
-                              <th scope="col" className="px-6 py-3">
-                                  <span className="sr-only">Edit</span>
-                              </th>
-                          </tr>
+               
+              <div className="overflow-x-auto shadow-sm">
+                <table className="w-full text-sm text-left text-gray-500 ">
+                    <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+                        <tr>
+                            <th scope="col" className="px-6 py-3">
+                                SL
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Customer Name
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Phone No
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Email
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Country
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                City
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                State
+                            </th>
+                            
+                            <th scope="col" className="px-6 py-3">
+                                <span className="">Action</span>
+                            </th>
+                        </tr>
+                    </thead>
 
-                      </thead>
-
-                      <tbody> 
-
-                        {customer.map((item, index)=>{
-                        return  <tr key={item._id} className="bg-white border-b hover:bg-gray-50">
-                              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                {index + 1}
-                              </th>
-                              <td className="px-6 py-4">
-                                  {item.customerName}
-                              </td>
-                              <td className="px-6 py-4">
-                                  {item.phoneNo}
-                              </td>
-                              <td className="px-6 py-4">
-                                  {item.email}
-                              </td>
-                              <td className="px-6 py-4">
-                                  {item.country}
-                              </td>
-                              <td className="px-6 py-4">
-                                  {item.city}
-                              </td>
-                              <td className="px-6 py-4">
-                                  {item.state}
-                              </td>
-                              <td className="px-6 py-4">
-                                  {item.zip}
-                              </td>
-                              
-                              <td className="px-6 py-4 text-right">
-                                  <a href="#" className="font-medium text-blue-600  no-underline hover:underline">Edit</a>
-                              </td>
-                        </tr>})}
-                      </tbody>
-                  </table>
+                    <tbody> 
+                      {customer.map((item, index)=>{
+                      return  <tr key={item._id} className="bg-white border-b hover:bg-gray-50">
+                        <th scope="row" className="px-6 py-3 font-medium text-gray-900 whitespace-nowrap">
+                          {index + 1}
+                        </th>
+                        <td className="px-6 py-3">
+                            {item.customerName}
+                        </td>
+                        <td className="px-6 py-3">
+                            {item.phoneNo}
+                        </td>
+                        <td className="px-6 py-3">
+                            {item.email}
+                        </td>
+                        <td className="px-6 py-3">
+                            {item.country}
+                        </td>
+                        <td className="px-6 py-3">
+                            {item.city}
+                        </td>
+                        <td className="px-6 py-3">
+                            {item.zip}
+                        </td>
+                        <td className="px-6 py-3">
+                          <Menu as="div" className=" inline-block text-left">
+                            <div>
+                              <Menu.Button className="z-0">
+                                <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
+                              </Menu.Button>
+                            </div>
+                            <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-75" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
+                              <Menu.Items className="absolute right-16 w-36 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                <div className="py-1 z-20">
+                                  <Menu.Item>{({ active }) => (
+                                      <Link href="#" className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'block px-4 py-2 text-sm hover:no-underline' )}>Edit</Link>
+                                    )}
+                                  </Menu.Item>
+                                  <Menu.Item>{({ active }) => (
+                                      <Link href="#" className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'block px-4 py-2 text-sm hover:no-underline' )}>Make inactive</Link>
+                                    )}
+                                  </Menu.Item>
+                                  
+                                </div>
+                              </Menu.Items>
+                            </Transition>
+                          </Menu>
+                        </td>
+                      </tr>})}
+                    </tbody>
+                </table>
               </div>
               
               </div>
