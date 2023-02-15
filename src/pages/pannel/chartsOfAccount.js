@@ -7,6 +7,7 @@ import Charts from '../../../models/Charts';
 import mongoose from 'mongoose';
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import moment from 'moment/moment'
 
 
 function classNames(...classes) {
@@ -16,21 +17,48 @@ function classNames(...classes) {
 
 const ChartsOfAccounts = ({charts}) => {
 
+
   const [open, setOpen] = useState(false)
-  const [account, setaccount] = useState('')
   const [accountCode, setAccountCode] = useState('')
+  const [accountName, setAccountName] = useState('')
+  const [account, setAccount] = useState('Assets')
+  const [subAccount, setSubAccount] = useState('Fixed Assets')
   const [balance, setBalance] = useState('')
   const [asof, setAsof] = useState('')
   const [desc, setDesc] = useState('')
-  const [subAccount, setSubAccount] = useState('')
+
+
+  const subAcc = ()=>{
+    if (account === 'Assets'){
+      setSubAccount('Fixed Assets')
+    }
+    else if(account === 'Liabilities'){
+      setSubAccount('Non-Current Liabilities')
+    }
+    else if(account === 'Equity'){
+      setSubAccount('Equity')
+    }
+    else if(account === 'Expenses'){
+      setSubAccount('Administration Expenses')
+    }
+    else if(account === 'Incomes'){
+      setSubAccount('Revenue')
+    }
+  }
 
   const handleChange = (e) => {
     
-    if(e.target.name === 'account'){
-      setaccount(e.target.value)
-    }
-    else if(e.target.name === 'accountCode'){
+    if(e.target.name === 'accountCode'){
       setAccountCode(e.target.value)
+    }
+    else if(e.target.name === 'account'){
+      setAccount(e.target.value)
+    }
+    else if(e.target.name === 'accountName'){
+      setAccountName(e.target.value)
+    }
+    else if(e.target.name === 'subAccount'){
+      setSubAccount(e.target.value)
     }
     else if(e.target.name === 'balance'){
       setBalance(e.target.value)
@@ -46,20 +74,91 @@ const ChartsOfAccounts = ({charts}) => {
     }
     else if(e.target.name === 'desc'){
       setDesc(e.target.value)
+    } 
+  }
+
+  const getData = async (id) =>{
+    setOpen(true)
+
+    const data = { id };
+    let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getDataEntry`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      let response = await res.json()
+
+      const date = moment(response.charts.asof).utc().format('YYYY-MM-DD')
+
+      if (response.success === true){
+
+        setAccountCode(response.charts.accountCode)
+        setAccount(response.charts.account)
+        setAccountName(response.charts.accountName)
+        setSubAccount(response.charts.subAccount)
+        setBalance(response.charts.balance)
+        setAsof(date)
+        setDesc(response.charts.desc)
+      }
+  }
+
+  const delEntry = async(id)=>{
+
+    const data = { id, delPath: 'chartsOfAccounts' };
+
+    let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/delEntry`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      let response = await res.json()
+
+      if (response.success === true) {
+          toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+      }
+      else {
+          toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+      }
+    
+  }
+
+  const editEntry = async(e)=>{
+    e.preventDefault();
+
+    setOpen(false)
+
+    const data = { accountCode, account, accountName, balance , asof,  desc, subAccount , editPath: 'chartsOfAccounts' };
+    let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/editEntry`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      let response = await res.json()
+
+      if (response.success === true){
+        toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: false, draggable: true, progress: undefined, theme: "light", });
+      }
+      else {
+        toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: false, draggable: true, progress: undefined, theme: "light", });
     }
-    else if(e.target.name === 'subAccount'){
-      setSubAccount(e.target.value)
-    }
+      
     
   }
 
   const submit = async(e)=>{
     e.preventDefault()
 
-    // fetch the data from form to makes a file in local system
-    const data = { account, accountCode, balance , asof, desc, subAccount };
+    subAcc();
 
-    console.log(data);
+
+    // fetch the data from form to makes a file in local system
+    const data = { account, accountCode, accountName, balance , asof,  desc, subAccount };
 
       let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/addCharts`, {
       method: 'POST',
@@ -69,21 +168,27 @@ const ChartsOfAccounts = ({charts}) => {
       body: JSON.stringify(data),
     })
       let response = await res.json()
-        setaccount('')
-        setAccountCode('')
-        setBalance('')
-        setAsof('')
-        setDesc('')
-        setSubAccount('')
+      
+        
 
         if (response.success === true) {
-            toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-        }
+          toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+          setOpen(false)
 
+          setAccountCode('')
+          setAccountName('')
+          setAccount('Assets')
+          setSubAccount('Fixed Assets')
+          setBalance('')
+          setAsof('')
+          setDesc('')
+        }
         else {
             toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
         }
   }
+
+  
 
   return (
     <>
@@ -99,20 +204,30 @@ const ChartsOfAccounts = ({charts}) => {
                New
             </button>
           </div>
+          <div className='flex space-x-10 ml-5 mt-4 text-indigo-700 font-bold text-sm'>
+            <button>All Acounts</button>
+            <button>Assets</button>
+            <button>Liabilites</button>
+            <button>Equity</button>
+            <button>Incomes</button>
+            <button>Expenses</button>
+          </div>
         </div>
         <div className="mt-2 md:col-span-2 md:mt-0">
-          <form action="#" method="POST">
+          <form method="POST">
             <div className="overflow-hidden shadow sm:rounded-md">
-       
             <div className="overflow-x-auto shadow-sm">
               <table className="w-full text-sm text-left text-gray-500 ">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                   <tr>
                       <th scope="col" className="px-6 py-3">
+                          Sr.
+                      </th>
+                      <th scope="col" className="px-6 py-3">
                           Account code
                       </th>
                       <th scope="col" className="px-6 py-3">
-                          Description
+                          Account Name
                       </th>
                       <th scope="col" className="px-6 py-3">
                           Account
@@ -131,13 +246,16 @@ const ChartsOfAccounts = ({charts}) => {
 
                 <tbody>
                   
-                  {Object.keys(charts).map((item)=>{
+                  {Object.keys(charts).map((item, index)=>{
                     return <tr key={charts[item]._id} className="bg-white border-b hover:bg-gray-50">
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                    <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        {index + 1}
+                    </td>
+                    <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                         {charts[item].accountCode}
-                    </th>
+                    </td>
                     <td className="px-6 py-4">
-                        {charts[item].desc}
+                        {charts[item].accountName}
                     </td>
                     <td className="px-6 py-4">
                         {charts[item].account}
@@ -150,32 +268,31 @@ const ChartsOfAccounts = ({charts}) => {
                     </td>
                     <td className="px-6 py-4">
                       <Menu as="div" className=" inline-block text-left">
-                            <div>
-                              <Menu.Button className="z-0">
-                                <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-                              </Menu.Button>
+                        <div>
+                          <Menu.Button className="z-0">
+                            <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
+                          </Menu.Button>
+                        </div>
+                        <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-75" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
+                          <Menu.Items className="absolute right-20 w-36 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <div className="py-1 z-20">
+                              
+                              <Menu.Item>{({ active }) => (
+                                  <div onClick={()=>{getData(charts[item]._id)}} className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'w-full text-left block px-4 py-2 text-sm hover:no-underline' )}>Edit</div>
+                                )}
+                              </Menu.Item>
+                              <Menu.Item>{({ active }) => (
+                                  <div onClick={()=>{delEntry(charts[item]._id)}} className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'w-full text-left block px-4 py-2 text-sm hover:no-underline' )}>Delete</div>
+                                )}
+                              </Menu.Item>
+                         
                             </div>
-                            <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-75" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
-                              <Menu.Items className="absolute right-20 w-36 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                <div className="py-1 z-20">
-                                  
-                                  <Menu.Item>{({ active }) => (
-                                      <Link href="#" className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'block px-4 py-2 text-sm hover:no-underline' )}>Edit</Link>
-                                    )}
-                                  </Menu.Item>
-                                  <Menu.Item>{({ active }) => (
-                                      <Link href="#" className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'block px-4 py-2 text-sm hover:no-underline' )}>Make inactive</Link>
-                                    )}
-                                  </Menu.Item>
-                             
-                                </div>
-                              </Menu.Items>
-                            </Transition>
+                          </Menu.Items>
+                        </Transition>
                       </Menu>
                     </td>
                   </tr>})}
-                    
-                  
+
                 </tbody>
               </table>
             </div>
@@ -223,33 +340,64 @@ const ChartsOfAccounts = ({charts}) => {
                                     id="accountCode"
                                     className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                   />
+                                  {/* <p className='text-xs'>hello 10 world account code</p> */}
                                 </div>
                                 
-                                <div className="col-span-6 sm:col-span-2">
+                                <div className="col-span-6 sm:col-span-3">
+                                  <label htmlFor="accountName" className="block text-sm font-medium text-gray-700">
+                                    Account Name:
+                                  </label>
+                                  <input
+                                    onChange={handleChange}
+                                    value={accountName}
+                                    type="text"
+                                    name="accountName"
+                                    id="accountName"
+                                    className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                  />
+                                  {/* <p className='text-xs'>hello 10 world account code</p> */}
+                                </div>
+                                <div className="col-span-6 sm:col-span-3">
                                   <label htmlFor="account" className="block text-sm font-medium text-gray-700">
                                     Account:
                                   </label>
-                                  <input
-                                    type="text"
-                                    onChange={handleChange}
-                                    name="account"
-                                    value={account}
-                                    id="account"
-                                    autoComplete="account"
-                                    className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                  />
+                                  <select id="account" name="account" onChange={handleChange} value={account} className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                    <option value={'Assets'}>Assets</option>
+                                    <option value={'Liabilities'}>Liabilities</option>
+                                    <option value={'Equity'}>Equity</option>
+                                    <option value={'Expenses'}>Expenses</option>
+                                    <option value={'Incomes'}>Incomes</option>
+                                  </select>
                                 </div>
 
 
-                                <div className="col-span-6 sm:col-span-2">
+                                <div className="col-span-6 sm:col-span-3">
                                   <label htmlFor="subAccount" className="block text-sm font-medium text-gray-700">
                                     Sub Account
                                   </label>
                                   <select id="subAccount" name="subAccount" onChange={handleChange} value={subAccount} className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                    <option value={'Due on receipt'}>Due on receipt</option>
-                                    <option value={'Net 15'}>Net 15</option>
-                                    <option value={'Net 30'}>Net 30</option>
-                                    <option value={'Net 60'}>Net 60</option>
+                                    {/* Assets */}
+                                    {account === 'Assets' ? <option value={'Fixed Assets'}>Fixed Assets</option> : '' }
+                                    {account === 'Assets' ? <option value={'Current Assets'}>Current Assets</option> : '' }
+
+                                    {/* Incomes */}
+                                    {account === 'Incomes' ? <option value={'Revenue'}>Revenue</option> : '' }
+                                    {account === 'Incomes' ? <option value={'Other Income'}>Other Income</option> : '' }
+
+                                    {/* Equity */}
+                                    {account === 'Equity' ? <option value={'Equity'}>Equity</option> : '' }
+
+                                    {/* Expenses */}
+                                    {account === 'Expenses' ? <option value={'Administration Expenses'}>Administration Expenses</option> : '' }
+                                    {account === 'Expenses' ? <option value={'Distribution Expenses'}>Distribution Expenses</option> : '' }
+                                    {account === 'Expenses' ? <option value={'Cost of sales'}>Cost of sales</option> : '' }
+                                    {account === 'Expenses' ? <option value={'Finance Cost'}>Finance Cost</option> : '' }
+
+                                    {/* Liabilities */}
+                                    {account === 'Liabilities' ? <option value={'Non-Current Liability'}>Non-Current Liability</option> : '' }
+                                    {account === 'Liabilities' ? <option value={'Current Liability'}>Current Liability</option> : '' }
+
+
                                   </select>
                                 </div>
                                 
@@ -298,17 +446,16 @@ const ChartsOfAccounts = ({charts}) => {
                                     required
                                   />
                                 </div>
-                           
-                                
-
 
                               </div>
 
                             </div>
-                            <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                            <div className="bg-gray-50 space-x-3 px-4 py-3 text-right sm:px-6">
+                              <button onClick={editEntry} className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save Changes</button>
                               <button type="submit" className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save</button>
                             </div>
                           </div>
+                          
                         </form>
                       </div>
                     </div>

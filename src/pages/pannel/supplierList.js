@@ -104,7 +104,7 @@ const SupplierList = ({supplier}) => {
                                     )}
                                   </Menu.Item>
                                   <Menu.Item>{({ active }) => (
-                                      <Link href="#" className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'block px-4 py-2 text-sm hover:no-underline' )}>Make inactive</Link>
+                                      <Link href="#" className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'block px-4 py-2 text-sm hover:no-underline' )}>Delete</Link>
                                     )}
                                   </Menu.Item>
                                   

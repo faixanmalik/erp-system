@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 const JournalEntrySchema = new mongoose.Schema({
     account:{type: String, required: true},
     name:{type: String, required: true},
@@ -12,7 +11,6 @@ const JournalEntrySchema = new mongoose.Schema({
     desc: {type: String, required: true},
     attachment: {type: Buffer}
     
-
   },{timestamps:true});
 
 mongoose.models={}

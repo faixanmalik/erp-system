@@ -1,183 +1,95 @@
-import React, { useState, Fragment } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
-import CashReceipt from './cashReceipt';
-import CashPayment from './cashPayment';
-import BankPayment from './bankPayment';
-import BankReceipt from './bankReceipt';
-import JournalVoucher from './journalVoucher';
+import React, { useState } from 'react'
+import CashReceipt from './cashReceipt'
+import CashPayment from './cashPayment'
+import BankPayment from './bankPayment'
+import BankReceipt from './bankReceipt'
+import JournalVoucher from './journalVoucher'
+
 
 const AddVouchers = () => {
 
-
-  const [cashPayment, setCashPayment] = useState(false)
-  const [cashReceipt, setCashReceipt] = useState(false)
-  const [bankPayment, setBankPayment] = useState(false)
-  const [bankReceipt, setBankReceipt] = useState(false)
-  const [journalVoucher, setJournalVoucher] = useState(false)
+  const [creditNoteDate, setCreditNoteDate] = useState('')
+  const [type, setType] = useState('CRV')
 
 
+  const handleChange = (e) => {
+  
+    if(e.target.name === 'creditNoteDate'){
+      setCreditNoteDate(e.target.value)
+    }
+    else if(e.target.name === 'type'){
+      setType(e.target.value)
+    }
+  }
 
 
   return (
     <>
 
-    <div className="p-3">
-
-      <div className='justify-center mt-3 flex md:justify-start space-x-3'>
-        <button onClick={() => { setCashPayment(true) }} className='bg-white font-extrabold text-lg text-blue-800 px-10 py-4 rounded-lg'>Cash Payment</button>
-        <button onClick={() => { setCashReceipt(true) }} className='bg-white font-extrabold text-lg text-blue-800 px-10 py-4 rounded-lg'>Cash Receipt</button>
-        <button onClick={() => { setBankPayment(true) }} className='bg-white font-extrabold text-lg text-blue-800 px-10 py-4 rounded-lg'>Bank Payment</button>
-        <button onClick={() => { setBankReceipt(true) }} className='bg-white font-extrabold text-lg text-blue-800 px-10 py-4 rounded-lg'>Bank Receipt</button>
-        <button onClick={() => { setJournalVoucher(true) }} className='bg-white font-extrabold text-lg text-blue-800 px-10 py-4 rounded-lg'>Journal Voucher</button>
+    <div className="mt-10 sm:mt-0 w-full">
+    <div className="md:grid md:grid-cols-1 md:gap-6">
+      <div className="md:col-span-1">
+        <div className="px-4 sm:px-0">
+          <h3 className="text-lg font-medium leading-6 text-gray-900">Add Vouchers</h3>
+        </div>
       </div>
+      <div className="mt-2 md:col-span-2 md:mt-0 w-full">
+        <form method="POST">
+          <div className="overflow-hidden shadow sm:rounded-md">
+            <div className="bg-white px-4 py-5 sm:p-6">
+              <div className="grid grid-cols-6 gap-6">
+
+            
+                <div className="col-span-6 sm:col-span-4">
+                  <label htmlFor="creditNoteDate" className="block text-sm font-medium text-gray-700">
+                    Credit Note Date:
+                  </label>
+                  <input
+                    type="date"
+                    onChange={handleChange}
+                    name="creditNoteDate"
+                    id="creditNoteDate"
+                    value={creditNoteDate}
+                    className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    required
+                  />
+                </div>
+          
+                  <div className="col-span-6 sm:col-span-2">
+                    <label htmlFor="type" className="block text-sm font-medium text-gray-700">
+                      Type:
+                    </label>
+                    <select id="type" name="type" onChange={handleChange} value={type} className="mt-1 p-2 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                      <option value={'CPV'}>Cash Payment Voucher (CPV)</option>
+                      <option value={'CRV'}>Cash Receipt Voucher (CRV)</option>
+                      <option value={'BPV'}>Bank Payment Voucher (BPV)</option>
+                      <option value={'BRV'}>Bank Receipt Voucher (BRV)</option>
+                      <option value={'JV'}>Journal Voucher (JV)</option>
+                    </select>
+                  </div>
+
+
+                
+                
+              </div>
+            </div>
+          
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+
+    <div>
+      {type === 'CPV' ? <CashPayment/> : ''}
+      {type === 'CRV' ? <CashReceipt/> : ''}
+      {type === 'BPV' ? <BankPayment/> : ''}
+      {type === 'BRV' ? <BankReceipt/> : ''}
+      {type === 'JV' ? <JournalVoucher/> : ''}
       
-      <Transition.Root show={cashPayment} as={Fragment}>
-        <Dialog as="div" className="relative z-20" onClose={()=>{setCashPayment(false)}}>
-          <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
-            <div className="fixed inset-0 hidden bg-gray-500 bg-opacity-75 transition-opacity md:block" />
-          </Transition.Child>
+    </div>
 
-          <div className="fixed inset-0 z-10 overflow-y-auto">
-            <div className="flex min-h-full items-stretch justify-center text-center md:items-center md:px-2 lg:px-4">
-              <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 translate-y-4 md:translate-y-0 md:scale-95" enterTo="opacity-100 translate-y-0 md:scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 translate-y-0 md:scale-100" leaveTo="opacity-0 translate-y-4 md:translate-y-0 md:scale-95">
-                <Dialog.Panel className="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-5xl">
-
-                  <div className="relative flex w-full items-center overflow-hidden bg-white px-4 pt-14 pb-8 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
-                    <button type="button" className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-6 lg:right-8" onClick={() => setCashPayment(false)}>
-                      <span className="sr-only">Close</span>
-                      <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
-
-                    <div className="relative mt-6 w-full overflow-x-auto shadow-sm">
-                      <CashPayment/>
-                    </div>
-
-
-
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition.Root>
-
-      <Transition.Root show={cashReceipt} as={Fragment}>
-        <Dialog as="div" className="relative z-20" onClose={()=>{setCashReceipt(false)}}>
-          <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
-            <div className="fixed inset-0 hidden bg-gray-500 bg-opacity-75 transition-opacity md:block" />
-          </Transition.Child>
-
-          <div className="fixed inset-0 z-10 overflow-y-auto">
-            <div className="flex min-h-full items-stretch justify-center text-center md:items-center md:px-2 lg:px-4">
-              <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 translate-y-4 md:translate-y-0 md:scale-95" enterTo="opacity-100 translate-y-0 md:scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 translate-y-0 md:scale-100" leaveTo="opacity-0 translate-y-4 md:translate-y-0 md:scale-95">
-                <Dialog.Panel className="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-5xl">
-
-                  <div className="relative flex w-full items-center overflow-hidden bg-white px-4 pt-14 pb-8 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
-                    <button type="button" className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-6 lg:right-8" onClick={() => setCashReceipt(false)}>
-                      <span className="sr-only">Close</span>
-                      <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
-
-                    <div className="relative mt-6 w-full overflow-x-auto shadow-sm">
-                      <CashReceipt/>
-                    </div>
-
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition.Root>
-
-      <Transition.Root show={bankPayment} as={Fragment}>
-        <Dialog as="div" className="relative z-20" onClose={()=>{setBankPayment(false)}}>
-          <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
-            <div className="fixed inset-0 hidden bg-gray-500 bg-opacity-75 transition-opacity md:block" />
-          </Transition.Child>
-
-          <div className="fixed inset-0 z-10 overflow-y-auto">
-            <div className="flex min-h-full items-stretch justify-center text-center md:items-center md:px-2 lg:px-4">
-              <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 translate-y-4 md:translate-y-0 md:scale-95" enterTo="opacity-100 translate-y-0 md:scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 translate-y-0 md:scale-100" leaveTo="opacity-0 translate-y-4 md:translate-y-0 md:scale-95">
-                <Dialog.Panel className="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-5xl">
-
-                  <div className="relative flex w-full items-center overflow-hidden bg-white px-4 pt-14 pb-8 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
-                    <button type="button" className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-6 lg:right-8" onClick={() => setBankPayment(false)}>
-                      <span className="sr-only">Close</span>
-                      <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
-
-                    <div className="relative mt-6 w-full overflow-x-auto shadow-sm">
-                      <BankPayment/>
-                    </div>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition.Root>
-
-      <Transition.Root show={bankReceipt} as={Fragment}>
-        <Dialog as="div" className="relative z-20" onClose={()=>{setBankReceipt(false)}}>
-          <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
-            <div className="fixed inset-0 hidden bg-gray-500 bg-opacity-75 transition-opacity md:block" />
-          </Transition.Child>
-
-          <div className="fixed inset-0 z-10 overflow-y-auto">
-            <div className="flex min-h-full items-stretch justify-center text-center md:items-center md:px-2 lg:px-4">
-              <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 translate-y-4 md:translate-y-0 md:scale-95" enterTo="opacity-100 translate-y-0 md:scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 translate-y-0 md:scale-100" leaveTo="opacity-0 translate-y-4 md:translate-y-0 md:scale-95">
-                <Dialog.Panel className="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-5xl">
-
-                  <div className="relative flex w-full items-center overflow-hidden bg-white px-4 pt-14 pb-8 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
-                    <button type="button" className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-6 lg:right-8" onClick={() => setBankReceipt(false)}>
-                      <span className="sr-only">Close</span>
-                      <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
-
-                    <div className="relative mt-6 w-full overflow-x-auto shadow-sm">
-                      <BankReceipt/>
-                    </div>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition.Root>
-      
-      <Transition.Root show={journalVoucher} as={Fragment}>
-        <Dialog as="div" className="relative z-20" onClose={()=>{setJournalVoucher(false)}}>
-          <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
-            <div className="fixed inset-0 hidden bg-gray-500 bg-opacity-75 transition-opacity md:block" />
-          </Transition.Child>
-
-          <div className="fixed inset-0 z-10 overflow-y-auto">
-            <div className="flex min-h-full items-stretch justify-center text-center md:items-center md:px-2 lg:px-4">
-              <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 translate-y-4 md:translate-y-0 md:scale-95" enterTo="opacity-100 translate-y-0 md:scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 translate-y-0 md:scale-100" leaveTo="opacity-0 translate-y-4 md:translate-y-0 md:scale-95">
-                <Dialog.Panel className="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-5xl">
-
-                  <div className="relative flex w-full items-center overflow-hidden bg-white px-4 pt-14 pb-8 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
-                    <button type="button" className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-6 lg:right-8" onClick={() => setJournalVoucher(false)}>
-                      <span className="sr-only">Close</span>
-                      <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
-
-                    <div className="relative mt-6 w-full overflow-x-auto shadow-sm">
-                      <JournalVoucher/>
-                    </div>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition.Root>
-
-
-    </div>      
+    
     </>
   )
 }

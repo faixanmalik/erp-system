@@ -1,13 +1,13 @@
 import React, {Fragment, useState} from 'react'
-import Link from 'next/link';
 import JournalEntries from '../../../models/JournalEntries';
 import mongoose from "mongoose";
 import moment from 'moment/moment';
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import JournalVoucher from './forms/journalVoucher';
 import AddVouchers from './forms/addVouchers';
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -20,12 +20,58 @@ const ManageVouchers = ({journalEntries}) => {
 
   const [open, setOpen] = useState(false)
 
-  const edit = (id)=>{
-    console.log(id);
+  const editEntry = async(id)=>{
+
+    setOpen(true)
+
+    const data = { id , editPath: 'manageVouchers'};
+    let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/editEntry`, {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      let response = await res.json()
+      console.log(response)
+      const date = moment(response.journalEntries.journalDate).utc().format('YYYY-MM-DD')
+        
+        setAccountCode(response.charts.accountCode)
+        setAccount(response.charts.account)
+        setAccountName(response.charts.accountName)
+        setSubAccount(response.charts.subAccount)
+        setBalance(response.charts.balance)
+        setAsof(response.charts.asof)
+        setDesc(response.charts.desc)
+    
+  }
+
+  const delEntry = async(id)=>{
+
+    const data = { id };
+    let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/delEntry`, {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      let response = await res.json()
+
+      if (response.success === true) {
+          toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+      }
+      else {
+          toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+      }
+    
   }
 
   return (
     <>
+    {/* React tostify */}
+    <ToastContainer position="bottom-center" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>
+
     <div className="mt-10 sm:mt-0">
       <div className="md:grid md:grid-cols-1 md:gap-6">
         <div className="md:col-span-1">
@@ -106,14 +152,14 @@ const ManageVouchers = ({journalEntries}) => {
                             <Menu.Items className="absolute right-20 w-36 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                               <div className="py-1 z-20">
                                 
-                                <Menu.Item>{({ active }) => (
-                                    <Link href="#" onClick={()=>{edit(item._id)}} className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'block px-4 py-2 text-sm hover:no-underline' )}>Edit</Link>
-                                  )}
-                                </Menu.Item>
-                                <Menu.Item>{({ active }) => (
-                                    <Link href="#" className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'block px-4 py-2 text-sm hover:no-underline' )}>Make inactive</Link>
-                                  )}
-                                </Menu.Item>
+                              <Menu.Item>{({ active }) => (
+                                  <div onClick={()=>{editEntry(item._id)}} className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'w-full text-left block px-4 py-2 text-sm hover:no-underline' )}>Edit</div>
+                                )}
+                              </Menu.Item>
+                              <Menu.Item>{({ active }) => (
+                                  <div onClick={()=>{delEntry(item._id)}} className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'w-full text-left block px-4 py-2 text-sm hover:no-underline' )}>Delete</div>
+                                )}
+                              </Menu.Item>
                           
                               </div>
                             </Menu.Items>
@@ -151,9 +197,10 @@ const ManageVouchers = ({journalEntries}) => {
                     <span className="sr-only">Close</span>
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
-
-                  {/* <AddVouchers/> */}
-                  <JournalVoucher/>
+                  
+                  <div className='w-full'>
+                    <AddVouchers/>
+                  </div>
 
 
                 </div>

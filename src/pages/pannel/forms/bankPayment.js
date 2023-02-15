@@ -95,9 +95,9 @@ const BankPayment = () => {
     <ToastContainer position="bottom-center" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>
 
 
-    <div className="mt-10 sm:mt-0">
+    <div className="mt-10 sm:mt-0 w-full ">
       <div className="md:grid md:grid-cols-1 md:gap-6">
-        <div className="md:col-span-1">
+        <div className="md:col-span-1 mt-10">
           <div className="px-4 sm:px-0">
             <h3 className="text-lg font-medium leading-6 text-gray-900">Add Bank Payment</h3>
           </div>

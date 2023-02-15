@@ -83,16 +83,16 @@ const CashReceipt = () => {
     <ToastContainer position="bottom-center" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>
 
 
-    <div className="mt-10 sm:mt-0">
+    <div className="mt-10 sm:mt-0 w-full">
       <div className="md:grid md:grid-cols-1 md:gap-6">
-        <div className="md:col-span-1">
+        <div className="md:col-span-1 mt-10">
           <div className="px-4 sm:px-0">
             <h3 className="text-lg font-medium leading-6 text-gray-900">Add Cash Receipt</h3>
           </div>
         </div>
         <div className="mt-2 md:col-span-2 md:mt-0">
           <form method="POST" onSubmit={submit}>
-            <div className="overflow-hidden shadow sm:rounded-md">
+            <div className="overflow-idden shadow sm:rounded-md">
               <div className="bg-white px-4 py-5 sm:p-6">
                 <div className="grid grid-cols-6 gap-6">
 
