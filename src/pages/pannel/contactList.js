@@ -15,13 +15,14 @@ function classNames(...classes) {
 }
 
 
-const ContactList = ({dbContact, dbCustomer, dbSupplier}) => {
+const ContactList = ({dbContact, dbCustomer, dbSupplier, dbEmployee}) => {
 
   // Filter Usestates
   const [all, setAll] = useState(dbContact)
   const [allContacts, setAllContacts] = useState(dbContact)
   const [customer, setCustomer] = useState(dbCustomer)
   const [supplier, setSupplier] = useState(dbSupplier)
+  const [employee, setEmployee] = useState(dbEmployee)
 
   const [open, setOpen] = useState(false)
 
@@ -41,6 +42,10 @@ const ContactList = ({dbContact, dbCustomer, dbSupplier}) => {
   const [openingBalance, setOpeningBalance] = useState('')
   const [date, setDate] = useState('')
 
+
+  // id For delete contact
+  const [id, setId] = useState('')
+  
 
   const handleChange = (e) => {
   
@@ -89,10 +94,10 @@ const ContactList = ({dbContact, dbCustomer, dbSupplier}) => {
   }
 
   const editEntry = async(id)=>{
-
     setOpen(true)
 
-    const data = { id , editPath: 'contactList'};
+    const data = { id, name, type,  email, phoneNo, country, streetAddress, city, state, zip, taxRigNo, paymentMethod, terms , openingBalance, date ,  editPath: 'contactList'};
+    
     let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/editEntry`, {
       method: 'POST',
       headers: { 
@@ -101,22 +106,43 @@ const ContactList = ({dbContact, dbCustomer, dbSupplier}) => {
       body: JSON.stringify(data),
     })
       let response = await res.json()
-      console.log(response)
-      const date = moment(response.journalEntries.journalDate).utc().format('YYYY-MM-DD')
-        
-        setAccountCode(response.charts.accountCode)
-        setAccount(response.charts.account)
-        setAccountName(response.charts.accountName)
-        setSubAccount(response.charts.subAccount)
-        setBalance(response.charts.balance)
-        setAsof(response.charts.asof)
-        setDesc(response.charts.desc)
+      
+      if (response.success === true) {
+
+        const date = moment(response.editContact.date).utc().format('YYYY-MM-DD')
+
+        toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 700);
+
+        setName(response.editContact.name)
+        setType(response.editContact.type)
+        setEmail(response.editContact.email)
+        setPhoneNo(response.editContact.phoneNo)
+        setCountry(response.editContact.country)
+        setStreetAddress(response.editContact.streetAddress)
+        setCity(response.editContact.city)
+        setState(response.editContact.state)
+        setZip(response.editContact.zip)
+        setTaxRigNo(response.editContact.taxRigNo)
+        setTerms(response.editContact.terms)
+        setOpeningBalance(response.editContact.openingBalance)
+        setPaymentMethod(response.editContact.paymentMethod)
+        setDate(date)
+    }
+
+    else {
+        toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+    }
+      
     
   }
 
   const delEntry = async(id)=>{
 
-    const data = { id };
+    const data = { id , delPath: 'contactList' };
     let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/delEntry`, {
       method: 'POST',
       headers: { 
@@ -127,7 +153,7 @@ const ContactList = ({dbContact, dbCustomer, dbSupplier}) => {
       let response = await res.json()
 
       if (response.success === true) {
-          toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+        window.location.reload();
       }
       else {
           toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
@@ -138,7 +164,7 @@ const ContactList = ({dbContact, dbCustomer, dbSupplier}) => {
   const getData = async (id) =>{
     setOpen(true)
 
-    const data = { id };
+    const data = { id, getDataPath: 'contactList' };
     let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getDataEntry`, {
       method: 'POST',
       headers: {
@@ -148,23 +174,29 @@ const ContactList = ({dbContact, dbCustomer, dbSupplier}) => {
     })
       let response = await res.json()
 
-      const date = moment(response.charts.asof).utc().format('YYYY-MM-DD')
-
+      const date = moment(response.contact.date).utc().format('YYYY-MM-DD')
       if (response.success === true){
 
-        setAccountCode(response.charts.accountCode)
-        setAccount(response.charts.account)
-        setAccountName(response.charts.accountName)
-        setSubAccount(response.charts.subAccount)
-        setBalance(response.charts.balance)
-        setAsof(date)
-        setDesc(response.charts.desc)
+        setId(response.contact._id)
+        setName(response.contact.name)
+        setType(response.contact.type)
+        setEmail(response.contact.email)
+        setPhoneNo(response.contact.phoneNo)
+        setCountry(response.contact.country)
+        setStreetAddress(response.contact.streetAddress)
+        setCity(response.contact.city)
+        setState(response.contact.state)
+        setZip(response.contact.zip)
+        setTaxRigNo(response.contact.taxRigNo)
+        setTerms(response.contact.terms)
+        setOpeningBalance(response.contact.openingBalance)
+        setPaymentMethod(response.contact.paymentMethod)
+        setDate(date)
       }
   }
 
   const submit = async(e)=>{
     e.preventDefault()
-
     
     // fetch the data from form to makes a file in local system
     const data = { name, type,  email, phoneNo, country, streetAddress, city, state, zip, taxRigNo, paymentMethod, terms , openingBalance, date };
@@ -210,8 +242,8 @@ const ContactList = ({dbContact, dbCustomer, dbSupplier}) => {
       <div className="md:grid md:grid-cols-1 md:gap-6">
         <div className="md:col-span-1">
           <div className="px-4 sm:px-0 flex">
-            <h3 className="text-lg font-medium leading-6 text-gray-900">Contacts</h3>
-            <button onClick={()=>{setOpen(true)}} className='ml-auto bg-blue-800 text-white px-14 py-2 rounded-lg'>
+            <h3 className="text-lg font-medium leading-6 text-gray-900">Contact List</h3>
+            <button onClick={()=>{ setOpen(true), setName(''), setEmail(''), setPhoneNo(''), setCountry('United States'), setStreetAddress(''), setCity(''), setState(''), setZip(''), setTaxRigNo(''), setTerms('Due on receipt'), setOpeningBalance(''), setPaymentMethod('Cash'), setDate('')}} className='ml-auto bg-blue-800 text-white px-14 py-2 rounded-lg'>
                New
             </button>
           </div>
@@ -219,6 +251,7 @@ const ContactList = ({dbContact, dbCustomer, dbSupplier}) => {
             <button className='text-indigo-600 hover:text-indigo-800' onClick={()=>{setAll(allContacts)}}>All Accounts</button>
             <button className='text-indigo-600 hover:text-indigo-800' onClick={()=>{setAll(customer)}}>Customer</button>
             <button className='text-indigo-600 hover:text-indigo-800' onClick={()=>{setAll(supplier)}}>Supplier</button>
+            <button className='text-indigo-600 hover:text-indigo-800' onClick={()=>{setAll(employee)}}>Employee</button>
           </div>
         </div>
         <div className="mt-2 md:col-span-2 md:mt-0">
@@ -304,7 +337,7 @@ const ContactList = ({dbContact, dbCustomer, dbSupplier}) => {
                 </tbody>
 
               </table>
-                {all.length === 0  ? <h1 className='text-red-600 text-center text-base my-3'>No charts of accounts found</h1> : ''}
+                {all.length === 0  ? <h1 className='text-red-600 text-center text-base my-3'>No contacts found</h1> : ''}
             </div>
             </div>
           </form>
@@ -343,25 +376,12 @@ const ContactList = ({dbContact, dbCustomer, dbSupplier}) => {
                                 <div className="grid grid-cols-6 gap-6">
 
                                   <div className="col-span-6 sm:col-span-4">
-                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                                      Name:
-                                    </label>
-                                    <input
-                                      type="name"
-                                      onChange={handleChange}
-                                      name="name"
-                                      id="name"
-                                      value={name}
-                                      placeholder='John Doe'
-                                      className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                      required
-                                    />
+                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name:</label>
+                                    <input type="name" onChange={handleChange} name="name" id="name" value={name} placeholder='John Doe' className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required required/>
                                   </div>
                             
                                     <div className="col-span-6 sm:col-span-2">
-                                      <label htmlFor="type" className="block text-sm font-medium text-gray-700">
-                                        Contact Type:
-                                      </label>
+                                      <label htmlFor="type" className="block text-sm font-medium text-gray-700">Contact Type:</label>
                                       <select id="type" name="type" onChange={handleChange} value={type} className="mt-1 p-2 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                         <option>Select Contact Type</option>
                                         <option value={'Customer'}>Customer</option>
@@ -372,46 +392,18 @@ const ContactList = ({dbContact, dbCustomer, dbSupplier}) => {
 
 
                                     <div className="col-span-6 sm:col-span-4">
-                                      <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                        Email address
-                                      </label>
-                                      <input
-                                        onChange={handleChange}
-                                        value={email}
-                                        type="text"
-                                        name="email"
-                                        id="email"
-                                        autoComplete="email"
-                                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                      />
+                                      <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email address</label>
+                                      <input onChange={handleChange} value={email} type="text" name="email" id="email" autoComplete="email" className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required/>
                                     </div>
 
                                     <div className="col-span-6 sm:col-span-3">
-                                      <label htmlFor="phoneNo" className="block text-sm font-medium text-gray-700">
-                                        Phone Number
-                                      </label>
-                                      <input
-                                        onChange={handleChange}
-                                        value={phoneNo}
-                                        type="number"
-                                        name="phoneNo"
-                                        id="phoneNo"
-                                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                      />
+                                      <label htmlFor="phoneNo" className="block text-sm font-medium text-gray-700">Phone Number</label>
+                                      <input onChange={handleChange} value={phoneNo} type="number" name="phoneNo" id="phoneNo" className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required/>
                                     </div>
 
                                     <div className="col-span-6 sm:col-span-3">
-                                      <label htmlFor="country" className="block text-sm font-medium text-gray-700">
-                                        Country
-                                      </label>
-                                      <select
-                                        id="country"
-                                        name="country"
-                                        onChange={handleChange}
-                                        value={country}
-                                        autoComplete="country"
-                                        className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                      >
+                                      <label htmlFor="country" className="block text-sm font-medium text-gray-700">Country</label>
+                                      <select id="country" name="country" onChange={handleChange} value={country} autoComplete="country" className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                         <option value={'United States'}>United States</option>
                                         <option value={'Canada'}>Canada</option>
                                         <option value={'Mexico'}>Mexico</option>
@@ -419,91 +411,35 @@ const ContactList = ({dbContact, dbCustomer, dbSupplier}) => {
                                     </div>
 
                                     <div className="col-span-6">
-                                      <label htmlFor="streetAddress" className="block text-sm font-medium text-gray-700">
-                                        Street Address
-                                      </label>
-                                      <input
-                                        onChange={handleChange}
-                                        value={streetAddress}
-                                        type="text"
-                                        name="streetAddress"
-                                        id="streetAddress"
-                                        autoComplete="streetAddress"
-                                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                      />
+                                      <label htmlFor="streetAddress" className="block text-sm font-medium text-gray-700">Street Address</label>
+                                      <input onChange={handleChange} value={streetAddress} type="text" name="streetAddress" id="streetAddress" autoComplete="streetAddress" className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"  required/>
                                     </div>
 
                                     <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                                      <label htmlFor="city" className="block text-sm font-medium text-gray-700">
-                                        City
-                                      </label>
-                                      <input
-                                        onChange={handleChange}
-                                        value={city}
-                                        type="text"
-                                        name="city"
-                                        id="city"
-                                        autoComplete="address-level2"
-                                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                      <label htmlFor="city" className="block text-sm font-medium text-gray-700">City</label>
+                                      <input onChange={handleChange} value={city} type="text" name="city" id="city" autoComplete="address-level2" className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-s requiredm"
                                       />
                                     </div>
 
                                     <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                                      <label htmlFor="state" className="block text-sm font-medium text-gray-700">
-                                        State / Province
-                                      </label>
-                                      <input
-                                        onChange={handleChange}
-                                        value={state}
-                                        type="text"
-                                        name="state"
-                                        id="state"
-                                        autoComplete="address-level1"
-                                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                      <label htmlFor="state" className="block text-sm font-medium text-gray-700">State / Province</label>
+                                      <input onChange={handleChange} value={state} type="text" name="state" id="state" className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-s requiredm"
                                       />
                                     </div>
 
                                     <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                                      <label htmlFor="zip" className="block text-sm font-medium text-gray-700">
-                                        ZIP / Postal code
-                                      </label>
-                                      <input
-                                        onChange={handleChange}
-                                        value={zip}
-                                        type="number"
-                                        name="zip"
-                                        id="zip"
-                                        autoComplete="zip"
-                                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                      />
+                                      <label htmlFor="zip" className="block text-sm font-medium text-gray-700">ZIP / Postal code</label>
+                                      <input onChange={handleChange} value={zip} type="number" name="zip" id="zip" className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required/>
                                     </div>
 
                                     <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                                      <label htmlFor="taxRigNo" className="block text-sm font-medium text-gray-700">
-                                          Tax Reg.No
-                                      </label>
-                                      <input
-                                        onChange={handleChange}
-                                        value={taxRigNo}
-                                        type="number"
-                                        name="taxRigNo"
-                                        id="taxRigNo"
-                                        autoComplete="taxRigNo"
-                                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                      />
+                                      <label htmlFor="taxRigNo" className="block text-sm font-medium text-gray-700">Tax Reg.No</label>
+                                      <input onChange={handleChange} value={taxRigNo} type="number" name="taxRigNo" id="taxRigNo" autoComplete="taxRigNo" className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required/>
                                     </div>
 
                                     <div className="col-span-6 sm:col-span-3">
-                                      <label htmlFor="paymentMethod" className="block text-sm font-medium text-gray-700">
-                                        Prefered Payment Method
-                                      </label>
-                                      <select
-                                        id="paymentMethod"
-                                        name="paymentMethod"
-                                        onChange={handleChange}
-                                        value={paymentMethod}
-                                        className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                      >
+                                      <label htmlFor="paymentMethod" className="block text-sm font-medium text-gray-700">Prefered Payment Method</label>
+                                      <select id="paymentMethod" name="paymentMethod" onChange={handleChange} value={paymentMethod} className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" required>
                                         <option value={'Cash'}>Cash</option>
                                         <option value={'Cheque'}>Cheque</option>
                                         <option value={'Credit Card'}>Credit Card</option>
@@ -512,10 +448,8 @@ const ContactList = ({dbContact, dbCustomer, dbSupplier}) => {
                                     </div>
 
                                     <div className="col-span-6 sm:col-span-2">
-                                      <label htmlFor="terms" className="block text-sm font-medium text-gray-700">
-                                        Terms
-                                      </label>
-                                      <select id="terms" name="terms" onChange={handleChange} value={terms} className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                      <label htmlFor="terms" className="block text-sm font-medium text-gray-700">Terms</label>
+                                      <select id="terms" name="terms" onChange={handleChange} value={terms} className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" required>
                                         <option value={'Due on receipt'}>Due on receipt</option>
                                         <option value={'Net 15'}>Net 15</option>
                                         <option value={'Net 30'}>Net 30</option>
@@ -524,38 +458,22 @@ const ContactList = ({dbContact, dbCustomer, dbSupplier}) => {
                                     </div>
 
                                     <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                                      <label htmlFor="openingBalance" className="block text-sm font-medium text-gray-700">
-                                        Opening Balance
-                                      </label>
-                                      <input
-                                        onChange={handleChange}
-                                        value={openingBalance}
-                                        type="number"
-                                        name="openingBalance"
-                                        id="openingBalance"
-                                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                      />
+                                      <label htmlFor="openingBalance" className="block text-sm font-medium text-gray-700">Opening Balance</label>
+                                      <input onChange={handleChange} value={openingBalance} type="number" name="openingBalance" id="openingBalance" className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required/>
                                     </div>
 
                                     <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                                      <label htmlFor="date" className="block text-sm font-medium text-gray-700">
-                                        as of
+                                      <label htmlFor="date" className="block text-sm font-medium text-gray-700">Date
                                       </label>
-                                      <input
-                                        onChange={handleChange}
-                                        value={date}
-                                        type="date"
-                                        name="date"
-                                        id="date"
-                                        className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                      />
+                                      <input onChange={handleChange} value={date} type="date" name="date" id="date" className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required/>
                                     </div>
 
                                 </div>
                               </div>
-                              <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                              <div className="bg-gray-50 space-x-3 px-4 py-3 text-right sm:px-6">
+                                <button type='button' onClick={()=>{editEntry(id)}} className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save Changes</button>
                                 <button type="submit" className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save</button>
-                              </div>
+                            </div>
                             
                             </div>
                           </form>
@@ -590,6 +508,7 @@ export async function getServerSideProps() {
   let dbContact = await Contact.find()
   let dbCustomer = await Contact.find({type: "Customer"})
   let dbSupplier = await Contact.find({type: "Supplier"})
+  let dbEmployee = await Contact.find({type: "Employee"})
   
 
   // Pass data to the page via props
@@ -598,6 +517,7 @@ export async function getServerSideProps() {
       dbContact: JSON.parse(JSON.stringify(dbContact)),
       dbCustomer: JSON.parse(JSON.stringify(dbCustomer)),
       dbSupplier: JSON.parse(JSON.stringify(dbSupplier)),
+      dbEmployee: JSON.parse(JSON.stringify(dbEmployee)),
       }
   }
 }

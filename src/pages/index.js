@@ -7,9 +7,8 @@ import TopCards from "../pannel/components/dashboard/TopCards";
 import SupplierComponent from "../pannel/components/dashboard/Supplier";
 import ProductsComponent from "@/pannel/components/dashboard/Products";
 import mongoose from "mongoose";
-import Customer from '../../models/Contact';
 import Product from '../../models/Product';
-import Supplier from '../../models/Supplier';
+import Contact from "../../models/Contact";
 
 
 export default function Home({customer, product, supplier}) {
@@ -111,9 +110,9 @@ export async function getServerSideProps() {
     mongoose.set("strictQuery", false);
     await mongoose.connect(process.env.MONGO_URI)
   }
-  let customer = await Customer.find()
+  let customer = await Contact.find({"type": "Customer"})
+  let supplier = await Contact.find({"type": "Supplier"})
   let product = await Product.find()
-  let supplier = await Supplier.find()
    
   // Pass data to the page via props
   return {

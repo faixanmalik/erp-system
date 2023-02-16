@@ -92,7 +92,7 @@ const ChartsOfAccounts = ({dbAllCharts, dbAssets, dbLiabilities, dbEquity, dbInc
   const getData = async (id) =>{
     setOpen(true)
 
-    const data = { id };
+    const data = { id, getDataPath: 'chartsOfAccounts' };
     let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getDataEntry`, {
       method: 'POST',
       headers: {
@@ -101,7 +101,6 @@ const ChartsOfAccounts = ({dbAllCharts, dbAssets, dbLiabilities, dbEquity, dbInc
       body: JSON.stringify(data),
     })
       let response = await res.json()
-
       const date = moment(response.charts.asof).utc().format('YYYY-MM-DD')
 
       if (response.success === true){
@@ -189,7 +188,6 @@ const ChartsOfAccounts = ({dbAllCharts, dbAssets, dbLiabilities, dbEquity, dbInc
           setOpen(false)
           window.location.reload();
           
-
           setAccountCode('')
           setAccountName('')
           setAccount('Assets')
