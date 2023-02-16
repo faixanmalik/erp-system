@@ -15,10 +15,23 @@ function classNames(...classes) {
 }
 
 
-const ChartsOfAccounts = ({charts}) => {
+const ChartsOfAccounts = ({dbAllCharts, dbAssets, dbLiabilities, dbEquity, dbIncomes, dbExpenses}) => {
 
 
   const [open, setOpen] = useState(false)
+
+  // Filter Usestates
+  const [allCharts, setAllCharts] = useState(dbAllCharts)
+  const [charts, setCharts] = useState(dbAllCharts)
+  const [assets, setAssets] = useState(dbAssets)
+  const [liabilities, setLiabilities] = useState(dbLiabilities)
+  const [equity, setEquity] = useState(dbEquity)
+  const [incomes, setIncomes] = useState(dbIncomes)
+  const [expenses, setexpenses] = useState(dbExpenses)
+
+
+
+  // Forms Usestates
   const [accountCode, setAccountCode] = useState('')
   const [accountName, setAccountName] = useState('')
   const [account, setAccount] = useState('Assets')
@@ -26,7 +39,6 @@ const ChartsOfAccounts = ({charts}) => {
   const [balance, setBalance] = useState('')
   const [asof, setAsof] = useState('')
   const [desc, setDesc] = useState('')
-
 
   const subAcc = ()=>{
     if (account === 'Assets'){
@@ -116,9 +128,12 @@ const ChartsOfAccounts = ({charts}) => {
       body: JSON.stringify(data),
     })
       let response = await res.json()
-
+      
       if (response.success === true) {
-          toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+        toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+        setTimeout(() => {
+          window.location.reload();
+        }, 700);
       }
       else {
           toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
@@ -143,6 +158,9 @@ const ChartsOfAccounts = ({charts}) => {
 
       if (response.success === true){
         toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: false, draggable: true, progress: undefined, theme: "light", });
+        setTimeout(() => {
+          window.location.reload();
+        }, 700);
       }
       else {
         toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: false, draggable: true, progress: undefined, theme: "light", });
@@ -152,10 +170,8 @@ const ChartsOfAccounts = ({charts}) => {
   }
 
   const submit = async(e)=>{
-    e.preventDefault()
-
     subAcc();
-
+    e.preventDefault()
 
     // fetch the data from form to makes a file in local system
     const data = { account, accountCode, accountName, balance , asof,  desc, subAccount };
@@ -168,10 +184,11 @@ const ChartsOfAccounts = ({charts}) => {
       body: JSON.stringify(data),
     })
       let response = await res.json()
-      
+    
         if (response.success === true) {
-          toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
           setOpen(false)
+          window.location.reload();
+          
 
           setAccountCode('')
           setAccountName('')
@@ -198,17 +215,28 @@ const ChartsOfAccounts = ({charts}) => {
         <div className="md:col-span-1">
           <div className="px-4 sm:px-0 flex">
             <h3 className="text-lg font-medium leading-6 text-gray-900">Charts of Accounts</h3>
-            <button onClick={()=>{setOpen(true)}} className='ml-auto bg-blue-800 text-white px-14 py-2 rounded-lg'>
+            <button onClick={()=>{
+              setOpen(true)
+              setAccountCode(''),
+              setAccountName(''),
+              setAccount('Assets'),
+              setSubAccount('Fixed Assets'),
+              setBalance(''),
+              setAsof(''),
+              setDesc('')
+            }} 
+            
+            className='ml-auto bg-blue-800 text-white px-14 py-2 rounded-lg'>
                New
             </button>
           </div>
-          <div className='flex space-x-10 ml-5 mt-4 text-indigo-700 font-bold text-sm'>
-            <button>All Acounts</button>
-            <button>Assets</button>
-            <button>Liabilites</button>
-            <button>Equity</button>
-            <button>Incomes</button>
-            <button>Expenses</button>
+          <div className='flex space-x-7 ml-5 mt-4 font-bold text-sm'>
+            <button className='text-indigo-600 hover:text-indigo-800' onClick={()=>{setAllCharts(charts)}}>All Acounts</button>
+            <button className='text-indigo-600 hover:text-indigo-800' onClick={()=>{setAllCharts(assets)}}>Assets</button>
+            <button className='text-indigo-600 hover:text-indigo-800' onClick={()=>{setAllCharts(liabilities)}}>Liabilites</button>
+            <button className='text-indigo-600 hover:text-indigo-800' onClick={()=>{setAllCharts(equity)}}>Equity</button>
+            <button className='text-indigo-600 hover:text-indigo-800' onClick={()=>{setAllCharts(incomes)}}>Incomes</button>
+            <button className='text-indigo-600 hover:text-indigo-800' onClick={()=>{setAllCharts(expenses)}}>Expenses</button>
           </div>
         </div>
         <div className="mt-2 md:col-span-2 md:mt-0">
@@ -244,25 +272,25 @@ const ChartsOfAccounts = ({charts}) => {
 
                 <tbody>
                   
-                  {Object.keys(charts).map((item, index)=>{
-                    return <tr key={charts[item]._id} className="bg-white border-b hover:bg-gray-50">
+                  {Object.keys(allCharts).map((item, index)=>{
+                    return <tr key={allCharts[item]._id} className="bg-white border-b hover:bg-gray-50">
                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                         {index + 1}
                     </td>
                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        {charts[item].accountCode}
+                        {allCharts[item].accountCode}
                     </td>
                     <td className="px-6 py-4">
-                        {charts[item].accountName}
+                        {allCharts[item].accountName}
                     </td>
                     <td className="px-6 py-4">
-                        {charts[item].account}
+                        {allCharts[item].account}
                     </td>
                     <td className="px-6 py-4">
-                        {charts[item].subAccount}
+                        {allCharts[item].subAccount}
                     </td>
                     <td className="px-6 py-4">
-                        {charts[item].balance}
+                        {allCharts[item].balance}
                     </td>
                     <td className="px-6 py-4">
                       <Menu as="div" className=" inline-block text-left">
@@ -276,11 +304,11 @@ const ChartsOfAccounts = ({charts}) => {
                             <div className="py-1 z-20">
                               
                               <Menu.Item>{({ active }) => (
-                                  <div onClick={()=>{getData(charts[item]._id)}} className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'w-full text-left block px-4 py-2 text-sm hover:no-underline' )}>Edit</div>
+                                  <div onClick={()=>{getData(allCharts[item]._id)}} className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'w-full text-left block px-4 py-2 text-sm hover:no-underline' )}>Edit</div>
                                 )}
                               </Menu.Item>
                               <Menu.Item>{({ active }) => (
-                                  <div onClick={()=>{delEntry(charts[item]._id)}} className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'w-full text-left block px-4 py-2 text-sm hover:no-underline' )}>Delete</div>
+                                  <div onClick={()=>{delEntry(allCharts[item]._id)}} className={classNames(   active ? 'bg-gray-100 text-gray-900' : 'text-gray-700 no-underline', 'w-full text-left block px-4 py-2 text-sm hover:no-underline' )}>Delete</div>
                                 )}
                               </Menu.Item>
                          
@@ -292,7 +320,9 @@ const ChartsOfAccounts = ({charts}) => {
                   </tr>})}
 
                 </tbody>
+
               </table>
+                {allCharts.length === 0  ? <h1 className='text-red-600 text-center text-base my-3'>No charts of accounts found</h1> : ''}
             </div>
             </div>
           </form>
@@ -318,7 +348,7 @@ const ChartsOfAccounts = ({charts}) => {
                     <div className="md:grid md:grid-cols-1 md:gap-6">
                       <div className="md:col-span-1">
                         <div className="px-4 sm:px-0">
-                          <h3 className="text-lg font-medium leading-6 text-gray-900">Account</h3>
+                          <h3 className="text-lg font-medium leading-6 text-gray-900">Charts of Accounts</h3>
                         </div>
                       </div>
                       <div className="mt-2 md:col-span-2 md:mt-0">
@@ -375,25 +405,17 @@ const ChartsOfAccounts = ({charts}) => {
                                   </label>
                                   <select id="subAccount" name="subAccount" onChange={handleChange} value={subAccount} className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                     {/* Assets */}
-                                    {account === 'Assets' ? <option value={'Fixed Assets'}>Fixed Assets</option> : '' }
-                                    {account === 'Assets' ? <option value={'Current Assets'}>Current Assets</option> : '' }
-
-                                    {/* Incomes */}
-                                    {account === 'Incomes' ? <option value={'Revenue'}>Revenue</option> : '' }
-                                    {account === 'Incomes' ? <option value={'Other Income'}>Other Income</option> : '' }
-
-                                    {/* Equity */}
-                                    {account === 'Equity' ? <option value={'Equity'}>Equity</option> : '' }
-
-                                    {/* Expenses */}
-                                    {account === 'Expenses' ? <option value={'Administration Expenses'}>Administration Expenses</option> : '' }
-                                    {account === 'Expenses' ? <option value={'Distribution Expenses'}>Distribution Expenses</option> : '' }
-                                    {account === 'Expenses' ? <option value={'Cost of sales'}>Cost of sales</option> : '' }
-                                    {account === 'Expenses' ? <option value={'Finance Cost'}>Finance Cost</option> : '' }
-
-                                    {/* Liabilities */}
-                                    {account === 'Liabilities' ? <option value={'Non-Current Liability'}>Non-Current Liability</option> : '' }
-                                    {account === 'Liabilities' ? <option value={'Current Liability'}>Current Liability</option> : '' }
+                                    <option value={'Fixed Assets'}>Fixed Assets</option>
+                                    <option value={'Current Assets'}>Current Assets</option>
+                                    <option value={'Revenue'}>Revenue</option>
+                                    <option value={'Other Income'}>Other Income</option>
+                                    <option value={'Equity'}>Equity</option>
+                                    <option value={'Administration Expenses'}>Administration Expenses</option>
+                                    <option value={'Distribution Expenses'}>Distribution Expenses</option>
+                                    <option value={'Cost of sales'}>Cost of sales</option>
+                                    <option value={'Finance Cost'}>Finance Cost</option>
+                                    <option value={'Non-Current Liability'}>Non-Current Liability</option>
+                                    <option value={'Current Liability'}>Current Liability</option>
 
 
                                   </select>
@@ -476,12 +498,25 @@ export async function getServerSideProps() {
     mongoose.set("strictQuery", false);
     await mongoose.connect(process.env.MONGO_URI)
   }
-  let charts = await Charts.find()
+  let allCharts = await Charts.find()
+  let assets = await Charts.find({account: "Assets"})
+  let liabilities = await Charts.find({account: "Liabilities"})
+  let equity = await Charts.find({account: "Equity"})
+  let expenses = await Charts.find({account: "Expenses"})
+  let incomes = await Charts.find({account: "Incomes"})
+
 
    
   // Pass data to the page via props
   return {
-     props: { charts: JSON.parse(JSON.stringify(charts)) } 
+     props: { 
+      dbAllCharts: JSON.parse(JSON.stringify(allCharts)),
+      dbAssets: JSON.parse(JSON.stringify(assets)),
+      dbLiabilities: JSON.parse(JSON.stringify(liabilities)),
+      dbEquity: JSON.parse(JSON.stringify(equity)),
+      dbExpenses: JSON.parse(JSON.stringify(expenses)),
+      dbIncomes: JSON.parse(JSON.stringify(incomes))
+    } 
     }
 }
 

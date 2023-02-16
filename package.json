@@ -25,6 +25,7 @@
     "react-dom": "18.2.0",
     "react-feather": "^2.0.9",
     "react-icons": "^4.7.1",
+    "react-pro-sidebar": "^1.0.0",
     "react-redux": "^7.2.6",
     "react-toastify": "^9.1.1",
     "reactstrap": "^9.1.5",
