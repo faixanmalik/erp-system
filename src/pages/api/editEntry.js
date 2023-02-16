@@ -61,7 +61,6 @@ export default async function handler(req, res) {
                     let editContact =  await Contact.findByIdAndUpdate(id, {name : name , type : type , email : email ,phoneNo : phoneNo , country : country , streetAddress : streetAddress, city : city , state : state , zip : zip, taxRigNo : taxRigNo , paymentMethod : paymentMethod , terms : terms, openingBalance : openingBalance, date: date })
                     res.status(200).json({ success: true, message: "Update Successfully!", editContact }) 
                 }
-
             }
             else{
                 res.status(400).json({ success: false, message: "Internal server error!" }) 

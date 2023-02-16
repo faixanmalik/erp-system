@@ -1,9 +1,8 @@
 import React, { useState, Fragment } from 'react'
-import Link from 'next/link'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import Charts from '../../../models/Charts';
+import Charts from 'models/Charts';
 import mongoose from 'mongoose';
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';

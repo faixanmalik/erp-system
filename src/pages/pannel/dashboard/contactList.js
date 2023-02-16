@@ -8,8 +8,6 @@ import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Contact from 'models/Contact';
 
-
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -377,7 +375,7 @@ const ContactList = ({dbContact, dbCustomer, dbSupplier, dbEmployee}) => {
 
                                   <div className="col-span-6 sm:col-span-4">
                                     <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name:</label>
-                                    <input type="name" onChange={handleChange} name="name" id="name" value={name} placeholder='John Doe' className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required required/>
+                                    <input type="name" onChange={handleChange} name="name" id="name" value={name} placeholder='John Doe' className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required/>
                                   </div>
                             
                                     <div className="col-span-6 sm:col-span-2">
