@@ -1,6 +1,6 @@
 import { Card, CardBody, CardTitle, CardSubtitle, Table } from "reactstrap";
 import mongoose from "mongoose";
-import Customer from '../../../../models/Customer';
+import Customer from '../../../../models/Contact';
 
 
 

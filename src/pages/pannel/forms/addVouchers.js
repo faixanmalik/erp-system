@@ -9,7 +9,7 @@ import JournalVoucher from './journalVoucher'
 const AddVouchers = () => {
 
   const [creditNoteDate, setCreditNoteDate] = useState('')
-  const [type, setType] = useState('CRV')
+  const [type, setType] = useState('')
 
 
   const handleChange = (e) => {
@@ -60,6 +60,7 @@ const AddVouchers = () => {
                       Type:
                     </label>
                     <select id="type" name="type" onChange={handleChange} value={type} className="mt-1 p-2 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                      <option>Select Voucher Type</option>
                       <option value={'CPV'}>Cash Payment Voucher (CPV)</option>
                       <option value={'CRV'}>Cash Receipt Voucher (CRV)</option>
                       <option value={'BPV'}>Bank Payment Voucher (BPV)</option>

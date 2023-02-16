@@ -34,8 +34,8 @@ const ChartsOfAccounts = ({dbAllCharts, dbAssets, dbLiabilities, dbEquity, dbInc
   // Forms Usestates
   const [accountCode, setAccountCode] = useState('')
   const [accountName, setAccountName] = useState('')
-  const [account, setAccount] = useState('Assets')
-  const [subAccount, setSubAccount] = useState('Fixed Assets')
+  const [account, setAccount] = useState('')
+  const [subAccount, setSubAccount] = useState('')
   const [balance, setBalance] = useState('')
   const [asof, setAsof] = useState('')
   const [desc, setDesc] = useState('')
@@ -219,12 +219,12 @@ const ChartsOfAccounts = ({dbAllCharts, dbAssets, dbLiabilities, dbEquity, dbInc
               setOpen(true)
               setAccountCode(''),
               setAccountName(''),
-              setAccount('Assets'),
-              setSubAccount('Fixed Assets'),
+              setAccount(''),
+              setSubAccount(''),
               setBalance(''),
               setAsof(''),
               setDesc('')
-            }} 
+            }}
             
             className='ml-auto bg-blue-800 text-white px-14 py-2 rounded-lg'>
                New
@@ -390,6 +390,7 @@ const ChartsOfAccounts = ({dbAllCharts, dbAssets, dbLiabilities, dbEquity, dbInc
                                     Account:
                                   </label>
                                   <select id="account" name="account" onChange={handleChange} value={account} className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                    <option>Select Account Type</option>
                                     <option value={'Assets'}>Assets</option>
                                     <option value={'Liabilities'}>Liabilities</option>
                                     <option value={'Equity'}>Equity</option>
@@ -405,6 +406,7 @@ const ChartsOfAccounts = ({dbAllCharts, dbAssets, dbLiabilities, dbEquity, dbInc
                                   </label>
                                   <select id="subAccount" name="subAccount" onChange={handleChange} value={subAccount} className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                     {/* Assets */}
+                                    <option>Select Sub-Account</option>
                                     <option value={'Fixed Assets'}>Fixed Assets</option>
                                     <option value={'Current Assets'}>Current Assets</option>
                                     <option value={'Revenue'}>Revenue</option>

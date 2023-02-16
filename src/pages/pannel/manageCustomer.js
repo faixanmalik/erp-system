@@ -1,7 +1,7 @@
 import React, {useState, Fragment} from 'react'
 import Link from 'next/link';
 import mongoose from "mongoose";
-import Customer from '../../../models/Customer';
+import Customer from '../../../models/Contact';
 import AddCustomer from './addCustomer';
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Menu, Dialog, Transition } from '@headlessui/react'

@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
-const CustomerSchema = new mongoose.Schema({
+const ContactSchema = new mongoose.Schema({
 
-    customerName:{type: String, required: true},
+    name:{type: String, required: true},
+    type:{type: String, required: true},
     email:{type: String, required: true},
     phoneNo:{type: Number, required: true},
     country:{type: String, required: true},
@@ -21,4 +22,4 @@ const CustomerSchema = new mongoose.Schema({
   },{timestamps:true});
 
 mongoose.models={}
-export default mongoose.model("Customer", CustomerSchema);
+export default mongoose.model("Contact", ContactSchema);

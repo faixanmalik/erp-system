@@ -7,7 +7,7 @@ import TopCards from "../pannel/components/dashboard/TopCards";
 import SupplierComponent from "../pannel/components/dashboard/Supplier";
 import ProductsComponent from "@/pannel/components/dashboard/Products";
 import mongoose from "mongoose";
-import Customer from '../../models/Customer';
+import Customer from '../../models/Contact';
 import Product from '../../models/Product';
 import Supplier from '../../models/Supplier';
 
