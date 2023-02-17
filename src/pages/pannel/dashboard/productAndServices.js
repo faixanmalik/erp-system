@@ -153,7 +153,6 @@ const ProductAndServices = ({product, charts}) => {
 
     const data = { id, delPath: 'productAndServices' };
 
-
     let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/delEntry`, {
       method: 'POST',
       headers: {
