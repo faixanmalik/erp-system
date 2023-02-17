@@ -4,6 +4,7 @@ import FinancialYear from 'models/FinancialYear';
 import JournalEntries from 'models/JournalEntries';
 import Charts from '../../../models/Charts'
 import moment from 'moment';
+import Product from 'models/Product';
 
 
 export default async function handler(req, res) {
@@ -83,6 +84,23 @@ export default async function handler(req, res) {
                 else{
                     let editFinancialYear =  await FinancialYear.findByIdAndUpdate(id, {yearName : yearName , status : status , startDate : startDate ,endDate : endDate })
                     res.status(200).json({ success: true, message: "Update Successfully!", editFinancialYear }) 
+                }
+            }
+            else{
+                res.status(400).json({ success: false, message: "Internal server error!" }) 
+            }
+        }
+        else if (editPath === 'productAndServices'){
+            const { id, code, name, purchaseStatus, costPrice, purchaseAccount, purchaseTaxRate, purchaseDesc , salesStatus,  salesPrice, salesAccount, salesTaxRate, salesDesc } = req.body;
+            let dbProduct = await Product.findById(id)
+
+            if(dbProduct){
+                if( code === dbProduct.code && name === dbProduct.name && name === dbProduct.name && purchaseStatus === dbProduct.purchaseStatus && costPrice === dbProduct.costPrice && purchaseAccount === dbProduct.purchaseAccount && purchaseTaxRate === dbProduct.purchaseTaxRate && purchaseDesc === dbProduct.purchaseDesc && salesStatus === dbProduct.salesStatus && salesPrice === dbProduct.salesPrice && salesAccount === dbProduct.salesAccount && salesTaxRate === dbProduct.salesTaxRate && salesDesc === dbProduct.salesDesc  ){
+                    res.status(400).json({ success: false, message: "Already found!" }) 
+                }
+                else{
+                    let editProduct =  await Product.findByIdAndUpdate(id, { code: code, name: name, purchaseStatus: purchaseStatus, costPrice:costPrice, purchaseAccount: purchaseAccount, purchaseTaxRate: purchaseTaxRate, purchaseDesc:purchaseDesc , salesStatus: salesStatus,  salesPrice: salesPrice, salesAccount:salesAccount, salesTaxRate:salesTaxRate, salesDesc:salesDesc })
+                    res.status(200).json({ success: true, message: "Update Successfully!", editProduct }) 
                 }
             }
             else{

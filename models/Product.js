@@ -1,19 +1,21 @@
 const mongoose = require('mongoose');
 
 const ProductSchema = new mongoose.Schema({
-    barcode:{type: String, required: true},
-    productName:{type: String, required: true},
-    sn:{type: Number, required: true},
-    model:{type: String, required: true},
-    category: {type: String, required: true},
-    salePrice: {type: Number, required: true},
-    unit: {type: Number, required: true},
-    supplier: {type: String, required: true},
-    supplierPrice: {type: Number, required: true},
-    action: {type: String, required: true},
-    productDetails: {type: String, required: true},
-    image: {type: String },
-    Date: {type: Date, default: Date.now() }
+    code:{type: String, required: true},
+    name:{type: String, required: true},
+
+    purchaseStatus:{ type: String },
+    costPrice:{type: Number, required: true},
+    purchaseAccount: {type: String, required: true},
+    purchaseTaxRate: {type: String, required: true},
+    purchaseDesc: {type: String, required: true},
+
+    salesStatus:{type: String },
+    salesPrice:{type: Number, required: true},
+    salesAccount: {type: String, required: true},
+    salesTaxRate: {type: String, required: true},
+    salesDesc: {type: String, required: true},
+
 
   },{timestamps:true});
 

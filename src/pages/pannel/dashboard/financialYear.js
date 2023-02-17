@@ -22,7 +22,6 @@ const FinancialYear = ({financial}) => {
   const [status, setStatus] = useState('Current')
 
 
-
   const handleChange = (e) => {
     if(e.target.name === 'yearName'){
       setYearName(e.target.value)
@@ -51,9 +50,8 @@ const FinancialYear = ({financial}) => {
       body: JSON.stringify(data),
     })
       let response = await res.json()
-      consol.log(response)
+
         if (response.success === true) {
-          toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
           window.location.reload();
           setYearName('')
           setStartDate('')
@@ -61,7 +59,7 @@ const FinancialYear = ({financial}) => {
           setStatus('')
         }
         else {
-            toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+          toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
         }
   }
 
@@ -96,7 +94,6 @@ const FinancialYear = ({financial}) => {
 
     const data = { id, delPath: 'financialYear' };
 
-
     let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/delEntry`, {
       method: 'POST',
       headers: {
@@ -107,13 +104,10 @@ const FinancialYear = ({financial}) => {
       let response = await res.json()
       
       if (response.success === true) {
-        toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-        setTimeout(() => {
-          window.location.reload();
-        }, 700);
+        window.location.reload();
       }
       else {
-          toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+        toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
       }
     
   }
@@ -132,19 +126,15 @@ const FinancialYear = ({financial}) => {
       console.log(response)
       
       if (response.success === true){
-        toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: false, draggable: true, progress: undefined, theme: "light", });
-
-        setTimeout(() => {
-          window.location.reload();
-        }, 700);
+        window.location.reload();
 
         const sDate = moment(response.editFinancialYear.startDate).utc().format('DD-MM-YYYY')
         const eDate = moment(response.editFinancialYear.endDate).utc().format('DD-MM-YYYY')
         
-          setYearName(response.editFinancialYear.yearName)
-          setStartDate(sDate)
-          setEndDate(eDate)
-          setStatus(response.editFinancialYear.status)
+        setYearName(response.editFinancialYear.yearName)
+        setStartDate(sDate)
+        setEndDate(eDate)
+        setStatus(response.editFinancialYear.status)
       }
       else {
         toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: false, draggable: true, progress: undefined, theme: "light", });
@@ -162,8 +152,15 @@ const FinancialYear = ({financial}) => {
       <div className="md:grid md:grid-cols-1 md:gap-6">
         <div className="md:col-span-1">
           <div className="px-4 sm:px-0 flex">
-            <h3 className="text-lg font-medium leading-6 text-gray-900">Manage Product</h3>
-            <button onClick={()=>{setOpen(true)}} className='ml-auto bg-blue-800 text-white px-14 py-2 rounded-lg'>
+            <h3 className="text-lg font-medium leading-6 text-gray-900">Manage Financial Years</h3>
+            <button onClick={
+              ()=>{setOpen(true)
+                setYearName('');
+                setStartDate('');
+                setEndDate('');
+                setStatus('');
+              }
+              } className='ml-auto bg-blue-800 text-white px-14 py-2 rounded-lg'>
              New
             </button>
           </div>
@@ -242,6 +239,7 @@ const FinancialYear = ({financial}) => {
                   </tr>})}
                 </tbody>
               </table>
+              {financial.length === 0  ? <h1 className='text-red-600 text-center text-base my-3'>No Financial Year found</h1> : ''}
             </div>
             </div>
           </form>
@@ -305,7 +303,7 @@ const FinancialYear = ({financial}) => {
                       </div>
                     </div>
                     <div className="bg-gray-50 space-x-3 px-4 py-3 text-right sm:px-6">
-                      <button onClick={()=>{editEntry(id)}} className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save Changes</button>
+                      <button type='button' onClick={()=>{editEntry(id)}} className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save Changes</button>
                       <button type="submit" className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save</button>
                     </div>
 

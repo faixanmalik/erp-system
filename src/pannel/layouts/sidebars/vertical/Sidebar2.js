@@ -232,15 +232,15 @@ const Sidebar2 = ({ showMobilemenu }) => {
               Dashboard
           </MenuItem>
 
-          {/* User Managment */}
-          <SubMenu label="User Mangment" icon={<AiOutlineUser className='text-lg'/>}>
+        
+          <SubMenu label={'User Mangment'} icon={<AiOutlineUser className='text-lg'/>}>
             <MenuItem icon={<BiUserCheck className='text-lg'/>} >User Details</MenuItem>
             <MenuItem icon={<BiUserCircle className='text-lg'/>} >User Authentication</MenuItem>
             <MenuItem icon={<AiOutlineUserSwitch className='text-lg'/>} >Reistriction Area</MenuItem>
-          </SubMenu>  
+          </SubMenu> 
 
 
-          {/* Business Setup */}
+          
           <SubMenu label="Business Setup" icon={<IoBusinessOutline className='text-lg'/>}>
             <MenuItem href="/pannel/dashboard/financialYear" icon={<SlCalender className='text-lg'/>} className={ location === '/pannel/dashboard/financialYear' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Financial Year
@@ -265,7 +265,7 @@ const Sidebar2 = ({ showMobilemenu }) => {
             </MenuItem>
           </SubMenu>
 
-          {/* Purchase Module */}
+        
           <SubMenu label="Purchase Module" icon={<AiOutlineShoppingCart className='text-lg'/>}>
             <MenuItem href="/pannel/dashboard/purchaseOrder" icon={<FiShoppingBag className='text-lg'/>} className={ location === '/pannel/dashboard/purchaseOrder' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Purchase Order
@@ -278,8 +278,7 @@ const Sidebar2 = ({ showMobilemenu }) => {
             </MenuItem> 
           </SubMenu>
 
-
-          {/* Sales Module */}
+    
           <SubMenu label="Sales Module" icon={<BsShop className='text-lg'/>}>
             <MenuItem href="/pannel/dashboard/quotations" icon={<BsChatQuote className='text-lg'/>} className={ location === '/pannel/dashboard/quotations' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Quotations
@@ -295,7 +294,7 @@ const Sidebar2 = ({ showMobilemenu }) => {
             </MenuItem>
           </SubMenu>
 
-          {/* Inventory Module */}
+         
           <SubMenu label="Inventory Module" icon={<MdOutlineInventory2 className='text-lg'/>}>
             <MenuItem href="/pannel/dashboard/inventory" icon={<MdOutlineInventory2 className='text-lg'/>} className={ location === '/pannel/dashboard/inventory' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Inventory
@@ -303,7 +302,7 @@ const Sidebar2 = ({ showMobilemenu }) => {
           </SubMenu>
 
 
-          {/* Payroll Department */}
+         
           <SubMenu label="Payroll Department" icon={<AiOutlineTeam className='text-lg'/>}>
             <MenuItem href="/pannel/dashboard/employeesDetails" icon={<AiOutlineTeam className='text-lg'/>} className={ location === '/pannel/dashboard/employeesDetails' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Employees Details
@@ -313,7 +312,7 @@ const Sidebar2 = ({ showMobilemenu }) => {
             </MenuItem>
           </SubMenu>
 
-          {/* Financial Managment */}
+          
           <SubMenu label="Financial Managment" icon={<HiOutlineCash className='text-lg'/>}>
             <MenuItem href="/pannel/dashboard/saleBilling" icon={<RiBillLine className='text-lg'/>} className={ location === '/pannel/dashboard/saleBilling' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Sale Invoice & Billing

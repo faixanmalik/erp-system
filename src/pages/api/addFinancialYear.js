@@ -5,10 +5,9 @@ import FinancialYear from "models/FinancialYear";
 export default async function handler(req, res) {
 
     if (req.method == 'POST'){
+        const { yearName, startDate, endDate , status } = req.body;
 
-        const { yearName, status, startDate, endDate } = req.body;
-        let newFinancialYear = new FinancialYear({yearName, status, startDate, endDate } );
-        
+        let newFinancialYear = new FinancialYear({ yearName, startDate, endDate , status } );
         await newFinancialYear.save();
         
         res.status(200).json({ success: true, message: "New Financial Year Added !"}) 

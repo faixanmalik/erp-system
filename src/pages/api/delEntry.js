@@ -3,6 +3,7 @@ import JournalEntries from 'models/JournalEntries';
 import Charts from 'models/Charts';
 import Contact from 'models/Contact';
 import FinancialYear from 'models/FinancialYear';
+import Product from 'models/Product';
 
 
 export default async function handler(req, res) {
@@ -34,6 +35,12 @@ export default async function handler(req, res) {
             const { id } = req.body;
             
             await FinancialYear.findByIdAndDelete( id )
+            res.status(200).json({ success: true, message: "Deleted Successfully !" }) 
+        }
+        else if (delPath === 'productAndServices'){
+            const { id } = req.body;
+            
+            await Product.findByIdAndDelete( id )
             res.status(200).json({ success: true, message: "Deleted Successfully !" }) 
         }
 
