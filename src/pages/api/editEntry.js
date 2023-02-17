@@ -1,7 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import Contact from 'models/Contact';
+import FinancialYear from 'models/FinancialYear';
 import JournalEntries from 'models/JournalEntries';
 import Charts from '../../../models/Charts'
+import moment from 'moment';
 
 
 export default async function handler(req, res) {
@@ -54,12 +56,33 @@ export default async function handler(req, res) {
             let dbContact = await Contact.findById(id)
 
             if(dbContact){
-                if( name == dbContact.name && type == dbContact.type && email == dbContact.email &&  phoneNo == dbContact.phoneNo &&  country == dbContact.country &&  streetAddress == dbContact.streetAddress && city == dbContact.city && state == dbContact.state && zip == dbContact.zip && taxRigNo == dbContact.taxRigNo && paymentMethod == dbContact.paymentMethod && terms == dbContact.terms && openingBalance == dbContact.openingBalance){
+                if( name === dbContact.name && type === dbContact.type && email === dbContact.email &&  phoneNo === dbContact.phoneNo &&  country === dbContact.country &&  streetAddress === dbContact.streetAddress && city === dbContact.city && state === dbContact.state && zip === dbContact.zip && taxRigNo === dbContact.taxRigNo && paymentMethod === dbContact.paymentMethod && terms === dbContact.terms && openingBalance === dbContact.openingBalance){
                     res.status(400).json({ success: false, message: "Already In Charts of accounts!" }) 
                 }
                 else{
                     let editContact =  await Contact.findByIdAndUpdate(id, {name : name , type : type , email : email ,phoneNo : phoneNo , country : country , streetAddress : streetAddress, city : city , state : state , zip : zip, taxRigNo : taxRigNo , paymentMethod : paymentMethod , terms : terms, openingBalance : openingBalance, date: date })
                     res.status(200).json({ success: true, message: "Update Successfully!", editContact }) 
+                }
+            }
+            else{
+                res.status(400).json({ success: false, message: "Internal server error!" }) 
+            }
+        }
+
+        else if (editPath === 'financialYear'){
+            const { id, yearName, status, startDate, endDate } = req.body;
+            let dbFinancialYear = await FinancialYear.findById(id)
+
+            const sDate = moment(dbFinancialYear.startDate).utc().format('YYYY-MM-DD')
+            const eDate = moment(dbFinancialYear.endDate).utc().format('YYYY-MM-DD')
+
+            if(dbFinancialYear){
+                if( yearName === dbFinancialYear.yearName && status === dbFinancialYear.status && startDate === sDate &&  endDate === eDate){
+                    res.status(400).json({ success: false, message: "Already In Charts of accounts!" }) 
+                }
+                else{
+                    let editFinancialYear =  await FinancialYear.findByIdAndUpdate(id, {yearName : yearName , status : status , startDate : startDate ,endDate : endDate })
+                    res.status(200).json({ success: true, message: "Update Successfully!", editFinancialYear }) 
                 }
             }
             else{

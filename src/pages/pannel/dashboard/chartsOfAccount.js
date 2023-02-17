@@ -271,25 +271,27 @@ const ChartsOfAccounts = ({dbAllCharts, dbAssets, dbLiabilities, dbEquity, dbInc
                   
                   {Object.keys(allCharts).map((item, index)=>{
                     return <tr key={allCharts[item]._id} className="bg-white border-b hover:bg-gray-50">
-                    <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                    <td scope="row" className="px-6 py-1 font-medium text-gray-900 whitespace-nowrap">
                         {index + 1}
                     </td>
-                    <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                    <td scope="row" className="px-6 py-1 font-medium text-gray-900 whitespace-nowrap">
                         {allCharts[item].accountCode}
                     </td>
-                    <td className="px-6 py-4">
-                        {allCharts[item].accountName}
+                    <td className="px-6 py-1">
+                      <h1 className='text-base text-gray-800 font-semibold -mb-1 mt-1'>{allCharts[item].accountName}</h1>
+                      <h1 className='text-xs'>{allCharts[item].desc}</h1>
+                        
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-1">
                         {allCharts[item].account}
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-1">
                         {allCharts[item].subAccount}
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-1">
                         {allCharts[item].balance}
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-1">
                       <Menu as="div" className=" inline-block text-left">
                         <div>
                           <Menu.Button className="z-0">
@@ -357,14 +359,7 @@ const ChartsOfAccounts = ({dbAllCharts, dbAssets, dbLiabilities, dbEquity, dbInc
                                   <label htmlFor="accountCode" className="block text-sm font-medium text-gray-700">
                                     Account Code
                                   </label>
-                                  <input
-                                    onChange={handleChange}
-                                    value={accountCode}
-                                    type="number"
-                                    name="accountCode"
-                                    id="accountCode"
-                                    className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                  />
+                                  <input onChange={handleChange} value={accountCode} type="number" name="accountCode" id="accountCode" className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required/>
                                   {/* <p className='text-xs'>hello 10 world account code</p> */}
                                 </div>
                                 
@@ -372,14 +367,7 @@ const ChartsOfAccounts = ({dbAllCharts, dbAssets, dbLiabilities, dbEquity, dbInc
                                   <label htmlFor="accountName" className="block text-sm font-medium text-gray-700">
                                     Account Name:
                                   </label>
-                                  <input
-                                    onChange={handleChange}
-                                    value={accountName}
-                                    type="text"
-                                    name="accountName"
-                                    id="accountName"
-                                    className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                  />
+                                  <input onChange={handleChange} value={accountName} type="text" name="accountName" id="accountName" className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required/>
                                   {/* <p className='text-xs'>hello 10 world account code</p> */}
                                 </div>
                                 <div className="col-span-6 sm:col-span-3">
@@ -402,21 +390,20 @@ const ChartsOfAccounts = ({dbAllCharts, dbAssets, dbLiabilities, dbEquity, dbInc
                                     Sub Account
                                   </label>
                                   <select id="subAccount" name="subAccount" onChange={handleChange} value={subAccount} className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+
                                     {/* Assets */}
                                     <option>Select Sub-Account</option>
                                     <option value={'Fixed Assets'}>Fixed Assets</option>
                                     <option value={'Current Assets'}>Current Assets</option>
-                                    <option value={'Revenue'}>Revenue</option>
-                                    <option value={'Other Income'}>Other Income</option>
+                                    <option value={'Non-Current Liability'}>Non-Current Liability</option>
+                                    <option value={'Current Liability'}>Current Liability</option>
                                     <option value={'Equity'}>Equity</option>
                                     <option value={'Administration Expenses'}>Administration Expenses</option>
                                     <option value={'Distribution Expenses'}>Distribution Expenses</option>
                                     <option value={'Cost of sales'}>Cost of sales</option>
                                     <option value={'Finance Cost'}>Finance Cost</option>
-                                    <option value={'Non-Current Liability'}>Non-Current Liability</option>
-                                    <option value={'Current Liability'}>Current Liability</option>
-
-
+                                    <option value={'Revenue'}>Revenue</option>
+                                    <option value={'Other Income'}>Other Income</option>
                                   </select>
                                 </div>
                                 

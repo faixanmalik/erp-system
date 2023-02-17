@@ -5,7 +5,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Menu, MenuItem, SubMenu, Sidebar } from 'react-pro-sidebar';
 
-import { AiOutlineBarChart, AiOutlineCloseCircle, AiOutlineContacts, AiOutlineDashboard, AiOutlineFundProjectionScreen, AiOutlineShopping, AiOutlineShoppingCart, AiOutlineTeam, AiOutlineUser, AiOutlineUserSwitch } from 'react-icons/ai'
+import {AiOutlineCloseCircle, AiOutlineContacts, AiOutlineFundProjectionScreen, AiOutlineShoppingCart, AiOutlineTeam, AiOutlineUser, AiOutlineUserSwitch } from 'react-icons/ai'
 import { BiFingerprint, BiHomeAlt, BiPurchaseTagAlt, BiUserCheck, BiUserCircle } from 'react-icons/bi'
 import {MdOutlineInventory2, MdProductionQuantityLimits} from 'react-icons/md'
 import {IoPieChartSharp, IoBusinessOutline} from 'react-icons/io5'
@@ -15,6 +15,7 @@ import {FiShoppingBag} from 'react-icons/fi'
 import {FaToriiGate} from 'react-icons/fa'
 import {TbFileInvoice} from 'react-icons/tb'
 import {RiBillLine} from 'react-icons/ri'
+import {SlCalender} from 'react-icons/sl'
 
 
 
@@ -241,6 +242,9 @@ const Sidebar2 = ({ showMobilemenu }) => {
 
           {/* Business Setup */}
           <SubMenu label="Business Setup" icon={<IoBusinessOutline className='text-lg'/>}>
+            <MenuItem href="/pannel/dashboard/financialYear" icon={<SlCalender className='text-lg'/>} className={ location === '/pannel/dashboard/financialYear' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+                Financial Year
+            </MenuItem>
             <MenuItem href="/pannel/dashboard/chartsOfAccount" icon={<IoPieChartSharp className='text-lg'/>} className={ location === '/pannel/dashboard/chartsOfAccount' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Charts of Accounts
             </MenuItem>
@@ -262,22 +266,16 @@ const Sidebar2 = ({ showMobilemenu }) => {
           </SubMenu>
 
           {/* Purchase Module */}
-          <SubMenu label="Purchase Module" icon={<BiPurchaseTagAlt className='text-lg'/>}>
+          <SubMenu label="Purchase Module" icon={<AiOutlineShoppingCart className='text-lg'/>}>
             <MenuItem href="/pannel/dashboard/purchaseOrder" icon={<FiShoppingBag className='text-lg'/>} className={ location === '/pannel/dashboard/purchaseOrder' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Purchase Order
             </MenuItem>
             <MenuItem href="/pannel/dashboard/inwardGatePass" icon={<FaToriiGate className='text-lg'/>} className={ location === '/pannel/dashboard/inwardGatePass' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Inward Gateway Pass
             </MenuItem>
-            <MenuItem href="/pannel/dashboard/purchaseInvoice" icon={<TbFileInvoice className='text-lg'/>} className={ location === '/pannel/dashboard/purchaseInvoice' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
-                Purchase Invoice
-            </MenuItem>
-            <MenuItem href="/pannel/dashboard/purchaseBilling" icon={<RiBillLine className='text-lg'/>} className={ location === '/pannel/dashboard/purchaseBilling' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
-                Billing
-            </MenuItem>
-            <MenuItem href="/pannel/dashboard/purchaseReport" icon={<HiOutlineDocumentReport className='text-lg'/>} className={ location === '/pannel/dashboard/purchaseReport' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
-                Report
-            </MenuItem>
+            <MenuItem href="/pannel/dashboard/purchaseOverview" icon={<FaToriiGate className='text-lg'/>} className={ location === '/pannel/dashboard/purchaseOverview' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+                Overview
+            </MenuItem> 
           </SubMenu>
 
 
@@ -286,23 +284,16 @@ const Sidebar2 = ({ showMobilemenu }) => {
             <MenuItem href="/pannel/dashboard/quotations" icon={<BsChatQuote className='text-lg'/>} className={ location === '/pannel/dashboard/quotations' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Quotations
             </MenuItem>
-            <MenuItem href="/pannel/dashboard/saleOrder" icon={<AiOutlineShoppingCart className='text-lg'/>} className={ location === '/pannel/dashboard/saleOrder' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/dashboard/saleOrder" icon={<BiPurchaseTagAlt className='text-lg'/>} className={ location === '/pannel/dashboard/saleOrder' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Sale Order
             </MenuItem>
             <MenuItem href="/pannel/dashboard/outwardGatewayPass" icon={<FaToriiGate className='text-lg'/>} className={ location === '/pannel/dashboard/outwardGatewayPass' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Outward Gateway Pass
             </MenuItem>
-            <MenuItem href="/pannel/dashboard/saleInvoice" icon={<TbFileInvoice className='text-lg'/>} className={ location === '/pannel/dashboard/saleInvoice' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
-                Sale Invoice
-            </MenuItem>
-            <MenuItem href="/pannel/dashboard/saleBilling" icon={<RiBillLine className='text-lg'/>} className={ location === '/pannel/dashboard/saleBilling' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
-                Billing
-            </MenuItem>
-            <MenuItem href="/pannel/dashboard/saleReport" icon={<HiOutlineDocumentReport className='text-lg'/>} className={ location === '/pannel/dashboard/saleReport' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
-                Report
+            <MenuItem href="/pannel/dashboard/saleOverview" icon={<TbFileInvoice className='text-lg'/>} className={ location === '/pannel/dashboard/saleOverview' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+                Overview
             </MenuItem>
           </SubMenu>
-
 
           {/* Inventory Module */}
           <SubMenu label="Inventory Module" icon={<MdOutlineInventory2 className='text-lg'/>}>
@@ -324,6 +315,15 @@ const Sidebar2 = ({ showMobilemenu }) => {
 
           {/* Financial Managment */}
           <SubMenu label="Financial Managment" icon={<HiOutlineCash className='text-lg'/>}>
+            <MenuItem href="/pannel/dashboard/saleBilling" icon={<RiBillLine className='text-lg'/>} className={ location === '/pannel/dashboard/saleBilling' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+                Sale Invoice & Billing
+            </MenuItem>
+            <MenuItem href="/pannel/dashboard/purchaseBilling" icon={<RiBillLine className='text-lg'/>} className={ location === '/pannel/dashboard/purchaseBilling' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+                Purchase Invoice & Billing
+            </MenuItem>
+            <MenuItem href="/pannel/dashboard/vouchers" icon={<HiOutlineDocumentReport className='text-lg'/>} className={ location === '/pannel/dashboard/vouchers' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+                Vouchers
+            </MenuItem>
             <MenuItem href="/pannel/dashboard/financialReports" icon={<HiOutlineDocumentReport className='text-lg'/>} className={ location === '/pannel/dashboard/financialReports' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Reports
             </MenuItem>
@@ -332,8 +332,7 @@ const Sidebar2 = ({ showMobilemenu }) => {
             </MenuItem>
           </SubMenu>
           
-        
-
+      
         </Menu>
       </Menu>
       </Sidebar>

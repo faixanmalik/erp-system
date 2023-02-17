@@ -207,6 +207,8 @@ const ContactList = ({dbContact, dbCustomer, dbSupplier, dbEmployee}) => {
     })
       let response = await res.json()
 
+      if(response.success === true){
+        window.location.reload();
         setName('')
         setEmail('')
         setPhoneNo('')
@@ -220,15 +222,10 @@ const ContactList = ({dbContact, dbCustomer, dbSupplier, dbEmployee}) => {
         setOpeningBalance('')
         setPaymentMethod('')
         setDate('')
-
-
-        if (response.success === true) {
-            toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-        }
-
-        else {
-            toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-        }
+      }
+      else {
+          toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+      }
   }
 
   return (
