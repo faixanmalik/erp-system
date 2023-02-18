@@ -1,4 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import BankAccount from 'models/BankAccount';
 import Contact from 'models/Contact';
 import FinancialYear from 'models/FinancialYear';
 import Product from 'models/Product';
@@ -51,6 +52,17 @@ export default async function handler(req, res) {
             let product = await Product.findById(id)
             if(product){
                 res.status(200).json({ success: true, product}) 
+            } 
+            else{
+                res.status(400).json({ success: false, message: "Internal server error!" }) 
+            }
+
+        }
+        else if( getDataPath === 'bankAccount' ){
+            const { id } = req.body;
+            let bankAccount = await BankAccount.findById(id)
+            if(bankAccount){
+                res.status(200).json({ success: true, bankAccount}) 
             } 
             else{
                 res.status(400).json({ success: false, message: "Internal server error!" }) 

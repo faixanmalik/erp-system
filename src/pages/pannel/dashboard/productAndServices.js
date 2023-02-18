@@ -96,22 +96,10 @@ const ProductAndServices = ({product, charts}) => {
       let response = await res.json()
 
         if (response.success === true) {
-            window.location.reload();
-            setCode('')
-            setName('')
-
-            setCostPrice('')
-            setPurchaseAccount('')
-            setPurchaseTaxRate('')
-            setPurchaseDesc('')
-
-            setSalesPrice('')
-            setSalesAccount('')
-            setSalesTaxRate('')
-            setSalesDesc('')
+          window.location.reload();
         }
         else {
-            toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+          toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
         }
   }
 
@@ -203,7 +191,7 @@ const ProductAndServices = ({product, charts}) => {
       <div className="md:grid md:grid-cols-1 md:gap-6">
         <div className="md:col-span-1">
           <div className="px-4 sm:px-0 flex">
-            <h3 className="text-lg font-medium leading-6 text-gray-900">Manage Product</h3>
+            <h3 className="text-lg font-medium leading-6 text-gray-900">Manage Product and Services</h3>
             <button onClick={
                 ()=>{
                     setOpen(true);

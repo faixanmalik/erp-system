@@ -4,6 +4,7 @@ import Charts from 'models/Charts';
 import Contact from 'models/Contact';
 import FinancialYear from 'models/FinancialYear';
 import Product from 'models/Product';
+import BankAccount from 'models/BankAccount';
 
 
 export default async function handler(req, res) {
@@ -43,7 +44,12 @@ export default async function handler(req, res) {
             await Product.findByIdAndDelete( id )
             res.status(200).json({ success: true, message: "Deleted Successfully !" }) 
         }
-
+        else if (delPath === 'bankAccount'){
+            const { id } = req.body;
+            
+            await BankAccount.findByIdAndDelete( id )
+            res.status(200).json({ success: true, message: "Deleted Successfully !" }) 
+        }
 
 
 

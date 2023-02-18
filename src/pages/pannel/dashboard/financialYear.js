@@ -19,7 +19,7 @@ const FinancialYear = ({financial}) => {
   const [yearName, setYearName] = useState('')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
-  const [status, setStatus] = useState('Current')
+  const [status, setStatus] = useState()
 
 
   const handleChange = (e) => {
@@ -294,6 +294,7 @@ const FinancialYear = ({financial}) => {
                         <div className="col-span-6 sm:col-span-2">
                           <label htmlFor="status" className="block text-sm font-medium text-gray-700">status</label>
                           <select onChange={handleChange} value={status} id="status" name="status" className="mt-1 p-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" required>
+                            <option>Select Status</option>
                             <option value={'Current'}>Current</option>
                             <option value={'Active'}>Active</option>
                             <option value={'Closed'}>Closed</option>

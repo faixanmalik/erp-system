@@ -112,6 +112,10 @@ const ChartsOfAccounts = ({dbAllCharts, dbAssets, dbLiabilities, dbEquity, dbInc
         setAsof(date)
         setDesc(response.charts.desc)
       }
+      else{
+        toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: false, draggable: true, progress: undefined, theme: "light", });
+      }
+
   }
 
   const delEntry = async(id)=>{
@@ -128,10 +132,7 @@ const ChartsOfAccounts = ({dbAllCharts, dbAssets, dbLiabilities, dbEquity, dbInc
       let response = await res.json()
       
       if (response.success === true) {
-        toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-        setTimeout(() => {
-          window.location.reload();
-        }, 700);
+        window.location.reload();
       }
       else {
           toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
@@ -141,8 +142,6 @@ const ChartsOfAccounts = ({dbAllCharts, dbAssets, dbLiabilities, dbEquity, dbInc
 
   const editEntry = async(e)=>{
     e.preventDefault();
-
-    setOpen(false)
 
     const data = { accountCode, account, accountName, balance , asof,  desc, subAccount , editPath: 'chartsOfAccounts' };
     let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/editEntry`, {
@@ -155,10 +154,7 @@ const ChartsOfAccounts = ({dbAllCharts, dbAssets, dbLiabilities, dbEquity, dbInc
       let response = await res.json()
 
       if (response.success === true){
-        toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: false, draggable: true, progress: undefined, theme: "light", });
-        setTimeout(() => {
-          window.location.reload();
-        }, 700);
+        window.location.reload();
       }
       else {
         toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: false, draggable: true, progress: undefined, theme: "light", });
@@ -186,14 +182,6 @@ const ChartsOfAccounts = ({dbAllCharts, dbAssets, dbLiabilities, dbEquity, dbInc
         if (response.success === true) {
           setOpen(false)
           window.location.reload();
-          
-          setAccountCode('')
-          setAccountName('')
-          setAccount('Assets')
-          setSubAccount('Fixed Assets')
-          setBalance('')
-          setAsof('')
-          setDesc('')
         }
         else {
             toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });

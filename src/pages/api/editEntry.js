@@ -5,6 +5,7 @@ import JournalEntries from 'models/JournalEntries';
 import Charts from '../../../models/Charts'
 import moment from 'moment';
 import Product from 'models/Product';
+import BankAccount from 'models/BankAccount';
 
 
 export default async function handler(req, res) {
@@ -101,6 +102,25 @@ export default async function handler(req, res) {
                 else{
                     let editProduct =  await Product.findByIdAndUpdate(id, { code: code, name: name, purchaseStatus: purchaseStatus, costPrice:costPrice, purchaseAccount: purchaseAccount, purchaseTaxRate: purchaseTaxRate, purchaseDesc:purchaseDesc , salesStatus: salesStatus,  salesPrice: salesPrice, salesAccount:salesAccount, salesTaxRate:salesTaxRate, salesDesc:salesDesc })
                     res.status(200).json({ success: true, message: "Update Successfully!", editProduct }) 
+                }
+            }
+            else{
+                res.status(400).json({ success: false, message: "Internal server error!" }) 
+            }
+        }
+        else if (editPath === 'bankAccount'){
+            const { id,  bankBranch, accountNo, accountType, accountDesc, accountTitle, 
+                chartsOfAccount,  borrowingLimit } = req.body;
+            let dbBank = await BankAccount.findById(id)
+
+            if(dbBank){
+                if( bankBranch === dbBank.bankBranch && accountNo === dbBank.accountNo && accountType === dbBank.accountType && accountDesc === dbBank.accountDesc && accountTitle === dbBank.accountTitle && chartsOfAccount === dbBank.chartsOfAccount && borrowingLimit === dbBank.borrowingLimit ){
+
+                    res.status(400).json({ success: false, message: "Already found!" }) 
+                }
+                else{
+                    await BankAccount.findByIdAndUpdate(id, { bankBranch: bankBranch, accountNo: accountNo, accountType: accountType, accountDesc: accountDesc, accountTitle:accountTitle , chartsOfAccount: chartsOfAccount,  borrowingLimit: borrowingLimit })
+                    res.status(200).json({ success: true, message: "Update Successfully!" }) 
                 }
             }
             else{
