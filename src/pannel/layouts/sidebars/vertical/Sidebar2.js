@@ -81,103 +81,88 @@ const Sidebar2 = ({ showMobilemenu }) => {
 
                           <tr className="bg-white border-b hover:bg-gray-50">
                             <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/invoice'} className='no-underline text-gray-500 font-semibold text-base'>Invoice</a>
+                              <a href={'/pannel/businessSetup/forms/invoice'} className='no-underline text-gray-500 font-semibold text-base'>Invoice</a>
                             </td>
                             <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/expense'} className='no-underline text-gray-500 font-semibold text-base'>Expense</a>
+                              <a href={'/pannel/businessSetup/forms/expense'} className='no-underline text-gray-500 font-semibold text-base'>Expense</a>
                             </td>
                             <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/singleTimeActivity'} className='no-underline text-gray-500 font-semibold text-base'>Single time activity</a>
+                              <a href={'/pannel/businessSetup/forms/singleTimeActivity'} className='no-underline text-gray-500 font-semibold text-base'>Single time activity</a>
                             </td>
                             <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/bankDeopsit'} className='no-underline text-gray-500 font-semibold text-base'>Bank deposit</a>
+                              <a href={'/pannel/businessSetup/forms/bankDeopsit'} className='no-underline text-gray-500 font-semibold text-base'>Bank deposit</a>
                             </td>
                           </tr>
 
                           <tr className="bg-white border-b hover:bg-gray-50">
                             <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/receivePayment'} className='no-underline text-gray-500 font-semibold text-base'>Receive payment</a>
+                              <a href={'/pannel/businessSetup/forms/receivePayment'} className='no-underline text-gray-500 font-semibold text-base'>Receive payment</a>
                             </td>
                             <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/cheque'} className='no-underline text-gray-500 font-semibold text-base'>Cheque</a>
+                              <a href={'/pannel/businessSetup/forms/cheque'} className='no-underline text-gray-500 font-semibold text-base'>Cheque</a>
                             </td>
                             <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/weeklyTimeSheet'} className='no-underline text-gray-500 font-semibold text-base'>Weekly time sheet</a>
+                              <a href={'/pannel/businessSetup/forms/weeklyTimeSheet'} className='no-underline text-gray-500 font-semibold text-base'>Weekly time sheet</a>
                             </td>
                             <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/transfer'} className='no-underline text-gray-500 font-semibold text-base'>Transfer</a>
-                            </td>
-                          </tr>
-
-
-                          <tr className="bg-white border-b hover:bg-gray-50">
-                            <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/estimate'} className='no-underline text-gray-500 font-semibold text-base'>Estimate</a>
-                            </td>
-                            <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/bill'} className='no-underline text-gray-500 font-semibold text-base'>Bill</a>
-                            </td>
-                            <td className="px-6 py-2">
-
-                            </td>
-                            <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/addVouchers'} className='no-underline text-gray-500 font-semibold text-base'>Journal entry</a>
+                              <a href={'/pannel/businessSetup/forms/transfer'} className='no-underline text-gray-500 font-semibold text-base'>Transfer</a>
                             </td>
                           </tr>
 
 
                           <tr className="bg-white border-b hover:bg-gray-50">
                             <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/creditNote'} className='no-underline text-gray-500 font-semibold text-base'>Credit Note</a>
+                              <a href={'/pannel/businessSetup/forms/estimate'} className='no-underline text-gray-500 font-semibold text-base'>Estimate</a>
                             </td>
                             <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/payBills'} className='no-underline text-gray-500 font-semibold text-base'>Pay bills</a>
-                            </td>
-                            <td className="px-6 py-2">
-
-                            </td>
-                            <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/statement'} className='no-underline text-gray-500 font-semibold text-base'>Statement</a>
-                            </td>
-                          </tr>
-
-                          <tr className="bg-white border-b hover:bg-gray-50">
-                            <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/salesReceipt'} className='no-underline text-gray-500 font-semibold text-base'>Sales receipt</a>
-                            </td>
-                            <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/purchaseOrder'} className='no-underline text-gray-500 font-semibold text-base'>Purchase order</a>
+                              <a href={'/pannel/businessSetup/forms/bill'} className='no-underline text-gray-500 font-semibold text-base'>Bill</a>
                             </td>
                             <td className="px-6 py-2">
 
                             </td>
                             <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/payDownCreditCard'} className='no-underline text-gray-500 font-semibold text-base'>Pay down credit card</a>
+                              <a href={'/pannel/businessSetup/forms/addVouchers'} className='no-underline text-gray-500 font-semibold text-base'>Journal entry</a>
                             </td>
                           </tr>
 
 
                           <tr className="bg-white border-b hover:bg-gray-50">
                             <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/refundReceipt'} className='no-underline text-gray-500 font-semibold text-base'>Refund receipt</a>
+                              <a href={'/pannel/businessSetup/forms/creditNote'} className='no-underline text-gray-500 font-semibold text-base'>Credit Note</a>
                             </td>
                             <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/supplierCredit'} className='no-underline text-gray-500 font-semibold text-base'>Supplier credit</a>
-                            </td>
-                            <td className="px-6 py-2">
-
+                              <a href={'/pannel/businessSetup/forms/payBills'} className='no-underline text-gray-500 font-semibold text-base'>Pay bills</a>
                             </td>
                             <td className="px-6 py-2">
 
+                            </td>
+                            <td className="px-6 py-2">
+                              <a href={'/pannel/businessSetup/forms/statement'} className='no-underline text-gray-500 font-semibold text-base'>Statement</a>
                             </td>
                           </tr>
 
                           <tr className="bg-white border-b hover:bg-gray-50">
                             <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/delayedCredit'} className='no-underline text-gray-500 font-semibold text-base'>Delayed credit</a>
+                              <a href={'/pannel/businessSetup/forms/salesReceipt'} className='no-underline text-gray-500 font-semibold text-base'>Sales receipt</a>
                             </td>
                             <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/creditCardCredit'} className='no-underline text-gray-500 font-semibold text-base'>Credit card credit</a>
+                              <a href={'/pannel/businessSetup/forms/purchaseOrder'} className='no-underline text-gray-500 font-semibold text-base'>Purchase order</a>
+                            </td>
+                            <td className="px-6 py-2">
+
+                            </td>
+                            <td className="px-6 py-2">
+                              <a href={'/pannel/businessSetup/forms/payDownCreditCard'} className='no-underline text-gray-500 font-semibold text-base'>Pay down credit card</a>
+                            </td>
+                          </tr>
+
+
+                          <tr className="bg-white border-b hover:bg-gray-50">
+                            <td className="px-6 py-2">
+                              <a href={'/pannel/businessSetup/forms/refundReceipt'} className='no-underline text-gray-500 font-semibold text-base'>Refund receipt</a>
+                            </td>
+                            <td className="px-6 py-2">
+                              <a href={'/pannel/businessSetup/forms/supplierCredit'} className='no-underline text-gray-500 font-semibold text-base'>Supplier credit</a>
                             </td>
                             <td className="px-6 py-2">
 
@@ -186,9 +171,24 @@ const Sidebar2 = ({ showMobilemenu }) => {
 
                             </td>
                           </tr>
+
                           <tr className="bg-white border-b hover:bg-gray-50">
                             <td className="px-6 py-2">
-                              <a href={'/pannel/dashboard/forms/delayedCharge'} className='no-underline text-gray-500 font-semibold text-base'>Delayed charge</a>
+                              <a href={'/pannel/businessSetup/forms/delayedCredit'} className='no-underline text-gray-500 font-semibold text-base'>Delayed credit</a>
+                            </td>
+                            <td className="px-6 py-2">
+                              <a href={'/pannel/businessSetup/forms/creditCardCredit'} className='no-underline text-gray-500 font-semibold text-base'>Credit card credit</a>
+                            </td>
+                            <td className="px-6 py-2">
+
+                            </td>
+                            <td className="px-6 py-2">
+
+                            </td>
+                          </tr>
+                          <tr className="bg-white border-b hover:bg-gray-50">
+                            <td className="px-6 py-2">
+                              <a href={'/pannel/businessSetup/forms/delayedCharge'} className='no-underline text-gray-500 font-semibold text-base'>Delayed charge</a>
                             </td>
                             <td className="px-6 py-2">
 
@@ -240,86 +240,86 @@ const Sidebar2 = ({ showMobilemenu }) => {
           </SubMenu> 
     
           <SubMenu label="Business Setup" icon={<IoBusinessOutline className='text-lg'/>}>
-            <MenuItem href="/pannel/dashboard/financialYear" icon={<SlCalender className='text-lg'/>} className={ location === '/pannel/dashboard/financialYear' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/businessSetup/financialYear" icon={<SlCalender className='text-lg'/>} className={ location === '/pannel/businessSetup/financialYear' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Financial Year
             </MenuItem>
-            <MenuItem href="/pannel/dashboard/chartsOfAccount" icon={<IoPieChartSharp className='text-lg'/>} className={ location === '/pannel/dashboard/chartsOfAccount' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/businessSetup/chartsOfAccount" icon={<IoPieChartSharp className='text-lg'/>} className={ location === '/pannel/businessSetup/chartsOfAccount' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Charts of Accounts
             </MenuItem>
-            <MenuItem href="/pannel/dashboard/contactList" icon={<AiOutlineContacts className='text-lg'/>} className={ location === '/pannel/dashboard/contactList' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/businessSetup/contactList" icon={<AiOutlineContacts className='text-lg'/>} className={ location === '/pannel/businessSetup/contactList' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Contact List
             </MenuItem>
-            <MenuItem href="/pannel/dashboard/productAndServices" icon={<MdProductionQuantityLimits className='text-lg'/>} className={ location === '/pannel/dashboard/productAndServices' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/businessSetup/productAndServices" icon={<MdProductionQuantityLimits className='text-lg'/>} className={ location === '/pannel/businessSetup/productAndServices' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Product and Services
             </MenuItem>
-            <MenuItem href="/pannel/dashboard/fixedAssets" icon={<HiOutlineCash className='text-lg'/>} className={ location === '/pannel/dashboard/fixedAssets' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/businessSetup/fixedAssets" icon={<HiOutlineCash className='text-lg'/>} className={ location === '/pannel/businessSetup/fixedAssets' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Fixed Assets
             </MenuItem>
-            <MenuItem href="/pannel/dashboard/bankAccount" icon={<BsBank className='text-lg'/>} className={ location === '/pannel/dashboard/bankAccounts' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/businessSetup/bankAccount" icon={<BsBank className='text-lg'/>} className={ location === '/pannel/businessSetup/bankAccounts' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Bank Accounts
             </MenuItem>
-            <MenuItem href="/pannel/dashboard/taxRates" icon={<HiOutlineReceiptTax className='text-lg'/>} className={ location === '/pannel/dashboard/taxRates' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/businessSetup/taxRates" icon={<HiOutlineReceiptTax className='text-lg'/>} className={ location === '/pannel/businessSetup/taxRates' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Tax Rates
             </MenuItem>
           </SubMenu>
         
           <SubMenu label="Purchase Module" icon={<AiOutlineShoppingCart className='text-lg'/>}>
-            <MenuItem href="/pannel/dashboard/purchaseOrder" icon={<FiShoppingBag className='text-lg'/>} className={ location === '/pannel/dashboard/purchaseOrder' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/purchaseModule/purchaseOrder" icon={<FiShoppingBag className='text-lg'/>} className={ location === '/pannel/purchaseModule/purchaseOrder' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Purchase Order
             </MenuItem>
-            <MenuItem href="/pannel/dashboard/inwardGatePass" icon={<FaToriiGate className='text-lg'/>} className={ location === '/pannel/dashboard/inwardGatePass' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/purchaseModule/inwardGatePass" icon={<FaToriiGate className='text-lg'/>} className={ location === '/pannel/purchaseModule/inwardGatePass' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Inward Gateway Pass
             </MenuItem>
-            <MenuItem href="/pannel/dashboard/purchaseOverview" icon={<FaToriiGate className='text-lg'/>} className={ location === '/pannel/dashboard/purchaseOverview' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/purchaseModule/purchaseOverview" icon={<FaToriiGate className='text-lg'/>} className={ location === '/pannel/purchaseModule/purchaseOverview' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Overview
             </MenuItem> 
           </SubMenu>
 
           <SubMenu label="Sales Module" icon={<BsShop className='text-lg'/>}>
-            <MenuItem href="/pannel/dashboard/quotations" icon={<BsChatQuote className='text-lg'/>} className={ location === '/pannel/dashboard/quotations' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/businessSetup/quotations" icon={<BsChatQuote className='text-lg'/>} className={ location === '/pannel/businessSetup/quotations' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Quotations
             </MenuItem>
-            <MenuItem href="/pannel/dashboard/saleOrder" icon={<BiPurchaseTagAlt className='text-lg'/>} className={ location === '/pannel/dashboard/saleOrder' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/businessSetup/saleOrder" icon={<BiPurchaseTagAlt className='text-lg'/>} className={ location === '/pannel/businessSetup/saleOrder' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Sale Order
             </MenuItem>
-            <MenuItem href="/pannel/dashboard/outwardGatewayPass" icon={<FaToriiGate className='text-lg'/>} className={ location === '/pannel/dashboard/outwardGatewayPass' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/businessSetup/outwardGatewayPass" icon={<FaToriiGate className='text-lg'/>} className={ location === '/pannel/businessSetup/outwardGatewayPass' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Outward Gateway Pass
             </MenuItem>
-            <MenuItem href="/pannel/dashboard/saleOverview" icon={<TbFileInvoice className='text-lg'/>} className={ location === '/pannel/dashboard/saleOverview' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/businessSetup/saleOverview" icon={<TbFileInvoice className='text-lg'/>} className={ location === '/pannel/businessSetup/saleOverview' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Overview
             </MenuItem>
           </SubMenu>
 
           <SubMenu label="Inventory Module" icon={<MdOutlineInventory2 className='text-lg'/>}>
-            <MenuItem href="/pannel/dashboard/inventory" icon={<MdOutlineInventory2 className='text-lg'/>} className={ location === '/pannel/dashboard/inventory' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/businessSetup/inventory" icon={<MdOutlineInventory2 className='text-lg'/>} className={ location === '/pannel/businessSetup/inventory' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Inventory
             </MenuItem>
           </SubMenu>
          
           <SubMenu label="Payroll Department" icon={<AiOutlineTeam className='text-lg'/>}>
-            <MenuItem href="/pannel/dashboard/employeesDetails" icon={<AiOutlineTeam className='text-lg'/>} className={ location === '/pannel/dashboard/employeesDetails' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/businessSetup/employeesDetails" icon={<AiOutlineTeam className='text-lg'/>} className={ location === '/pannel/businessSetup/employeesDetails' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Employees Details
             </MenuItem>
-            <MenuItem href="/pannel/dashboard/employeesAttendance" icon={<BiFingerprint className='text-lg'/>} className={ location === '/pannel/dashboard/employeesAttendance' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/businessSetup/employeesAttendance" icon={<BiFingerprint className='text-lg'/>} className={ location === '/pannel/businessSetup/employeesAttendance' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Employees Attendance
             </MenuItem>
           </SubMenu>
 
           
           <SubMenu label="Financial Managment" icon={<HiOutlineCash className='text-lg'/>}>
-            <MenuItem href="/pannel/dashboard/saleBilling" icon={<RiBillLine className='text-lg'/>} className={ location === '/pannel/dashboard/saleBilling' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/businessSetup/saleBilling" icon={<RiBillLine className='text-lg'/>} className={ location === '/pannel/businessSetup/saleBilling' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Sale Invoice & Billing
             </MenuItem>
-            <MenuItem href="/pannel/dashboard/purchaseBilling" icon={<RiBillLine className='text-lg'/>} className={ location === '/pannel/dashboard/purchaseBilling' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/businessSetup/purchaseBilling" icon={<RiBillLine className='text-lg'/>} className={ location === '/pannel/businessSetup/purchaseBilling' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Purchase Invoice & Billing
             </MenuItem>
-            <MenuItem href="/pannel/dashboard/vouchers" icon={<HiOutlineDocumentReport className='text-lg'/>} className={ location === '/pannel/dashboard/vouchers' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/businessSetup/vouchers" icon={<HiOutlineDocumentReport className='text-lg'/>} className={ location === '/pannel/businessSetup/vouchers' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Vouchers
             </MenuItem>
-            <MenuItem href="/pannel/dashboard/financialReports" icon={<HiOutlineDocumentReport className='text-lg'/>} className={ location === '/pannel/dashboard/financialReports' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/businessSetup/financialReports" icon={<HiOutlineDocumentReport className='text-lg'/>} className={ location === '/pannel/businessSetup/financialReports' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Reports
             </MenuItem>
-            <MenuItem href="/pannel/dashboard/projections" icon={<AiOutlineFundProjectionScreen className='text-lg'/>} className={ location === '/pannel/dashboard/projections' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/businessSetup/projections" icon={<AiOutlineFundProjectionScreen className='text-lg'/>} className={ location === '/pannel/businessSetup/projections' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Projections
             </MenuItem>
           </SubMenu>

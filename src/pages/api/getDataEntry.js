@@ -3,6 +3,7 @@ import BankAccount from 'models/BankAccount';
 import Contact from 'models/Contact';
 import FinancialYear from 'models/FinancialYear';
 import Product from 'models/Product';
+import PurchaseOrder from 'models/PurchaseOrder';
 import Charts from '../../../models/Charts'
 
 
@@ -63,6 +64,17 @@ export default async function handler(req, res) {
             let bankAccount = await BankAccount.findById(id)
             if(bankAccount){
                 res.status(200).json({ success: true, bankAccount}) 
+            } 
+            else{
+                res.status(400).json({ success: false, message: "Internal server error!" }) 
+            }
+
+        }
+        else if( getDataPath === 'purchaseOrder' ){
+            const { id } = req.body;
+            let data = await PurchaseOrder.findById(id)
+            if(data){
+                res.status(200).json({ success: true, data}) 
             } 
             else{
                 res.status(400).json({ success: false, message: "Internal server error!" }) 

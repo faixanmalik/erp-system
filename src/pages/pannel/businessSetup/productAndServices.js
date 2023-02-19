@@ -19,6 +19,7 @@ const ProductAndServices = ({product, charts}) => {
   const [open, setOpen] = useState(false)
   const [id, setId] = useState('')
 
+
   const [code, setCode] = useState('')
   const [name, setName] = useState('')
 

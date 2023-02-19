@@ -106,26 +106,8 @@ const ContactList = ({dbContact, dbCustomer, dbSupplier, dbEmployee}) => {
       let response = await res.json()
       
       if (response.success === true) {
-
-        //const date = moment(response.editContact.date).utc().format('YYYY-MM-DD')
-
         window.location.reload();
-
-        //setName(response.editContact.name)
-        //setType(response.editContact.type)
-        //setEmail(response.editContact.email)
-        //setPhoneNo(response.editContact.phoneNo)
-        //setCountry(response.editContact.country)
-        //setStreetAddress(response.editContact.streetAddress)
-        //setCity(response.editContact.city)
-        //setState(response.editContact.state)
-        //setZip(response.editContact.zip)
-        //setTaxRigNo(response.editContact.taxRigNo)
-        //setTerms(response.editContact.terms)
-        //setOpeningBalance(response.editContact.openingBalance)
-        //setPaymentMethod(response.editContact.paymentMethod)
-        //setDate(date)
-    }
+      }
 
     else {
         toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
@@ -205,19 +187,6 @@ const ContactList = ({dbContact, dbCustomer, dbSupplier, dbEmployee}) => {
 
       if(response.success === true){
         window.location.reload();
-        setName('')
-        setEmail('')
-        setPhoneNo('')
-        setCountry('')
-        setStreetAddress('')
-        setCity('')
-        setState('')
-        setZip('')
-        setTaxRigNo('')
-        setTerms('')
-        setOpeningBalance('')
-        setPaymentMethod('')
-        setDate('')
       }
       else {
           toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });

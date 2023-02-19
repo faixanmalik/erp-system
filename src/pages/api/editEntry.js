@@ -6,6 +6,7 @@ import Charts from '../../../models/Charts'
 import moment from 'moment';
 import Product from 'models/Product';
 import BankAccount from 'models/BankAccount';
+import PurchaseOrder from 'models/PurchaseOrder';
 
 
 export default async function handler(req, res) {
@@ -120,6 +121,58 @@ export default async function handler(req, res) {
                 }
                 else{
                     await BankAccount.findByIdAndUpdate(id, { bankBranch: bankBranch, accountNo: accountNo, accountType: accountType, accountDesc: accountDesc, accountTitle:accountTitle , chartsOfAccount: chartsOfAccount,  borrowingLimit: borrowingLimit })
+                    res.status(200).json({ success: true, message: "Update Successfully!" }) 
+                }
+            }
+            else{
+                res.status(400).json({ success: false, message: "Internal server error!" }) 
+            }
+        }
+        else if (editPath === 'purchaseOrder'){
+            const { id, contact, date, deliveryDate, orderNo,  reference, currency,
+                 amountsAre, item,  desc, qty, unitPrice, discount, account , 
+                 taxRate, amount} = req.body;
+
+            let dbPurchaseOrder = await PurchaseOrder.findById(id)
+
+            
+            if(dbPurchaseOrder){
+                const dbDate = moment(dbPurchaseOrder.date).utc().format('YYYY-MM-DD')
+                const dbDeliveryDate = moment(dbPurchaseOrder.deliveryDate).utc().format('YYYY-MM-DD')
+                
+                if( contact === dbPurchaseOrder.contact 
+                    && date === dbDate 
+                    && deliveryDate === dbDeliveryDate 
+                    && orderNo === dbPurchaseOrder.orderNo 
+                    && reference === dbPurchaseOrder.reference 
+                    && currency === dbPurchaseOrder.currency 
+                    && amountsAre === dbPurchaseOrder.amountsAre 
+                    && item === dbPurchaseOrder.item 
+                    && desc === dbPurchaseOrder.desc 
+                    && qty === dbPurchaseOrder.qty 
+                    && unitPrice === dbPurchaseOrder.unitPrice 
+                    && discount === dbPurchaseOrder.discount 
+                    && account === dbPurchaseOrder.account 
+                    && taxRate === dbPurchaseOrder.taxRate 
+                    && amount === dbPurchaseOrder.amount 
+                    
+                    ){
+
+                    res.status(400).json({ success: false, message: "Already found!" }) 
+                }
+                else{
+                    await PurchaseOrder.findByIdAndUpdate(id, { contact: contact, date: date, deliveryDate: deliveryDate, 
+                        orderNo: orderNo, reference:reference , currency: currency,  
+                        amountsAre: amountsAre, 
+                        item: item, 
+                        desc: desc, 
+                        qty: qty, 
+                        unitPrice: unitPrice, 
+                        discount: discount, 
+                        account: account, 
+                        taxRate: taxRate, 
+                        amount: amount, 
+                    })
                     res.status(200).json({ success: true, message: "Update Successfully!" }) 
                 }
             }
