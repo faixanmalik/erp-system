@@ -270,7 +270,7 @@ const Sidebar2 = ({ showMobilemenu }) => {
             <MenuItem href="/pannel/purchaseModule/inwardGatePass" icon={<FaToriiGate className='text-lg'/>} className={ location === '/pannel/purchaseModule/inwardGatePass' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Inward Gateway Pass
             </MenuItem>
-            <MenuItem href="/pannel/purchaseModule/purchaseOverview" icon={<FaToriiGate className='text-lg'/>} className={ location === '/pannel/purchaseModule/purchaseOverview' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
+            <MenuItem href="/pannel/purchaseModule/purchaseOverview" icon={<MdOutlineInventory2 className='text-lg'/>} className={ location === '/pannel/purchaseModule/purchaseOverview' ?  'text-indigo-700 bg-zinc-50 font-semibold' : 'text-gray-600 font-semibold'}>
                 Overview
             </MenuItem> 
           </SubMenu>

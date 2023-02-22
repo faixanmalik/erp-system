@@ -33,7 +33,7 @@ export default function Home({customer, product, supplier}) {
           <Col sm="6" lg="3">
             <TopCards
               bg="bg-light-success text-success"
-              href='/pannel/manageCustomer'
+              href='/pannel/businessSetup/contactList'
               title="Customer"
               subtitle="Total Customer"
               amount={noOfCustomers}
@@ -43,7 +43,7 @@ export default function Home({customer, product, supplier}) {
           <Col sm="6" lg="3">
             <TopCards
               bg="bg-light-danger text-danger"
-              href='/pannel/manageProduct'
+              href='/pannel/businessSetup/productAndServices'
               title="Products"
               subtitle="Total Products"
               amount={noOfProducts}
@@ -53,7 +53,7 @@ export default function Home({customer, product, supplier}) {
           <Col sm="6" lg="3">
             <TopCards
               bg="bg-light-warning text-warning"
-              href='/pannel/supplierList'
+              href='/pannel/businessSetup/contactList'
               title="Supplier"
               subtitle="Total Supplier"
               amount={noOfSuppliers}

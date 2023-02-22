@@ -6,6 +6,7 @@ import FinancialYear from 'models/FinancialYear';
 import Product from 'models/Product';
 import BankAccount from 'models/BankAccount';
 import PurchaseOrder from 'models/PurchaseOrder';
+import InwardGatePass from 'models/InwardGatePass';
 
 
 export default async function handler(req, res) {
@@ -57,20 +58,19 @@ export default async function handler(req, res) {
             await PurchaseOrder.findByIdAndDelete( id )
             res.status(200).json({ success: true, message: "Deleted Successfully !" }) 
         }
+        else if (delPath === 'inwardGatePass'){
+            const { id } = req.body;
+            
+            await InwardGatePass.findByIdAndDelete( id )
+            res.status(200).json({ success: true, message: "Deleted Successfully !" }) 
+        }
 
 
 
         else{
             res.status(400).json({ success: false, message: "Some Error Occured !" }) 
         }
-
-
-
-
     }
     else{
         res.status(400).json({ success: false, message: "Some Error Occured !" }) 
-
-    }
-
-    }
+    }}

@@ -30,20 +30,21 @@ const PurchaseOrder = ({ dbProducts, dbContacts, dbAccounts, dbPurchaseOrder }) 
   const [amountsAre, setAmountsAre] = useState('Tax Exclusive')
   const [item, setItem] = useState('')
   const [desc, setDesc] = useState('')
-  const [qty, setQty] = useState('')
-  const [unitPrice, setUnitPrice] = useState('')
+  const [qty, setQty] = useState([])
+  const [unitPrice, setUnitPrice] = useState([])
   const [discount, setDiscount] = useState('')
   const [account, setAccount] = useState('')
   const [taxRate, setTaxRate] = useState('')
-  const [amount, setAmount] = useState('')
+  const [amount, setAmount] = useState([])
+ 
 
-
+  
   // id For delete contact
   const [id, setId] = useState('')
 
-  //const totalAmount = ()=>{
-  //  setAmount(unitPrice * qty)
-  //}
+  const totalAmount = ()=>{
+    return setAmount(+(qty * unitPrice))     
+  }
   
   const handleChange = (e) => {
   
@@ -88,6 +89,14 @@ const PurchaseOrder = ({ dbProducts, dbContacts, dbAccounts, dbPurchaseOrder }) 
     }
     else if(e.target.name === 'taxRate'){
       setTaxRate(e.target.value)
+    }
+    else if(e.target.name === 'amount'){
+      
+      console.log('main amoutn hon');
+      setAmount(totalAmount())
+    }
+    else {
+      console.log('please select a tax rate')
     }
   }
 
@@ -176,8 +185,7 @@ const PurchaseOrder = ({ dbProducts, dbContacts, dbAccounts, dbPurchaseOrder }) 
 
   const submit = async(e)=>{
     e.preventDefault()
-
-    setAmount(qty*unitPrice)
+    totalAmount()
     
     // fetch the data from form to makes a file in local system
     const data = { contact, date, deliveryDate, orderNo,  reference, currency, amountsAre, item,  desc, qty, unitPrice, discount, account , taxRate, amount };
@@ -200,7 +208,9 @@ const PurchaseOrder = ({ dbProducts, dbContacts, dbAccounts, dbPurchaseOrder }) 
           toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
       }
   }
-
+  const dataLayerUpdate=(e)=>{
+    
+  }
   return (
     <>
     {/* React tostify */}
@@ -337,7 +347,6 @@ const PurchaseOrder = ({ dbProducts, dbContacts, dbAccounts, dbPurchaseOrder }) 
       </div>
     </div>
 
-
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-20" onClose={()=>{setOpen(false)}}>
         <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
@@ -349,7 +358,7 @@ const PurchaseOrder = ({ dbProducts, dbContacts, dbAccounts, dbPurchaseOrder }) 
               <Dialog.Panel className="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-7xl">
                 <div className="relative flex w-full items-center overflow-hidden bg-white px-4 pt-14 pb-8 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
                   <button type="button" className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-6 lg:right-8" onClick={() => setOpen(false)}>
-                    <span className="sr-only">Close</span>
+                    <span className="sr-only">Close</span>  
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
                   
@@ -368,27 +377,25 @@ const PurchaseOrder = ({ dbProducts, dbContacts, dbAccounts, dbPurchaseOrder }) 
                           </div>
 
                           <div className="w-44">
-                            <label htmlFor="date" className="block text-sm font-medium text-gray-700">Date
-                            </label>
-                            <input onChange={handleChange} value={date} type="date" name="date" id="date" className="mt-1 p-2 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required/>
+                            <label htmlFor="date" className="block text-sm font-medium text-gray-700">Date:</label>
+                            <input onChange={handleChange} value={date} type="date" name="date" id="date" className="mt-1 p-2 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                           </div>
 
                           <div className="w-44">
-                            <label htmlFor="deliveryDate" className="block text-sm font-medium text-gray-700">Delivery Date
-                            </label>
-                            <input onChange={handleChange} value={deliveryDate} type="date" name="deliveryDate" id="deliveryDate" className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required/>
+                            <label htmlFor="deliveryDate" className="block text-sm font-medium text-gray-700">Delivery Date:</label>
+                            <input onChange={handleChange} value={deliveryDate} type="date" name="deliveryDate" id="deliveryDate" className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                           </div>
 
                           
 
                           <div className="w-40">
-                            <label htmlFor="orderNo" className="block text-sm font-medium text-gray-700">Order Number</label>
-                            <input onChange={handleChange} value={orderNo} type="number" name="orderNo" id="orderNo" className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required/>
+                            <label htmlFor="orderNo" className="block text-sm font-medium text-gray-700">Order Number:</label>
+                            <input onChange={handleChange} value={orderNo} type="number" name="orderNo" id="orderNo" className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                           </div>
 
                           <div className="w-44">
-                            <label htmlFor="reference" className="block text-sm font-medium text-gray-700">Reference</label>
-                            <input onChange={handleChange} value={reference} type="text" name="reference" id="reference" className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required/>
+                            <label htmlFor="reference" className="block text-sm font-medium text-gray-700">Reference:</label>
+                            <input onChange={handleChange} value={reference} type="text" name="reference" id="reference" className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                           </div>
 
 
@@ -396,7 +403,7 @@ const PurchaseOrder = ({ dbProducts, dbContacts, dbAccounts, dbPurchaseOrder }) 
 
                         <div className='flex items-center my-4'>
                           <div className="w-64">
-                            <label htmlFor="currency" className="block text-sm font-medium text-gray-700">Currency</label>
+                            <label htmlFor="currency" className="block text-sm font-medium text-gray-700">Currency:</label>
                             <select id="currency" name="currency" onChange={handleChange} value={currency} className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                               <option>Select Currency</option>
                               <option value={'PKR'}>Pakistani Rupees (PKR)</option>
@@ -404,8 +411,8 @@ const PurchaseOrder = ({ dbProducts, dbContacts, dbAccounts, dbPurchaseOrder }) 
                           </div>
 
                           <div className="ml-auto w-60">
-                            <label htmlFor="amountsAre" className="block text-sm font-medium text-gray-700">Amount are</label>
-                            <select id="amountsAre" name="amountsAre" onChange={handleChange} value={amountsAre} className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" required>
+                            <label htmlFor="amountsAre" className="block text-sm font-medium text-gray-700">Amount are:</label>
+                            <select id="amountsAre" name="amountsAre" onChange={handleChange} value={amountsAre} className="mt-1 py-2 block w-full rounded-md border border-gray-300 bg-white px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" >
                               <option value={'Tax Exclusive'}>Tax Exclusive</option>
                               <option value={'Tax Inclusive'}>Tax Inclusive</option>
                               <option value={'No Tax'}>No Tax</option>
@@ -416,44 +423,44 @@ const PurchaseOrder = ({ dbProducts, dbContacts, dbAccounts, dbPurchaseOrder }) 
 
                         <div className='flex items-center space-x-4 my-5 pt-10'>
                           <div className="w-36">
-                            <label htmlFor="item" className="text-sm font-medium text-gray-700">Item</label>
-                            <select id="item" name="item" onChange={handleChange} value={item} className="block w-full mt-1 py-2 rounded-md border border-gray-300 bg-white px-1 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" required>
+                            <label htmlFor="item" className="text-sm font-medium text-gray-700">Item:</label>
+                            <select id="item" name="item" onChange={handleChange} value={item} className="block w-full mt-1 py-2 rounded-md border border-gray-300 bg-white px-1 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" >
                             <option>Select Item</option>
                               {dbProducts.map((item)=>{return <option key={item._id} value={item.name}>{item.code} - {item.name}</option>})}
                             </select>
                           </div>
 
                           <div className="w-32">
-                            <label htmlFor="desc" className="text-sm font-medium text-gray-700">Description</label>
-                            <input onChange={handleChange} value={desc} type="text" name="desc" id="desc" className="block w-full mt-1 py-2 px-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"  required/>
+                            <label htmlFor="desc" className="text-sm font-medium text-gray-700">Description:</label>
+                            <input onChange={handleChange} value={desc} type="text" name="desc" id="desc" className="block w-full mt-1 py-2 px-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"  />
                           </div>
 
                           <div className="w-24">
-                            <label htmlFor="qty" className="text-sm font-medium text-gray-700">Quantity</label>
-                            <input onChange={handleChange} value={qty} type="number" name="qty" id="qty" className="block w-full mt-1 py-2 px-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required/>
+                            <label htmlFor="qty" className="text-sm font-medium text-gray-700">Quantity:</label>
+                            <input onChange={handleChange} value={qty} type="number" name="qty" id="qty" className="block w-full mt-1 py-2 px-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                           </div>
 
                           <div className="w-24">
-                            <label htmlFor="unitPrice" className="text-sm font-medium text-gray-700">Unit Price</label>
-                            <input onChange={handleChange} value={unitPrice} type="number" name="unitPrice" id="unitPrice" className="block w-full mt-1 py-2 px-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required/>
+                            <label htmlFor="unitPrice" className="text-sm font-medium text-gray-700">Unit Price:</label>
+                            <input onChange={handleChange} value={unitPrice} type="number" name="unitPrice" id="unitPrice" className="block w-full mt-1 py-2 px-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                           </div>
 
                           <div className="w-24">
-                            <label htmlFor="discount" className="text-sm font-medium text-gray-700">Discount</label>
+                            <label htmlFor="discount" className="text-sm font-medium text-gray-700">Discount:</label>
                             <input onChange={handleChange} value={discount} type="number" name="discount" id="discount" className="block w-full mt-1 py-2 px-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"/>
                           </div>
 
                           <div className="w-44">
-                            <label htmlFor="account" className="text-sm font-medium text-gray-700">Account</label>
-                            <select id="account" name="account" onChange={handleChange} value={account} className="block w-full mt-1 py-2 px-1 rounded-md border border-gray-300 bg-white shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" required>
+                            <label htmlFor="account" className="text-sm font-medium text-gray-700">Account:</label>
+                            <select id="account" name="account" onChange={handleChange} value={account} className="block w-full mt-1 py-2 px-1 rounded-md border border-gray-300 bg-white shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" >
                               <option>Select Account</option>
                                 {dbAccounts.map((item)=>{return <option key={item._id} value={item.accountName}>{item.accountCode} - {item.accountName}</option>})}
                             </select>
                           </div>
 
                           <div className="w-40">
-                            <label htmlFor="taxRate" className="block text-sm font-medium text-gray-700">Tax Rate</label>
-                            <select id="taxRate" name="taxRate" onChange={handleChange} value={taxRate} className="block w-full mt-1 py-2 px-1 rounded-md border border-gray-300 bg-white shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" required>
+                            <label htmlFor="taxRate" className="block text-sm font-medium text-gray-700">Tax Rate:</label>
+                            <select id="taxRate" name="taxRate" onChange={handleChange} value={taxRate} className="block w-full mt-1 py-2 px-1 rounded-md border border-gray-300 bg-white shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" >
                               <option>Select Tax Rate</option>
                               <option value='None'>None</option>
                               <option value='Sales Tax on Imports(0%)'>Sales Tax on Imports(0%)</option>
@@ -464,15 +471,15 @@ const PurchaseOrder = ({ dbProducts, dbContacts, dbAccounts, dbPurchaseOrder }) 
                           </div>
 
                           <div className="w-32 text-center bg-gray-100">
-                            <label htmlFor="amount" className="text-sm font-medium  text-gray-700">Amount</label>
-                            <input value={qty*unitPrice} type="number" name="amount" id="amount" className="block bg-gray-100 text-center w-full mt-1 py-2 px-1 text-black border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"/>
+                            <label htmlFor="amount" className="text-sm font-medium  text-gray-700">Amount:</label>
+                            <input onChange={handleChange} value={unitPrice * qty} type="number" name="amount" id="amount" className="block bg-gray-100 text-center w-full mt-1 py-2 px-1 text-black border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"/>
                           </div>
 
                         </div>
 
                         <div className="bg-gray-50 space-x-3 px-4 py-3 text-right sm:px-6">
                             <button type='button' onClick={()=>{editEntry(id)}} className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save Changes</button>
-                            <button type="submit" className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save</button>
+                            <button onClick={dataLayerUpdate} type="submit" className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save</button>
                         </div>
 
 

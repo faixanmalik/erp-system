@@ -12,7 +12,7 @@ const PurchaseOrderSchema = new mongoose.Schema({
     desc: {type: String, required: true},
     qty:{type: Number, required: true},
     unitPrice:{type: Number, required: true},
-    discount:{type: Number },
+    discount:{type: Number},
     account: {type: String, required: true},
     taxRate:{type: String, required: true},
     amount:{type: Number, required: true}
